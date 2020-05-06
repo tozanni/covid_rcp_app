@@ -1,2 +1,3 @@
-# pred_covid_app
-Front end para la aplicación de diagnóstico y predicción de complicaciones COVID-19
+# covid_rcp_app
+
+Web app para diagnóstico y predicción de complicaciones COVID-19
