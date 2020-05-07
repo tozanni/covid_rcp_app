@@ -1,6 +1,6 @@
 
-	define(['app','factories/factories','filters/filters'], (app)=>{
-		app.controller('mainController', ['$rootScope','$scope','$location','authFactory', ($rootScope, $scope, $location)=>{
+	define(['app','services/services','filters/filters'], function(app){
+		app.controller('mainController', ['$rootScope','$scope','$location', function($rootScope, $scope, $location){
 			console.log('mainController');
-		});
+		}]);
 	});

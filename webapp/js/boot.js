@@ -11,8 +11,6 @@ require.config({
 		'angularAMD': 'lib/angularAMD.min',
 		'ui-bootstrap': 'lib/ui-bootstrap-tpls-2.5.0.min',
 		/*'angular-multiselect': 'lib/angularjs-dropdown-multiselect',*/
-		'highcharts':'lib/highcharts',
-		'dark-unica':'lib/dark-unica',
 		'angular-filter':'lib/angular-filter',
 		'angular-locale':'lib/angular-locale_es-mx'
 	},
