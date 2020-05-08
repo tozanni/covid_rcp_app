@@ -8,13 +8,16 @@
         "friendsofsymfony/rest-bundle": "^2.7",
         "jms/serializer-bundle": "^3.5",
         "nelmio/api-doc-bundle": "^3.6",
+        "sonata-project/admin-bundle": "^3.66",
         "symfony/asset": "4.4.*",
         "symfony/console": "4.4.*",
         "symfony/dotenv": "4.4.*",
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "4.4.*",
-        "symfony/twig-pack": "^1.0",
-        "symfony/yaml": "4.4.*"
+        "symfony/twig-bundle": "4.4.*",
+        "symfony/yaml": "4.4.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12"
     },
     "require-dev": {
     },
