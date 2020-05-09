@@ -23,6 +23,11 @@ class Record
     private $admission_date;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $id_canonical;
+
+    /**
      * @ORM\Column(type="string", length=128)
      */
     private $status;
@@ -254,6 +259,18 @@ class Record
     public function setTriage(?Triage $triage): self
     {
         $this->triage = $triage;
+
+        return $this;
+    }
+
+    public function getIdCanonical(): ?string
+    {
+        return $this->id_canonical;
+    }
+
+    public function setIdCanonical(?string $id_canonical): self
+    {
+        $this->id_canonical = $id_canonical;
 
         return $this;
     }
