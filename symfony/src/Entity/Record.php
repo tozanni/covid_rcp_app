@@ -62,6 +62,17 @@ class Record
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=VitalSigns::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $vitalSigns;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Triage::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $triage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -219,6 +230,30 @@ class Record
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getVitalSigns(): ?VitalSigns
+    {
+        return $this->vitalSigns;
+    }
+
+    public function setVitalSigns(VitalSigns $vitalSigns): self
+    {
+        $this->vitalSigns = $vitalSigns;
+
+        return $this;
+    }
+
+    public function getTriage(): ?Triage
+    {
+        return $this->triage;
+    }
+
+    public function setTriage(?Triage $triage): self
+    {
+        $this->triage = $triage;
 
         return $this;
     }

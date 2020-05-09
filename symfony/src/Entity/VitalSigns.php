@@ -82,6 +82,11 @@ class VitalSigns
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns", cascade={"persist", "remove"})
+     */
+    private $record;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -239,6 +244,23 @@ class VitalSigns
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getRecord(): ?Record
+    {
+        return $this->record;
+    }
+
+    public function setRecord(Record $record): self
+    {
+        $this->record = $record;
+
+        // set the owning side of the relation if necessary
+        if ($record->getVitalSigns() !== $this) {
+            $record->setVitalSigns($this);
+        }
 
         return $this;
     }
