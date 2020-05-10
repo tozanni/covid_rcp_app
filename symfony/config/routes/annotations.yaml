@@ -5,3 +5,8 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+rest_controller:
+    resource: ../../src/Controller/Api/
+    type: annotation
+    prefix: /api/v1
