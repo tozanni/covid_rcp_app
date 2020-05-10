@@ -27,6 +27,21 @@ class MedicalNotes
      */
     private $prescription_drugs;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="medicalNotes", cascade={"persist", "remove"})
+     */
+    private $record;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +67,48 @@ class MedicalNotes
     public function setPrescriptionDrugs(?string $prescription_drugs): self
     {
         $this->prescription_drugs = $prescription_drugs;
+
+        return $this;
+    }
+
+    public function getRecord(): ?Record
+    {
+        return $this->record;
+    }
+
+    public function setRecord(?Record $record): self
+    {
+        $this->record = $record;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMedicalNotes = null === $record ? null : $this;
+        if ($record->getMedicalNotes() !== $newMedicalNotes) {
+            $record->setMedicalNotes($newMedicalNotes);
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

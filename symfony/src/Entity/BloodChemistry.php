@@ -57,6 +57,11 @@ class BloodChemistry
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="bloodChemistry", cascade={"persist", "remove"})
+     */
+    private $record;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,24 @@ class BloodChemistry
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getRecord(): ?Record
+    {
+        return $this->record;
+    }
+
+    public function setRecord(?Record $record): self
+    {
+        $this->record = $record;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newBloodChemistry = null === $record ? null : $this;
+        if ($record->getBloodChemistry() !== $newBloodChemistry) {
+            $record->setBloodChemistry($newBloodChemistry);
+        }
 
         return $this;
     }

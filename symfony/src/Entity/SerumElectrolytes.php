@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\HematicBiometryRepository;
+use App\Repository\SerumElectrolytesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)
+ * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
  */
-class HematicBiometry
+class SerumElectrolytes
 {
     /**
      * @ORM\Id()
@@ -20,22 +20,12 @@ class HematicBiometry
     /**
      * @ORM\Column(type="integer")
      */
-    private $hematocrit;
+    private $sodium;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $hemoglobin;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $leukocytes;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $platelets;
+    private $potassium;
 
     /**
      * @ORM\Column(type="datetime")
@@ -48,7 +38,7 @@ class HematicBiometry
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="hematicBiometry", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="serumElectrolytes", cascade={"persist", "remove"})
      */
     private $record;
 
@@ -57,50 +47,26 @@ class HematicBiometry
         return $this->id;
     }
 
-    public function getHematocrit(): ?int
+    public function getSodium(): ?int
     {
-        return $this->hematocrit;
+        return $this->sodium;
     }
 
-    public function setHematocrit(int $hematocrit): self
+    public function setSodium(int $sodium): self
     {
-        $this->hematocrit = $hematocrit;
+        $this->sodium = $sodium;
 
         return $this;
     }
 
-    public function getHemoglobin(): ?int
+    public function getPotassium(): ?int
     {
-        return $this->hemoglobin;
+        return $this->potassium;
     }
 
-    public function setHemoglobin(int $hemoglobin): self
+    public function setPotassium(int $potassium): self
     {
-        $this->hemoglobin = $hemoglobin;
-
-        return $this;
-    }
-
-    public function getLeukocytes(): ?int
-    {
-        return $this->leukocytes;
-    }
-
-    public function setLeukocytes(int $leukocytes): self
-    {
-        $this->leukocytes = $leukocytes;
-
-        return $this;
-    }
-
-    public function getPlatelets(): ?int
-    {
-        return $this->platelets;
-    }
-
-    public function setPlatelets(int $platelets): self
-    {
-        $this->platelets = $platelets;
+        $this->potassium = $potassium;
 
         return $this;
     }
@@ -139,9 +105,9 @@ class HematicBiometry
         $this->record = $record;
 
         // set (or unset) the owning side of the relation if necessary
-        $newHematicBiometry = null === $record ? null : $this;
-        if ($record->getHematicBiometry() !== $newHematicBiometry) {
-            $record->setHematicBiometry($newHematicBiometry);
+        $newSerumElectrolytes = null === $record ? null : $this;
+        if ($record->getSerumElectrolytes() !== $newSerumElectrolytes) {
+            $record->setSerumElectrolytes($newSerumElectrolytes);
         }
 
         return $this;

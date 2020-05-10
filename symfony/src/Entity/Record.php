@@ -78,6 +78,26 @@ class Record
      */
     private $triage;
 
+    /**
+     * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $hematicBiometry;
+
+    /**
+     * @ORM\OneToOne(targetEntity=BloodChemistry::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $bloodChemistry;
+
+    /**
+     * @ORM\OneToOne(targetEntity=SerumElectrolytes::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $serumElectrolytes;
+
+    /**
+     * @ORM\OneToOne(targetEntity=MedicalNotes::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $medicalNotes;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -271,6 +291,54 @@ class Record
     public function setIdCanonical(?string $id_canonical): self
     {
         $this->id_canonical = $id_canonical;
+
+        return $this;
+    }
+
+    public function getHematicBiometry(): ?HematicBiometry
+    {
+        return $this->hematicBiometry;
+    }
+
+    public function setHematicBiometry(?HematicBiometry $hematicBiometry): self
+    {
+        $this->hematicBiometry = $hematicBiometry;
+
+        return $this;
+    }
+
+    public function getBloodChemistry(): ?BloodChemistry
+    {
+        return $this->bloodChemistry;
+    }
+
+    public function setBloodChemistry(?BloodChemistry $bloodChemistry): self
+    {
+        $this->bloodChemistry = $bloodChemistry;
+
+        return $this;
+    }
+
+    public function getSerumElectrolytes(): ?SerumElectrolytes
+    {
+        return $this->serumElectrolytes;
+    }
+
+    public function setSerumElectrolytes(?SerumElectrolytes $serumElectrolytes): self
+    {
+        $this->serumElectrolytes = $serumElectrolytes;
+
+        return $this;
+    }
+
+    public function getMedicalNotes(): ?MedicalNotes
+    {
+        return $this->medicalNotes;
+    }
+
+    public function setMedicalNotes(?MedicalNotes $medicalNotes): self
+    {
+        $this->medicalNotes = $medicalNotes;
 
         return $this;
     }
