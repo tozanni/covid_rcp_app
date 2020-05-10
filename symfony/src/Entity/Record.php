@@ -98,6 +98,11 @@ class Record
      */
     private $medicalNotes;
 
+    /**
+     * @ORM\OneToOne(targetEntity=LiverFunction::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $LiverFunction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -339,6 +344,18 @@ class Record
     public function setMedicalNotes(?MedicalNotes $medicalNotes): self
     {
         $this->medicalNotes = $medicalNotes;
+
+        return $this;
+    }
+
+    public function getLiverFunction(): ?LiverFunction
+    {
+        return $this->LiverFunction;
+    }
+
+    public function setLiverFunction(?LiverFunction $LiverFunction): self
+    {
+        $this->LiverFunction = $LiverFunction;
 
         return $this;
     }
