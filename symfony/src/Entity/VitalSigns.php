@@ -145,7 +145,7 @@ class VitalSigns
         return $this->diastolic_blood_pressure;
     }
 
-    public function setDiastolicBloodPressure(?int $diastolic_blood_pressure): self
+    public function setDiastolicBloodPressure(int $diastolic_blood_pressure): self
     {
         $this->diastolic_blood_pressure = $diastolic_blood_pressure;
 
@@ -157,7 +157,7 @@ class VitalSigns
         return $this->systolic_blood_pressure;
     }
 
-    public function setSystolicBloodPressure(?int $systolic_blood_pressure): self
+    public function setSystolicBloodPressure(int $systolic_blood_pressure): self
     {
         $this->systolic_blood_pressure = $systolic_blood_pressure;
 
@@ -169,7 +169,7 @@ class VitalSigns
         return $this->heart_rate;
     }
 
-    public function setHeartRate(?int $heart_rate): self
+    public function setHeartRate(int $heart_rate): self
     {
         $this->heart_rate = $heart_rate;
 
@@ -181,7 +181,7 @@ class VitalSigns
         return $this->breathing_frequency;
     }
 
-    public function setBreathingFrequency(?int $breathing_frequency): self
+    public function setBreathingFrequency(int $breathing_frequency): self
     {
         $this->breathing_frequency = $breathing_frequency;
 
@@ -253,13 +253,14 @@ class VitalSigns
         return $this->record;
     }
 
-    public function setRecord(Record $record): self
+    public function setRecord(?Record $record): self
     {
         $this->record = $record;
 
-        // set the owning side of the relation if necessary
-        if ($record->getVitalSigns() !== $this) {
-            $record->setVitalSigns($this);
+        // set (or unset) the owning side of the relation if necessary
+        $newVitalSigns = null === $record ? null : $this;
+        if ($record->getVitalSigns() !== $newVitalSigns) {
+            $record->setVitalSigns($newVitalSigns);
         }
 
         return $this;

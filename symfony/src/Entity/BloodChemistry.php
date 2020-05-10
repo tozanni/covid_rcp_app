@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BloodChemistryRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,11 +49,13 @@ class BloodChemistry
     private $glycated_hemoglobin;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updated_at;

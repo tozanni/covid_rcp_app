@@ -97,8 +97,6 @@ class BloodChemistryController extends AbstractFOSRestController
         $chemistrieBlood->setCholesterol($request->get('cholesterol'));
         $chemistrieBlood->setTriglycerides($request->get('triglycerides'));
         $chemistrieBlood->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
-        $chemistrieBlood->setCreatedAt(new \DateTime());
-        $chemistrieBlood->setUpdatedAt(new \DateTime());
 
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($chemistrieBlood);

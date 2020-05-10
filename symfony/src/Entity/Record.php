@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RecordRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,16 +59,6 @@ class Record
     private $egress_notes;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updated_at;
-
-    /**
      * @ORM\OneToOne(targetEntity=VitalSigns::class, inversedBy="record", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -101,7 +92,19 @@ class Record
     /**
      * @ORM\OneToOne(targetEntity=LiverFunction::class, inversedBy="record", cascade={"persist", "remove"})
      */
-    private $LiverFunction;
+    private $liverFunction;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -350,12 +353,12 @@ class Record
 
     public function getLiverFunction(): ?LiverFunction
     {
-        return $this->LiverFunction;
+        return $this->liverFunction;
     }
 
-    public function setLiverFunction(?LiverFunction $LiverFunction): self
+    public function setLiverFunction(?LiverFunction $liverFunction): self
     {
-        $this->LiverFunction = $LiverFunction;
+        $this->liverFunction = $liverFunction;
 
         return $this;
     }
