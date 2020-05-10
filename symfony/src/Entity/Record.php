@@ -106,6 +106,17 @@ class Record
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ClottingTime::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ClottingTime;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Immunological::class, inversedBy="record", cascade={"persist", "remove"})
+     */
+    private $Immunological;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -359,6 +370,30 @@ class Record
     public function setLiverFunction(?LiverFunction $liverFunction): self
     {
         $this->liverFunction = $liverFunction;
+
+        return $this;
+    }
+
+    public function getClottingTime(): ?ClottingTime
+    {
+        return $this->ClottingTime;
+    }
+
+    public function setClottingTime(ClottingTime $ClottingTime): self
+    {
+        $this->ClottingTime = $ClottingTime;
+
+        return $this;
+    }
+
+    public function getImmunological(): ?Immunological
+    {
+        return $this->Immunological;
+    }
+
+    public function setImmunological(?Immunological $Immunological): self
+    {
+        $this->Immunological = $Immunological;
 
         return $this;
     }
