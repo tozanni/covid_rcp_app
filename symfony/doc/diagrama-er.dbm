@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,0" last-zoom="0.7" max-obj-count="16"
+	 default-schema="public" default-owner="postgres">
+<role name="rds_superuser"
+      inherit="true"
+      encrypted="true"
+      password="********">
+	<roles names="postgres" role-type="member" />
+</role>
+
+<role name="rds_replication"
+      inherit="true"
+      encrypted="true"
+      password="********">
+	<roles names="rds_superuser" role-type="admin" />
+</role>
+
+<role name="rds_iam"
+      inherit="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<role name="rds_password"
+      inherit="true"
+      encrypted="true"
+      password="********">
+	<roles names="rds_superuser" role-type="admin" />
+</role>
+
+<role name="rds_ad"
+      inherit="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<role name="rdsrepladmin"
+      replication="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<database name="covid_dev" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layer="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<sequence name="fos_user_group_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="fos_user_user_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="record_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="liver_function_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="hematic_biometry_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="vital_signs_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="serum_electrolytes_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="blood_chemistry_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="triage_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="medical_notes_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="ext_log_entries_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="fos_user_group" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1320" y="40"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="roles" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:array)]]></comment>
+	</column>
+	<constraint name="fos_user_group_pkey" type="pk-constr" table="public.fos_user_group">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="uniq_583d1f3e5e237e06" table="public.fos_user_group"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="name"/>
+		</idxelement>
+</index>
+
+<table name="fos_user_user" layer="0" collapse-mode="2" max-obj-count="40">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="40"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="username_canonical" not-null="true">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="email_canonical" not-null="true">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="enabled" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="salt" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="last_login" default-value="NULL::timestamp without time zone">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="confirmation_token" default-value="NULL">
+		<type name="character varying" length="180"/>
+	</column>
+	<column name="password_requested_at" default-value="NULL::timestamp without time zone">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="roles" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:array)]]></comment>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="date_of_birth" default-value="NULL::timestamp without time zone">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="firstname" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="lastname" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="website" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="biography" default-value="NULL">
+		<type name="character varying" length="1000"/>
+	</column>
+	<column name="gender" default-value="NULL">
+		<type name="character varying" length="1"/>
+	</column>
+	<column name="locale" default-value="NULL">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="timezone" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="phone" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="facebook_uid" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="facebook_name" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="facebook_data">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:json)]]></comment>
+	</column>
+	<column name="twitter_uid" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="twitter_name" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="twitter_data">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:json)]]></comment>
+	</column>
+	<column name="gplus_uid" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="gplus_name" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="gplus_data">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:json)]]></comment>
+	</column>
+	<column name="token" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="two_step_code" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="fos_user_user_pkey" type="pk-constr" table="public.fos_user_user">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="uniq_c560d76192fc23a8" table="public.fos_user_user"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="username_canonical"/>
+		</idxelement>
+</index>
+
+<index name="uniq_c560d761a0d96fbf" table="public.fos_user_user"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="email_canonical"/>
+		</idxelement>
+</index>
+
+<index name="uniq_c560d761c05fb297" table="public.fos_user_user"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="confirmation_token"/>
+		</idxelement>
+</index>
+
+<table name="fos_user_user_group" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="960" y="40"/>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="group_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="fos_user_user_group_pkey" type="pk-constr" table="public.fos_user_user_group">
+		<columns names="user_id,group_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_b3c77447a76ed395" table="public.fos_user_user_group"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<index name="idx_b3c77447fe54d947" table="public.fos_user_user_group"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="group_id"/>
+		</idxelement>
+</index>
+
+<table name="record" layer="0" collapse-mode="2" max-obj-count="24">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="960" y="280"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="vital_signs_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="triage_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hematic_biometry_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="blood_chemistry_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="serum_electrolytes_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="medical_notes_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="liver_function_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="admission_date" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="id_canonical" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="character varying" length="128"/>
+	</column>
+	<column name="egress_date" default-value="NULL::timestamp without time zone">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="egress_type" default-value="NULL">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="rcp_required">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="treatment">
+		<type name="text" length="0"/>
+	</column>
+	<column name="egress_notes">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="clotting_time_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="immunological_id">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="record_pkey" type="pk-constr" table="public.record">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="uniq_9b349f9175deb273" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="vital_signs_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f91c65f751d" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="triage_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f91b67d2472" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="hematic_biometry_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f91d8e4c35c" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="blood_chemistry_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f916b1a984b" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="serum_electrolytes_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f9180cc1801" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="medical_notes_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f917f3497fe" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="liver_function_id"/>
+		</idxelement>
+</index>
+
+<table name="liver_function" layer="0" collapse-mode="2" max-obj-count="7">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="860" y="1080"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aspartate_aminotransferase" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="alanine_transaminase" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="blood_urea_nitrogen" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="liver_function_pkey" type="pk-constr" table="public.liver_function">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="hematic_biometry" layer="0" collapse-mode="2" max-obj-count="8">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="620"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hematocrit" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="hemoglobin" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="leukocytes" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="platelets" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="hematic_biometry_pkey" type="pk-constr" table="public.hematic_biometry">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="vital_signs" layer="0" collapse-mode="2" max-obj-count="16">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="40"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="age" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="gender" not-null="true">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="weight" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="height" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="diastolic_blood_pressure" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="systolic_blood_pressure" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="heart_rate" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="breathing_frequency" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="temperature" not-null="true">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="oximetry" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="capillary_glucose" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="vital_signs_pkey" type="pk-constr" table="public.vital_signs">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="serum_electrolytes" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1400" y="1080"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sodium" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="potassium" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="serum_electrolytes_pkey" type="pk-constr" table="public.serum_electrolytes">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="blood_chemistry" layer="0" collapse-mode="2" max-obj-count="10">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="820"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="glucose" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="urea" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="creatinine" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cholesterol" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="triglycerides" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="glycated_hemoglobin" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="blood_chemistry_pkey" type="pk-constr" table="public.blood_chemistry">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="triage" layer="0" collapse-mode="2" max-obj-count="14">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1600" y="340"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="days_before_admission" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="difficulty_breathing" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="chest_pain" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="headache" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="cough" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="other_symptoms">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:json)]]></comment>
+	</column>
+	<column name="comorbidities">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:json)]]></comment>
+	</column>
+	<column name="smoker">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="pregnant">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="triage_pkey" type="pk-constr" table="public.triage">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="medical_notes" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="1080"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="notes" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="prescription_drugs">
+		<type name="text" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="medical_notes_pkey" type="pk-constr" table="public.medical_notes">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ext_log_entries" layer="0" collapse-mode="2" max-obj-count="9">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="720"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="action" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="logged_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="object_id" default-value="NULL">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="object_class" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="version" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="data">
+		<type name="text" length="0"/>
+		<comment><![CDATA[(DC2Type:array)]]></comment>
+	</column>
+	<column name="username" default-value="NULL">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="ext_log_entries_pkey" type="pk-constr" table="public.ext_log_entries">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="log_class_lookup_idx" table="public.ext_log_entries"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="object_class"/>
+		</idxelement>
+</index>
+
+<index name="log_date_lookup_idx" table="public.ext_log_entries"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="logged_at"/>
+		</idxelement>
+</index>
+
+<index name="log_user_lookup_idx" table="public.ext_log_entries"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="username"/>
+		</idxelement>
+</index>
+
+<index name="log_version_lookup_idx" table="public.ext_log_entries"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="object_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="object_class"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="version"/>
+		</idxelement>
+</index>
+
+<sequence name="immunological_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="clotting_time_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="immunological" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1680" y="1060"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="reactive_protein_c" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="immunological_pkey" type="pk-constr" table="public.immunological">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="clotting_time" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1160" y="1080"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="prothrombin" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="thromboplastin" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="created_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<column name="updated_at" not-null="true">
+		<type name="timestamp" length="0" precision="0"/>
+	</column>
+	<constraint name="clotting_time_pkey" type="pk-constr" table="public.clotting_time">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="uniq_9b349f91ef849a5d" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="clotting_time_id"/>
+		</idxelement>
+</index>
+
+<index name="uniq_9b349f9166c16f61" table="public.record"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="immunological_id"/>
+		</idxelement>
+</index>
+
+<constraint name="fk_b3c77447a76ed395" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.fos_user_user" table="public.fos_user_user_group">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_b3c77447fe54d947" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="CASCADE" ref-table="public.fos_user_group" table="public.fos_user_user_group">
+	<columns names="group_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f9175deb273" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.vital_signs" table="public.record">
+	<columns names="vital_signs_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f91c65f751d" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.triage" table="public.record">
+	<columns names="triage_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f91b67d2472" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.hematic_biometry" table="public.record">
+	<columns names="hematic_biometry_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f91d8e4c35c" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.blood_chemistry" table="public.record">
+	<columns names="blood_chemistry_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f916b1a984b" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.serum_electrolytes" table="public.record">
+	<columns names="serum_electrolytes_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f9180cc1801" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.medical_notes" table="public.record">
+	<columns names="medical_notes_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f917f3497fe" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.liver_function" table="public.record">
+	<columns names="liver_function_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f91ef849a5d" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.clotting_time" table="public.record">
+	<columns names="clotting_time_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_9b349f9166c16f61" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.immunological" table="public.record">
+	<columns names="immunological_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_fos_user_user_group_fos_user_user" type="relfk" layer="0"
+	 custom-color="#ae7b0a"
+	 src-table="public.fos_user_user_group"
+	 dst-table="public.fos_user_user" reference-fk="fk_b3c77447a76ed395"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_fos_user_user_group_fos_user_group" type="relfk" layer="0"
+	 custom-color="#7a75ac"
+	 src-table="public.fos_user_user_group"
+	 dst-table="public.fos_user_group" reference-fk="fk_b3c77447fe54d947"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_vital_signs" type="relfk" layer="0"
+	 custom-color="#57b3e0"
+	 src-table="public.record"
+	 dst-table="public.vital_signs" reference-fk="fk_9b349f9175deb273"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_triage" type="relfk" layer="0"
+	 custom-color="#dd810b"
+	 src-table="public.record"
+	 dst-table="public.triage" reference-fk="fk_9b349f91c65f751d"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_hematic_biometry" type="relfk" layer="0"
+	 custom-color="#6a3cac"
+	 src-table="public.record"
+	 dst-table="public.hematic_biometry" reference-fk="fk_9b349f91b67d2472"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_blood_chemistry" type="relfk" layer="0"
+	 custom-color="#68baa5"
+	 src-table="public.record"
+	 dst-table="public.blood_chemistry" reference-fk="fk_9b349f91d8e4c35c"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_serum_electrolytes" type="relfk" layer="0"
+	 custom-color="#1c51a4"
+	 src-table="public.record"
+	 dst-table="public.serum_electrolytes" reference-fk="fk_9b349f916b1a984b"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_medical_notes" type="relfk" layer="0"
+	 custom-color="#f6ac7c"
+	 src-table="public.record"
+	 dst-table="public.medical_notes" reference-fk="fk_9b349f9180cc1801"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_liver_function" type="relfk" layer="0"
+	 custom-color="#989a1b"
+	 src-table="public.record"
+	 dst-table="public.liver_function" reference-fk="fk_9b349f917f3497fe"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="15.7165" y="158.97"/>
+	</label>
+</relationship>
+
+<relationship name="rel_record_clotting_time" type="relfk" layer="0"
+	 custom-color="#16128c"
+	 src-table="public.record"
+	 dst-table="public.clotting_time" reference-fk="fk_9b349f91ef849a5d"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_record_immunological" type="relfk" layer="0"
+	 custom-color="#90b0f0"
+	 src-table="public.record"
+	 dst-table="public.immunological" reference-fk="fk_9b349f9166c16f61"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

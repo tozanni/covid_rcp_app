@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LiverFunctionRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,11 +34,13 @@ class LiverFunction
     private $BloodUreaNitrogen;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updated_at;

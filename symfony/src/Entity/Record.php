@@ -110,12 +110,12 @@ class Record
      * @ORM\OneToOne(targetEntity=ClottingTime::class, inversedBy="record", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $ClottingTime;
+    private $clottingTime;
 
     /**
      * @ORM\OneToOne(targetEntity=Immunological::class, inversedBy="record", cascade={"persist", "remove"})
      */
-    private $Immunological;
+    private $immunological;
 
     public function getId(): ?int
     {
@@ -376,24 +376,24 @@ class Record
 
     public function getClottingTime(): ?ClottingTime
     {
-        return $this->ClottingTime;
+        return $this->clottingTime;
     }
 
-    public function setClottingTime(ClottingTime $ClottingTime): self
+    public function setClottingTime(ClottingTime $clottingTime): self
     {
-        $this->ClottingTime = $ClottingTime;
+        $this->clottingTime = $clottingTime;
 
         return $this;
     }
 
     public function getImmunological(): ?Immunological
     {
-        return $this->Immunological;
+        return $this->immunological;
     }
 
-    public function setImmunological(?Immunological $Immunological): self
+    public function setImmunological(?Immunological $immunological): self
     {
-        $this->Immunological = $Immunological;
+        $this->immunological = $immunological;
 
         return $this;
     }
