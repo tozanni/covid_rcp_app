@@ -1,0 +1,19 @@
+.rzslider .rz-pointer{
+	background-color: transparent;
+	
+}
+.rzslider .rzslider-pointer{
+	background-color: transparent;
+}
+
+.rzslider .rz-pointer:after{
+	background: #4db6ac;
+	width: 14px;
+	height: 14px;
+	position: absolute;
+	top: 9px;
+	border-radius: 15px;
+}
+.rzslider .rz-pointer.rz-active:after{
+	background-color: #4db6ac;
+}

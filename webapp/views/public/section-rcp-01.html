@@ -1,0 +1,25 @@
+<div class="section-wrapper mt-5">
+	<div class="text-wrapper mt-5">
+		<div class="text-item">P&aacute;gina para calcular sin iniciar sesi&oacute;n</div>
+		<div class="text-item">No guarda datos del paciente</div>
+	</div>
+	<div class="tiles-wrapper mt-5">
+		<div ng-repeat="item in [].constructor(5) track by $index" class="image-tile-wrapper">
+			<div class="tile">
+				<i class="fa fa-pie-chart"></i>
+			</div>
+		</div>
+	</div>
+	<div class="text-wrapper mt-5">
+		<a role="button" class="btn btn-lg btn-custom" ui-sref="home.second"><i class="fa fa-plus mr-3"></i>Calcular Riesgo RcP</a>
+	</div>
+	<div class="text-wrapper mt-5">
+		<div class="text-item">Inicia sesi&oacute;n con una cuenta para llevar un historial de los pacientes.</div>
+	</div>
+	<div class="text-wrapper mt-5">
+		<button class="btn btn-custom btn-custom-sm" ng-click="">Iniciar Sesi&oacute;n</button>
+	</div>
+	<div class="text-wrapper mt-5">
+		<div class="text-item"><a ui-sref="home.second">Registrarme</a></div>
+	</div>
+</div>
