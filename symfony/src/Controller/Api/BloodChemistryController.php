@@ -32,9 +32,7 @@ class BloodChemistryController extends AbstractFOSRestController
      *    )
      * )
      *
-     * @SWG\Response(
-     *     response=404,
-     *     description="HTTP_NOT_FOUND - La dirección con el Id solicitado no se encuentra.",
+     * @SWG\Response(response=404, description="HTTP_NOT_FOUND - La dirección con el Id solicitado no se encuentra.",
      *     @SWG\Schema(type="object",
      *          @SWG\Property(property="success", type="string", description="El código del error.", example= "false"),
      *          @SWG\Property(property="error_description", type="string", description="Detalles del error.")

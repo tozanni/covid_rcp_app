@@ -5,7 +5,8 @@ fos_rest:
 #    routing_loader: true
     view:
         view_response_listener:  true
-#    exception:
+    exception:
+        enabled: true
 #        codes:
 #            App\Exception\MyException: 403
 #        messages:
