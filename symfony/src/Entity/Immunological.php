@@ -21,10 +21,10 @@ class Immunological
     /**
      * @ORM\Column(type="integer")
      */
-    private $ReactiveProteinC;
+    private $reactiveProteinC;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="Immunological", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="immunological", cascade={"persist", "remove"})
      */
     private $record;
 
@@ -35,12 +35,12 @@ class Immunological
 
     public function getReactiveProteinC(): ?int
     {
-        return $this->ReactiveProteinC;
+        return $this->reactiveProteinC;
     }
 
-    public function setReactiveProteinC(int $ReactiveProteinC): self
+    public function setReactiveProteinC(int $reactiveProteinC): self
     {
-        $this->ReactiveProteinC = $ReactiveProteinC;
+        $this->reactiveProteinC = $reactiveProteinC;
 
         return $this;
     }

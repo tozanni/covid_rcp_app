@@ -21,17 +21,17 @@ class LiverFunction
     /**
      * @ORM\Column(type="integer")
      */
-    private $AspartateAminotransferase;
+    private $aspartateAminotransferase;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $AlanineTransaminase;
+    private $alanineTransaminase;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $BloodUreaNitrogen;
+    private $bloodUreaNitrogen;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -57,36 +57,36 @@ class LiverFunction
 
     public function getAspartateAminotransferase(): ?int
     {
-        return $this->AspartateAminotransferase;
+        return $this->aspartateAminotransferase;
     }
 
-    public function setAspartateAminotransferase(int $AspartateAminotransferase): self
+    public function setAspartateAminotransferase(int $aspartateAminotransferase): self
     {
-        $this->AspartateAminotransferase = $AspartateAminotransferase;
+        $this->aspartateAminotransferase = $aspartateAminotransferase;
 
         return $this;
     }
 
     public function getAlanineTransaminase(): ?int
     {
-        return $this->AlanineTransaminase;
+        return $this->alanineTransaminase;
     }
 
-    public function setAlanineTransaminase(int $AlanineTransaminase): self
+    public function setAlanineTransaminase(int $alanineTransaminase): self
     {
-        $this->AlanineTransaminase = $AlanineTransaminase;
+        $this->alanineTransaminase = $alanineTransaminase;
 
         return $this;
     }
 
     public function getBloodUreaNitrogen(): ?int
     {
-        return $this->BloodUreaNitrogen;
+        return $this->bloodUreaNitrogen;
     }
 
-    public function setBloodUreaNitrogen(int $BloodUreaNitrogen): self
+    public function setBloodUreaNitrogen(int $bloodUreaNitrogen): self
     {
-        $this->BloodUreaNitrogen = $BloodUreaNitrogen;
+        $this->bloodUreaNitrogen = $bloodUreaNitrogen;
 
         return $this;
     }

@@ -14,3 +14,15 @@ fos_rest:
         rules:
             - { path: ^/api/v1, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
             - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
+    versioning:
+        enabled: true
+#        resolvers:
+#            query: true # Query parameter: /users?version=v1
+#            custom_header: true # X-Accept-Version header
+#            media_type:
+#                enabled: true
+#                regex: '/api\/(v|version)=(?P<version>[0-9\.]+)/'
+#        guessing_order:
+#            - query
+#            - custom_header
+#            - media_type

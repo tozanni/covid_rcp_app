@@ -17,7 +17,6 @@ use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Entity\BloodChemistry;
 
-
 class BloodChemistryController extends AbstractFOSRestController
 {
     /**
@@ -46,7 +45,6 @@ class BloodChemistryController extends AbstractFOSRestController
      *
      * @return View
      */
-
     public function index(){
 
         $chemistries = $this->getDoctrine()->getRepository(BloodChemistry::class)

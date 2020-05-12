@@ -21,12 +21,12 @@ class ClottingTime
     /**
      * @ORM\Column(type="integer")
      */
-    private $Prothrombin;
+    private $prothrombin;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Thromboplastin;
+    private $thromboplastin;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -41,7 +41,7 @@ class ClottingTime
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="ClottingTime", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="clottingTime", cascade={"persist", "remove"})
      */
     private $record;
 
@@ -52,24 +52,24 @@ class ClottingTime
 
     public function getProthrombin(): ?int
     {
-        return $this->Prothrombin;
+        return $this->prothrombin;
     }
 
-    public function setProthrombin(int $Prothrombin): self
+    public function setProthrombin(int $prothrombin): self
     {
-        $this->Prothrombin = $Prothrombin;
+        $this->prothrombin = $prothrombin;
 
         return $this;
     }
 
     public function getThromboplastin(): ?int
     {
-        return $this->Thromboplastin;
+        return $this->thromboplastin;
     }
 
-    public function setThromboplastin(int $Thromboplastin): self
+    public function setThromboplastin(int $thromboplastin): self
     {
-        $this->Thromboplastin = $Thromboplastin;
+        $this->thromboplastin = $thromboplastin;
 
         return $this;
     }
