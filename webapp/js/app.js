@@ -1,16 +1,47 @@
 
-	define(['angularAMD','ui-router','ui-bootstrap','angular-cookies','angular-animate','angular-sanitize','angular-filter','angular-locale'], function(angularAMD){
-		var app = angular.module('predcovid', ['ui.router','ui.bootstrap','ngCookies','ngAnimate','ngSanitize','angular.filter']);
+	define(['angularAMD','ui-router','ui-bootstrap','angular-cookies','angular-animate','angular-sanitize','angular-filter','angular-locale','rzslider'], function(angularAMD){
+		var app = angular.module('predcovid', ['ui.router','ui.bootstrap','ngCookies','ngAnimate','ngSanitize','angular.filter','rzSlider']);
 		app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider){
+			
+			$urlRouterProvider.otherwise('/home');
+			
 			$stateProvider
 			// states
-			.state('/',angularAMD.route({
-				url:'/',
-				data:{title:'predCOVID | Inicio'},
-				templateUrl: 'layout/login.php',
-				controller: 'mainController',
-				controllerUrl: 'controllers/mainController'
-			}))
+			.state('home', {
+				url:'/home',
+				data:{title:'Inicio | Invitado'},
+				views:{
+					'':angularAMD.route({
+						templateUrl: 'layout/home.html',
+						controller: 'mainController',
+						controllerUrl: 'controllers/mainController'
+					})
+				}
+			})
+			
+			.state('home.first', {
+				url: '/first',
+				data: {title: 'Probabilidad de RcP'},
+				views:{
+					'': angularAMD.route({
+						templateUrl: 'views/public/section-rcp-01.html',
+						controller: 'mainController',
+						controllerUrl: 'controllers/mainController'
+					})
+				}
+			})
+
+			.state('home.second',{
+				url: '/second',
+				data: {title: 'Triage #8888'},
+				views:{
+					'':angularAMD.route({
+						templateUrl: 'views/public/section-rcp-02.html',
+						controller: 'triageController',
+						controllerUrl: 'controllers/mainController'
+					})
+				}
+			})
 			.state('admin', {
 				url: '/admin',
 				data:{title: 'predCOVID | Administración'},
@@ -22,6 +53,7 @@
 					})
 				}
 			})
+
 			/* dashboards */
 			.state('admin.master_dashboard',{
 				url: '/master_dashboard',
@@ -34,7 +66,7 @@
 					})
 				}
 			})
-			/* Catalogs */
+
 		}]);
 	
 		app.run(['$rootScope','$location','$state', '$cookies','$http', function($rootScope, $location, $state, $cookies, $http){
@@ -43,7 +75,7 @@
 				$location.path('/admin');
 			}else{
 				console.log('no access');
-				$location.path('/');
+				$location.path('/home');
 			}
 		
 			$rootScope.$on('$locationChangeStart', function(event, next, current){
@@ -53,7 +85,7 @@
 				angular.forEach(unAuth, function(v,k){
 					if(v!==$location.path() && !loggedIn){
 						console.log('No access; not loggedIn');
-						$location.path('/');
+						$location.path('/home');
 					}
 				});
 			});
