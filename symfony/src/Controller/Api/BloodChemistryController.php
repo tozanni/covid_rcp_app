@@ -8,6 +8,7 @@
 
 namespace App\Controller\Api;
 
+use App\Repository\BloodChemistryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -20,16 +21,13 @@ use App\Entity\BloodChemistry;
 class BloodChemistryController extends AbstractFOSRestController
 {
     /**
-     * Muestra un listado de objeto
-     *
      * @Rest\Get("blood_chemistry")
+     * @param BloodChemistryRepository $bloodChemistryRepository
+     * @return View
      *
-     * @SWG\Response(
-     *     response=200,
-     *     description="Regresa un listado",
-     *     @SWG\Schema(type="array",
-     *          @Model(type=BloodChemistry::class)
-     *    )
+     * @SWG\Tag(name="BloodChemistry")
+     * @SWG\Response(response=200, description="Regresa un listado",
+     *     @SWG\Schema(type="array", @Model(type=BloodChemistry::class))
      * )
      *
      * @SWG\Response(response=404, description="HTTP_NOT_FOUND - La dirección con el Id solicitado no se encuentra.",
@@ -38,29 +36,19 @@ class BloodChemistryController extends AbstractFOSRestController
      *          @SWG\Property(property="error_description", type="string", description="Detalles del error.")
      *    )
      * )
-     *
-     * @SWG\Tag(name="BloodChemistry")
-     *
-     * @return View
      */
-    public function index(){
-
-        $chemistries = $this->getDoctrine()->getRepository(BloodChemistry::class)
-            ->findAll();
-
-        if (!$chemistries){
-            return View::create(["success" => false, "msg" => ''], Response::HTTP_NOT_FOUND);
-        }
-
-        return View::create($chemistries, Response::HTTP_OK);
+    public function index(BloodChemistryRepository $bloodChemistryRepository): View
+    {
+        return View::create($bloodChemistryRepository->findAll(), Response::HTTP_OK);
     }
 
-
     /**
-     * Crear BloodChemistry
-     *
      * @Rest\Post("blood_chemistry")
+     * @param Request $request
+     * @return View
+     * @throws \Exception
      *
+     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="glucose", type="int", description="", example="10"),
@@ -72,33 +60,22 @@ class BloodChemistryController extends AbstractFOSRestController
      *    )
      * )
      *
-     * @SWG\Response(
-     *     response=200,
-     *     description="Regresa el objecto creado",
-     *     @Model(type=BloodChemistry::class)
-     * )
-     *
-     * @param Request $request
-     *
-     * @SWG\Tag(name="BloodChemistry")
-     *
-     * @return View
-     * @throws \Exception
+     * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=BloodChemistry::class))
      */
-    public function create(Request $request){
-        $chemistrieBlood = new BloodChemistry();
-        $chemistrieBlood->setGlucose($request->get('glucose'));
-        $chemistrieBlood->setUrea($request->get('urea'));
-        $chemistrieBlood->setCreatinine($request->get('creatinine'));
-        $chemistrieBlood->setCholesterol($request->get('cholesterol'));
-        $chemistrieBlood->setTriglycerides($request->get('triglycerides'));
-        $chemistrieBlood->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
+    public function create(Request $request): View
+    {
+        $bloodChemistry = new BloodChemistry();
+        $bloodChemistry->setGlucose($request->get('glucose'));
+        $bloodChemistry->setUrea($request->get('urea'));
+        $bloodChemistry->setCreatinine($request->get('creatinine'));
+        $bloodChemistry->setCholesterol($request->get('cholesterol'));
+        $bloodChemistry->setTriglycerides($request->get('triglycerides'));
+        $bloodChemistry->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
 
         $manager = $this->getDoctrine()->getManager();
-        $manager->persist($chemistrieBlood);
+        $manager->persist($bloodChemistry);
         $manager->flush();
 
-        Return View::create($chemistrieBlood, Response::HTTP_OK);
-
+        return View::create($bloodChemistry);
     }
 }
