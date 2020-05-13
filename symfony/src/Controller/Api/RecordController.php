@@ -37,7 +37,6 @@ class RecordController extends AbstractFOSRestController
      *
      * @SWG\Tag(name="Record")
      * @SWG\Parameter(name="id", in="path", type="integer", description="ID del expendiente a buscar")
-     *
      * @SWG\Response(response=200, description="Regresa los detalles de un Expediente", @Model(type=Record::class))
      * @SWG\Response(response=404, description="El expediente no fue encontrado",
      *     @SWG\Schema(type="object", @SWG\Property(property="message", type="string", example="El expediente no fue encontrado"))
