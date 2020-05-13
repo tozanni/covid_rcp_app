@@ -70,6 +70,18 @@ class Record
     private $triage;
 
     /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
+    /**
      * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record", cascade={"persist", "remove"})
      */
     private $hematicBiometry;
@@ -93,18 +105,6 @@ class Record
      * @ORM\OneToOne(targetEntity=LiverFunction::class, inversedBy="record", cascade={"persist", "remove"})
      */
     private $liverFunction;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
-
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updated_at;
 
     /**
      * @ORM\OneToOne(targetEntity=ClottingTime::class, inversedBy="record", cascade={"persist", "remove"})
