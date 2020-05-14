@@ -24,10 +24,17 @@ class ClottingTimeController extends AbstractFOSRestController
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=ClottingTime::class))
      * )
+     *
+     * @SWG\Response(response=404, description="HTTP_NOT_FOUND - La dirección con el Id solicitado no se encuentra.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="success", type="string", description="El código del error.", example= "false"),
+     *          @SWG\Property(property="error_description", type="string", description="Detalles del error.")
+     *    )
+     * )
      */
     public function index(ClottingTimeRepository $clottingTimeRepository): View
     {
-        return View::create($clottingTimeRepository->findAll());
+        return View::create($clottingTimeRepository->findAll(), Response::HTTP_OK);
     }
 
 

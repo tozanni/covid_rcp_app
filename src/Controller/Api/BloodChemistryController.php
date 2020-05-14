@@ -42,6 +42,27 @@ class BloodChemistryController extends AbstractFOSRestController
         return View::create($bloodChemistryRepository->findAll(), Response::HTTP_OK);
     }
 
+    
+    /**
+     * @Rest\Get("/blood_chemistry/{id}")
+     * @param BloodChemistry $bloodChemistry
+     * @return View
+     *
+     * @SWG\Tag(name="BloodChemistry")
+     * @SWG\Parameter(name="id", in="path", type="integer", description="Blood Chemistry resource Id")
+     * @SWG\Response(response=200, description="Returns recorded Blood Chemistry.", @Model(type=BloodChemistry::class))
+     * @SWG\Response(response=404, description="Blood Chemistry not found.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="string", example="Error code."),
+     *          @SWG\Property(property="message", type="string", example="Blood Chemistry not found.")
+     *     )
+     * )
+     */
+    public function show(BloodChemistry $bloodChemistry): View
+    {
+        return View::create($bloodChemistry);
+    }
+
     /**
      * @Rest\Post("blood_chemistry")
      * @param Request $request
@@ -77,5 +98,78 @@ class BloodChemistryController extends AbstractFOSRestController
         $manager->flush();
 
         return View::create($bloodChemistry);
+    }
+
+    /**
+     * @Rest\Put("/blood_chemistry/{id}")
+     * @param Request $request
+     * @param $id
+     * @return View
+     *
+     * @SWG\Tag(name="BloodChemistry")
+     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Blood Chemistry ID")
+     * @SWG\Parameter(name="body", in="body",
+     *    @SWG\Schema(type="object",
+     *         @SWG\Property(property="glucose", type="integer", description="", example="10"),
+     *         @SWG\Property(property="urea", type="integer", description="", example="12"),
+     *         @SWG\Property(property="creatinine", type="integer", description="", example="13"),
+     *         @SWG\Property(property="cholesterol", type="integer", description="", example="123"),
+     *         @SWG\Property(property="triglycerides", type="integer", description="", example="12"),
+     *         @SWG\Property(property="glycated_hemoglobin", type="integer", description="", example="65"),
+     *    )
+     * )
+     * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=BloodChemistry::class))
+     * @SWG\Response(response=404, description="Blood Chemistry resource not found.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="string", example="Código del error"),
+     *          @SWG\Property(property="message", type="string", example="Blood Chemistry resource not found.")
+     *     )
+     * )
+     */
+    public function edit(Request $request, $id): View
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $bloodChemistry = $manager->getRepository(BloodChemistry::class)->find($id);
+
+        if(!$bloodChemistry){
+            return View::create(
+                ["code" => 404, "message" => "¡Registro no encontrado!"],
+                Response::HTTP_NOT_FOUND
+            );
+        }
+        //TODO: Validate input
+        $bloodChemistry->setGlucose($request->get('glucose'));
+        $bloodChemistry->setUrea($request->get('urea'));
+        $bloodChemistry->setCreatinine($request->get('creatinine'));
+        $bloodChemistry->setCholesterol($request->get('cholesterol'));
+        $bloodChemistry->setTriglycerides($request->get('triglycerides'));
+        $bloodChemistry->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
+        $manager->flush();
+
+        return View::create($bloodChemistry);
+    }
+
+    /**
+     * @Rest\Delete("/blood_chemistry/{id}")
+     * @param BloodChemistry $bloodChemistry
+     * @return View
+     *
+     * @SWG\Tag(name="BloodChemistry")
+     * @SWG\Parameter(name="id", in="path", type="integer", description="Clotting Time Id to delete")
+     * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=BloodChemistry::class))
+     * @SWG\Response(response=404, description="Clotting Times deleted",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="string", example="Código del error"),
+     *          @SWG\Property(property="message", type="string", example="Clotting Times deleted")
+     *     )
+     * )
+     */
+    public function delete(BloodChemistry $bloodChemistry): View
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($bloodChemistry);
+        $manager->flush();
+
+        return View::create(['code' => 200, 'message' => '¡Registro eliminado correctamente!']);
     }
 }
