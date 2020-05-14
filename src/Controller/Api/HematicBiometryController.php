@@ -49,12 +49,12 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="HematicBiometry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Blood Chemistry resource Id")
-     * @SWG\Response(response=200, description="Returns recorded Blood Chemistry.", @Model(type=HematicBiometry::class))
-     * @SWG\Response(response=404, description="Blood Chemistry not found.",
+     * @SWG\Parameter(name="id", in="path", type="integer", description="Hematic biometry resource Id")
+     * @SWG\Response(response=200, description="Returns recorded Hematic biometry.", @Model(type=HematicBiometry::class))
+     * @SWG\Response(response=404, description="Hematic biometry not found.",
      *     @SWG\Schema(type="object",
      *          @SWG\Property(property="code", type="string", example="Error code."),
-     *          @SWG\Property(property="message", type="string", example="Blood Chemistry not found.")
+     *          @SWG\Property(property="message", type="string", example="Hematic biometry not found.")
      *     )
      * )
      */
@@ -103,7 +103,7 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="HematicBiometry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Blood Chemistry ID")
+     * @SWG\Parameter(name="id", in="path", type="integer", description="Hematic biometry ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="hematocrit", type="integer", description="", example="10"),
@@ -113,10 +113,10 @@ class HematicBiometryController extends AbstractFOSRestController
      *    )
      * )
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=HematicBiometry::class))
-     * @SWG\Response(response=404, description="Blood Chemistry resource not found.",
+     * @SWG\Response(response=404, description="Hematic biometry resource not found.",
      *     @SWG\Schema(type="object",
      *          @SWG\Property(property="code", type="string", example="Código del error"),
-     *          @SWG\Property(property="message", type="string", example="Blood Chemistry resource not found.")
+     *          @SWG\Property(property="message", type="string", example="Hematic biometry resource not found.")
      *     )
      * )
      */
