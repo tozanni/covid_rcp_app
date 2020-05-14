@@ -51,7 +51,7 @@ class BloodChemistryController extends AbstractFOSRestController
      * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
-     *         @SWG\Property(property="glucose", type="int", description="", example="10"),
+     *         @SWG\Property(property="glucose", type="integer", description="", example="10"),
      *         @SWG\Property(property="urea", type="integer", description="", example="12"),
      *         @SWG\Property(property="creatinine", type="integer", description="", example="13"),
      *         @SWG\Property(property="cholesterol", type="integer", description="", example="123"),
