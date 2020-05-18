@@ -6,6 +6,10 @@ sonata_user_admin_resetting:
   resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
   prefix: /admin/resetting
 
+api_auth_login:
+  path: /api/auth/login
+  methods:  [POST]
+
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index

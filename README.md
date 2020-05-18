@@ -32,3 +32,16 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+#JWT Configuration 
+
+#inside bash
+mkdir config/jwt
+openssl genrsa -out config/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+
+#.env
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=sf4jwt........(el que usó para crear los archivos en el paso anterior)
