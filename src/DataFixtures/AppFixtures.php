@@ -21,6 +21,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setUsername('admin');
             $user->setEmail('admin@example.com');
+            $user->setRoles(['ROLE_SUPER_ADMIN']);
             $user->setEnabled(true);
 
             $password = $this->encoder->encodePassword($user, 'covidadmin2020');
