@@ -19,17 +19,17 @@ class LiverFunction
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $aspartateAminotransferase;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $alanineTransaminase;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $bloodUreaNitrogen;
 
@@ -55,36 +55,36 @@ class LiverFunction
         return $this->id;
     }
 
-    public function getAspartateAminotransferase(): ?int
+    public function getAspartateAminotransferase(): ?string
     {
         return $this->aspartateAminotransferase;
     }
 
-    public function setAspartateAminotransferase(int $aspartateAminotransferase): self
+    public function setAspartateAminotransferase(string $aspartateAminotransferase): self
     {
         $this->aspartateAminotransferase = $aspartateAminotransferase;
 
         return $this;
     }
 
-    public function getAlanineTransaminase(): ?int
+    public function getAlanineTransaminase(): ?string
     {
         return $this->alanineTransaminase;
     }
 
-    public function setAlanineTransaminase(int $alanineTransaminase): self
+    public function setAlanineTransaminase(string $alanineTransaminase): self
     {
         $this->alanineTransaminase = $alanineTransaminase;
 
         return $this;
     }
 
-    public function getBloodUreaNitrogen(): ?int
+    public function getBloodUreaNitrogen(): ?string
     {
         return $this->bloodUreaNitrogen;
     }
 
-    public function setBloodUreaNitrogen(int $bloodUreaNitrogen): self
+    public function setBloodUreaNitrogen(string $bloodUreaNitrogen): self
     {
         $this->bloodUreaNitrogen = $bloodUreaNitrogen;
 

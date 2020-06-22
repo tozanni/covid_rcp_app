@@ -19,12 +19,12 @@ class SerumElectrolytes
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $sodium;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $potassium;
 
@@ -50,24 +50,24 @@ class SerumElectrolytes
         return $this->id;
     }
 
-    public function getSodium(): ?int
+    public function getSodium(): ?string
     {
         return $this->sodium;
     }
 
-    public function setSodium(int $sodium): self
+    public function setSodium(string $sodium): self
     {
         $this->sodium = $sodium;
 
         return $this;
     }
 
-    public function getPotassium(): ?int
+    public function getPotassium(): ?string
     {
         return $this->potassium;
     }
 
-    public function setPotassium(int $potassium): self
+    public function setPotassium(string $potassium): self
     {
         $this->potassium = $potassium;
 

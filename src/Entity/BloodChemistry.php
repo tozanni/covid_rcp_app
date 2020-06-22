@@ -19,32 +19,32 @@ class BloodChemistry
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $glucose;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $urea;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $creatinine;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $cholesterol;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $triglycerides;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $glycated_hemoglobin;
 
@@ -70,72 +70,72 @@ class BloodChemistry
         return $this->id;
     }
 
-    public function getGlucose(): ?int
+    public function getGlucose(): ?string
     {
         return $this->glucose;
     }
 
-    public function setGlucose(int $glucose): self
+    public function setGlucose(string $glucose): self
     {
         $this->glucose = $glucose;
 
         return $this;
     }
 
-    public function getUrea(): ?int
+    public function getUrea(): ?string
     {
         return $this->urea;
     }
 
-    public function setUrea(int $urea): self
+    public function setUrea(string $urea): self
     {
         $this->urea = $urea;
 
         return $this;
     }
 
-    public function getCreatinine(): ?int
+    public function getCreatinine(): ?string
     {
         return $this->creatinine;
     }
 
-    public function setCreatinine(int $creatinine): self
+    public function setCreatinine(string $creatinine): self
     {
         $this->creatinine = $creatinine;
 
         return $this;
     }
 
-    public function getCholesterol(): ?int
+    public function getCholesterol(): ?string
     {
         return $this->cholesterol;
     }
 
-    public function setCholesterol(int $cholesterol): self
+    public function setCholesterol(string $cholesterol): self
     {
         $this->cholesterol = $cholesterol;
 
         return $this;
     }
 
-    public function getTriglycerides(): ?int
+    public function getTriglycerides(): ?string
     {
         return $this->triglycerides;
     }
 
-    public function setTriglycerides(int $triglycerides): self
+    public function setTriglycerides(string $triglycerides): self
     {
         $this->triglycerides = $triglycerides;
 
         return $this;
     }
 
-    public function getGlycatedHemoglobin(): ?int
+    public function getGlycatedHemoglobin(): ?string
     {
         return $this->glycated_hemoglobin;
     }
 
-    public function setGlycatedHemoglobin(int $glycated_hemoglobin): self
+    public function setGlycatedHemoglobin(string $glycated_hemoglobin): self
     {
         $this->glycated_hemoglobin = $glycated_hemoglobin;
 

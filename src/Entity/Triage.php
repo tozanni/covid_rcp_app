@@ -19,7 +19,7 @@ class Triage
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $days_before_admission;
 
@@ -85,12 +85,12 @@ class Triage
         return $this->id;
     }
 
-    public function getDaysBeforeAdmission(): ?int
+    public function getDaysBeforeAdmission(): ?string
     {
         return $this->days_before_admission;
     }
 
-    public function setDaysBeforeAdmission(int $days_before_admission): self
+    public function setDaysBeforeAdmission(string $days_before_admission): self
     {
         $this->days_before_admission = $days_before_admission;
 

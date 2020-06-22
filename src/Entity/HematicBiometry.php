@@ -19,22 +19,22 @@ class HematicBiometry
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $hematocrit;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $hemoglobin;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $leukocytes;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $platelets;
 
@@ -60,48 +60,48 @@ class HematicBiometry
         return $this->id;
     }
 
-    public function getHematocrit(): ?int
+    public function getHematocrit(): ?string
     {
         return $this->hematocrit;
     }
 
-    public function setHematocrit(int $hematocrit): self
+    public function setHematocrit(string $hematocrit): self
     {
         $this->hematocrit = $hematocrit;
 
         return $this;
     }
 
-    public function getHemoglobin(): ?int
+    public function getHemoglobin(): ?string
     {
         return $this->hemoglobin;
     }
 
-    public function setHemoglobin(int $hemoglobin): self
+    public function setHemoglobin(string $hemoglobin): self
     {
         $this->hemoglobin = $hemoglobin;
 
         return $this;
     }
 
-    public function getLeukocytes(): ?int
+    public function getLeukocytes(): ?string
     {
         return $this->leukocytes;
     }
 
-    public function setLeukocytes(int $leukocytes): self
+    public function setLeukocytes(string $leukocytes): self
     {
         $this->leukocytes = $leukocytes;
 
         return $this;
     }
 
-    public function getPlatelets(): ?int
+    public function getPlatelets(): ?string
     {
         return $this->platelets;
     }
 
-    public function setPlatelets(int $platelets): self
+    public function setPlatelets(string $platelets): self
     {
         $this->platelets = $platelets;
 

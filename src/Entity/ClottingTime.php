@@ -19,12 +19,12 @@ class ClottingTime
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $prothrombin;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $thromboplastin;
 
@@ -50,24 +50,24 @@ class ClottingTime
         return $this->id;
     }
 
-    public function getProthrombin(): ?int
+    public function getProthrombin(): ?string
     {
         return $this->prothrombin;
     }
 
-    public function setProthrombin(int $prothrombin): self
+    public function setProthrombin(string $prothrombin): self
     {
         $this->prothrombin = $prothrombin;
 
         return $this;
     }
 
-    public function getThromboplastin(): ?int
+    public function getThromboplastin(): ?string
     {
         return $this->thromboplastin;
     }
 
-    public function setThromboplastin(int $thromboplastin): self
+    public function setThromboplastin(string $thromboplastin): self
     {
         $this->thromboplastin = $thromboplastin;
 

@@ -29,12 +29,12 @@ class VitalSigns
     private $gender;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $weight;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $height;
 
@@ -64,12 +64,12 @@ class VitalSigns
     private $temperature;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $oximetry;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $capillary_glucose;
 
@@ -119,24 +119,24 @@ class VitalSigns
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getWeight(): ?string
     {
         return $this->weight;
     }
 
-    public function setWeight(int $weight): self
+    public function setWeight(string $weight): self
     {
         $this->weight = $weight;
 
         return $this;
     }
 
-    public function getHeight(): ?int
+    public function getHeight(): ?string
     {
         return $this->height;
     }
 
-    public function setHeight(int $height): self
+    public function setHeight(string $height): self
     {
         $this->height = $height;
 
@@ -203,24 +203,24 @@ class VitalSigns
         return $this;
     }
 
-    public function getOximetry(): ?int
+    public function getOximetry(): ?string
     {
         return $this->oximetry;
     }
 
-    public function setOximetry(int $oximetry): self
+    public function setOximetry(string $oximetry): self
     {
         $this->oximetry = $oximetry;
 
         return $this;
     }
 
-    public function getCapillaryGlucose(): ?int
+    public function getCapillaryGlucose(): ?string
     {
         return $this->capillary_glucose;
     }
 
-    public function setCapillaryGlucose(int $capillary_glucose): self
+    public function setCapillaryGlucose(string $capillary_glucose): self
     {
         $this->capillary_glucose = $capillary_glucose;
 

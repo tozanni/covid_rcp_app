@@ -19,7 +19,7 @@ class Immunological
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     private $reactiveProteinC;
 
@@ -33,12 +33,12 @@ class Immunological
         return $this->id;
     }
 
-    public function getReactiveProteinC(): ?int
+    public function getReactiveProteinC(): ?string
     {
         return $this->reactiveProteinC;
     }
 
-    public function setReactiveProteinC(int $reactiveProteinC): self
+    public function setReactiveProteinC(string $reactiveProteinC): self
     {
         $this->reactiveProteinC = $reactiveProteinC;
 
