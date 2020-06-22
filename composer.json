@@ -11,6 +11,7 @@
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/api-doc-bundle": "^3.6",
         "nelmio/cors-bundle": "^2.0",
+        "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",
         "sonata-project/admin-bundle": "^3.66",
         "sonata-project/doctrine-orm-admin-bundle": "^3.17",

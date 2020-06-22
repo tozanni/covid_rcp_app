@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\HematicBiometryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)
@@ -14,27 +15,28 @@ class HematicBiometry
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $hematocrit;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $hemoglobin;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $leukocytes;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $platelets;
 
@@ -55,53 +57,53 @@ class HematicBiometry
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getHematocrit(): ?string
+    public function getHematocrit(): ?float
     {
         return $this->hematocrit;
     }
 
-    public function setHematocrit(string $hematocrit): self
+    public function setHematocrit(float $hematocrit): self
     {
         $this->hematocrit = $hematocrit;
 
         return $this;
     }
 
-    public function getHemoglobin(): ?string
+    public function getHemoglobin(): ?float
     {
         return $this->hemoglobin;
     }
 
-    public function setHemoglobin(string $hemoglobin): self
+    public function setHemoglobin(float $hemoglobin): self
     {
         $this->hemoglobin = $hemoglobin;
 
         return $this;
     }
 
-    public function getLeukocytes(): ?string
+    public function getLeukocytes(): ?float
     {
         return $this->leukocytes;
     }
 
-    public function setLeukocytes(string $leukocytes): self
+    public function setLeukocytes(float $leukocytes): self
     {
         $this->leukocytes = $leukocytes;
 
         return $this;
     }
 
-    public function getPlatelets(): ?string
+    public function getPlatelets(): ?float
     {
         return $this->platelets;
     }
 
-    public function setPlatelets(string $platelets): self
+    public function setPlatelets(float $platelets): self
     {
         $this->platelets = $platelets;
 

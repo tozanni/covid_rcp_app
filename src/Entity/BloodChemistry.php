@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BloodChemistryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=BloodChemistryRepository::class)
@@ -14,37 +15,38 @@ class BloodChemistry
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $glucose;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $urea;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $creatinine;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $cholesterol;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $triglycerides;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $glycated_hemoglobin;
 
@@ -65,77 +67,77 @@ class BloodChemistry
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getGlucose(): ?string
+    public function getGlucose(): ?float
     {
         return $this->glucose;
     }
 
-    public function setGlucose(string $glucose): self
+    public function setGlucose(float $glucose): self
     {
         $this->glucose = $glucose;
 
         return $this;
     }
 
-    public function getUrea(): ?string
+    public function getUrea(): ?float
     {
         return $this->urea;
     }
 
-    public function setUrea(string $urea): self
+    public function setUrea(float $urea): self
     {
         $this->urea = $urea;
 
         return $this;
     }
 
-    public function getCreatinine(): ?string
+    public function getCreatinine(): ?float
     {
         return $this->creatinine;
     }
 
-    public function setCreatinine(string $creatinine): self
+    public function setCreatinine(float $creatinine): self
     {
         $this->creatinine = $creatinine;
 
         return $this;
     }
 
-    public function getCholesterol(): ?string
+    public function getCholesterol(): ?float
     {
         return $this->cholesterol;
     }
 
-    public function setCholesterol(string $cholesterol): self
+    public function setCholesterol(float $cholesterol): self
     {
         $this->cholesterol = $cholesterol;
 
         return $this;
     }
 
-    public function getTriglycerides(): ?string
+    public function getTriglycerides(): ?float
     {
         return $this->triglycerides;
     }
 
-    public function setTriglycerides(string $triglycerides): self
+    public function setTriglycerides(float $triglycerides): self
     {
         $this->triglycerides = $triglycerides;
 
         return $this;
     }
 
-    public function getGlycatedHemoglobin(): ?string
+    public function getGlycatedHemoglobin(): ?float
     {
         return $this->glycated_hemoglobin;
     }
 
-    public function setGlycatedHemoglobin(string $glycated_hemoglobin): self
+    public function setGlycatedHemoglobin(float $glycated_hemoglobin): self
     {
         $this->glycated_hemoglobin = $glycated_hemoglobin;
 

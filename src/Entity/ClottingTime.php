@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClottingTimeRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=ClottingTimeRepository::class)
@@ -14,17 +15,18 @@ class ClottingTime
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $prothrombin;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $thromboplastin;
 
@@ -45,29 +47,29 @@ class ClottingTime
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getProthrombin(): ?string
+    public function getProthrombin(): ?float
     {
         return $this->prothrombin;
     }
 
-    public function setProthrombin(string $prothrombin): self
+    public function setProthrombin(float $prothrombin): self
     {
         $this->prothrombin = $prothrombin;
 
         return $this;
     }
 
-    public function getThromboplastin(): ?string
+    public function getThromboplastin(): ?float
     {
         return $this->thromboplastin;
     }
 
-    public function setThromboplastin(string $thromboplastin): self
+    public function setThromboplastin(float $thromboplastin): self
     {
         $this->thromboplastin = $thromboplastin;
 

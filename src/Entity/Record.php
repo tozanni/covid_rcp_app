@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RecordRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=RecordRepository::class)
@@ -14,7 +15,8 @@ class Record
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -117,7 +119,7 @@ class Record
      */
     private $immunological;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }

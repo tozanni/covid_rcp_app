@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\LiverFunctionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=LiverFunctionRepository::class)
@@ -14,22 +15,23 @@ class LiverFunction
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $aspartateAminotransferase;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $alanineTransaminase;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $bloodUreaNitrogen;
 
@@ -50,41 +52,41 @@ class LiverFunction
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getAspartateAminotransferase(): ?string
+    public function getAspartateAminotransferase(): ?float
     {
         return $this->aspartateAminotransferase;
     }
 
-    public function setAspartateAminotransferase(string $aspartateAminotransferase): self
+    public function setAspartateAminotransferase(float $aspartateAminotransferase): self
     {
         $this->aspartateAminotransferase = $aspartateAminotransferase;
 
         return $this;
     }
 
-    public function getAlanineTransaminase(): ?string
+    public function getAlanineTransaminase(): ?float
     {
         return $this->alanineTransaminase;
     }
 
-    public function setAlanineTransaminase(string $alanineTransaminase): self
+    public function setAlanineTransaminase(float $alanineTransaminase): self
     {
         $this->alanineTransaminase = $alanineTransaminase;
 
         return $this;
     }
 
-    public function getBloodUreaNitrogen(): ?string
+    public function getBloodUreaNitrogen(): ?float
     {
         return $this->bloodUreaNitrogen;
     }
 
-    public function setBloodUreaNitrogen(string $bloodUreaNitrogen): self
+    public function setBloodUreaNitrogen(float $bloodUreaNitrogen): self
     {
         $this->bloodUreaNitrogen = $bloodUreaNitrogen;
 

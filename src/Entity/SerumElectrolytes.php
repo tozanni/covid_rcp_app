@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SerumElectrolytesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
@@ -14,17 +15,18 @@ class SerumElectrolytes
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $sodium;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $potassium;
 
@@ -45,29 +47,29 @@ class SerumElectrolytes
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getSodium(): ?string
+    public function getSodium(): ?float
     {
         return $this->sodium;
     }
 
-    public function setSodium(string $sodium): self
+    public function setSodium(float $sodium): self
     {
         $this->sodium = $sodium;
 
         return $this;
     }
 
-    public function getPotassium(): ?string
+    public function getPotassium(): ?float
     {
         return $this->potassium;
     }
 
-    public function setPotassium(string $potassium): self
+    public function setPotassium(float $potassium): self
     {
         $this->potassium = $potassium;
 

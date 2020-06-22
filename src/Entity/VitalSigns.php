@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\VitalSignsRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)
@@ -14,7 +15,8 @@ class VitalSigns
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -29,12 +31,12 @@ class VitalSigns
     private $gender;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $weight;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $height;
 
@@ -64,12 +66,12 @@ class VitalSigns
     private $temperature;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $oximetry;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $capillary_glucose;
 
@@ -90,7 +92,7 @@ class VitalSigns
      */
     private $record;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -119,24 +121,24 @@ class VitalSigns
         return $this;
     }
 
-    public function getWeight(): ?string
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
 
-    public function setWeight(string $weight): self
+    public function setWeight(float $weight): self
     {
         $this->weight = $weight;
 
         return $this;
     }
 
-    public function getHeight(): ?string
+    public function getHeight(): ?float
     {
         return $this->height;
     }
 
-    public function setHeight(string $height): self
+    public function setHeight(float $height): self
     {
         $this->height = $height;
 
@@ -203,24 +205,24 @@ class VitalSigns
         return $this;
     }
 
-    public function getOximetry(): ?string
+    public function getOximetry(): ?float
     {
         return $this->oximetry;
     }
 
-    public function setOximetry(string $oximetry): self
+    public function setOximetry(float $oximetry): self
     {
         $this->oximetry = $oximetry;
 
         return $this;
     }
 
-    public function getCapillaryGlucose(): ?string
+    public function getCapillaryGlucose(): ?float
     {
         return $this->capillary_glucose;
     }
 
-    public function setCapillaryGlucose(string $capillary_glucose): self
+    public function setCapillaryGlucose(float $capillary_glucose): self
     {
         $this->capillary_glucose = $capillary_glucose;
 

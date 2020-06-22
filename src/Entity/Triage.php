@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TriageRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=TriageRepository::class)
@@ -14,12 +15,13 @@ class Triage
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="float")
      */
     private $days_before_admission;
 
@@ -80,17 +82,17 @@ class Triage
      */
     private $updated_at;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getDaysBeforeAdmission(): ?string
+    public function getDaysBeforeAdmission(): ?float
     {
         return $this->days_before_admission;
     }
 
-    public function setDaysBeforeAdmission(string $days_before_admission): self
+    public function setDaysBeforeAdmission(float $days_before_admission): self
     {
         $this->days_before_admission = $days_before_admission;
 
