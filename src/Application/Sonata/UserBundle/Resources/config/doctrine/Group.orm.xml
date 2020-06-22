@@ -6,8 +6,9 @@
 
     <entity name="App\Application\Sonata\UserBundle\Entity\Group" table="fos_user_group">
 
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
+        <id name="id" column="id" type="uuid">
+            <generator strategy="CUSTOM" />
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
         </id>
 
     </entity>
