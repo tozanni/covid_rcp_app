@@ -72,18 +72,6 @@ class Record
     private $triage;
 
     /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
-
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updated_at;
-
-    /**
      * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record", cascade={"persist", "remove"})
      */
     private $hematicBiometry;
@@ -118,6 +106,18 @@ class Record
      * @ORM\OneToOne(targetEntity=Immunological::class, inversedBy="record", cascade={"persist", "remove"})
      */
     private $immunological;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function getId()
     {
