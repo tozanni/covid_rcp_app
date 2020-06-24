@@ -14,7 +14,7 @@ class VitalSigns
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
@@ -41,22 +41,22 @@ class VitalSigns
     private $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $diastolic_blood_pressure;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $systolic_blood_pressure;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $heart_rate;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $breathing_frequency;
 
@@ -76,6 +76,11 @@ class VitalSigns
     private $capillary_glucose;
 
     /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns", cascade={"persist", "remove"})
+     */
+    private $record;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -86,11 +91,6 @@ class VitalSigns
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns", cascade={"persist", "remove"})
-     */
-    private $record;
 
     public function getId()
     {
@@ -145,48 +145,48 @@ class VitalSigns
         return $this;
     }
 
-    public function getDiastolicBloodPressure(): ?int
+    public function getDiastolicBloodPressure(): ?float
     {
         return $this->diastolic_blood_pressure;
     }
 
-    public function setDiastolicBloodPressure(int $diastolic_blood_pressure): self
+    public function setDiastolicBloodPressure(float $diastolic_blood_pressure): self
     {
         $this->diastolic_blood_pressure = $diastolic_blood_pressure;
 
         return $this;
     }
 
-    public function getSystolicBloodPressure(): ?int
+    public function getSystolicBloodPressure(): ?float
     {
         return $this->systolic_blood_pressure;
     }
 
-    public function setSystolicBloodPressure(int $systolic_blood_pressure): self
+    public function setSystolicBloodPressure(float $systolic_blood_pressure): self
     {
         $this->systolic_blood_pressure = $systolic_blood_pressure;
 
         return $this;
     }
 
-    public function getHeartRate(): ?int
+    public function getHeartRate(): ?float
     {
         return $this->heart_rate;
     }
 
-    public function setHeartRate(int $heart_rate): self
+    public function setHeartRate(float $heart_rate): self
     {
         $this->heart_rate = $heart_rate;
 
         return $this;
     }
 
-    public function getBreathingFrequency(): ?int
+    public function getBreathingFrequency(): ?float
     {
         return $this->breathing_frequency;
     }
 
-    public function setBreathingFrequency(int $breathing_frequency): self
+    public function setBreathingFrequency(float $breathing_frequency): self
     {
         $this->breathing_frequency = $breathing_frequency;
 

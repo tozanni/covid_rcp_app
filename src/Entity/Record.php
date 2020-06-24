@@ -14,7 +14,7 @@ class Record
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
@@ -98,7 +98,7 @@ class Record
 
     /**
      * @ORM\OneToOne(targetEntity=ClottingTime::class, inversedBy="record", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $clottingTime;
 
@@ -381,7 +381,7 @@ class Record
         return $this->clottingTime;
     }
 
-    public function setClottingTime(ClottingTime $clottingTime): self
+    public function setClottingTime(?ClottingTime $clottingTime): self
     {
         $this->clottingTime = $clottingTime;
 
