@@ -35,6 +35,5 @@ class VitalSignsFixtures extends Fixture
         $manager->flush();
 
         $this->addReference(self::VITAL_SIGNS_REFERENCE, $vitalSigns);
-
     }
 }

@@ -25,7 +25,7 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
             $record->setTreatment($faker->paragraph);
             $record->setEgressNotes($faker->paragraph);
             $record->setVitalSigns($this->getReference(VitalSignsFixtures::VITAL_SIGNS_REFERENCE));
-            //$record->setTriage();
+            $record->setTriage($this->getReference(TriageFixtures::TRIAGE_REFERENCE));
             //$record->setHematicBiometry();
             //$record->setBloodChemistry();
             //$record->setSerumElectrolytes();
@@ -43,6 +43,7 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             VitalSignsFixtures::class,
+            TriageFixtures::class,
         ];
     }
 }
