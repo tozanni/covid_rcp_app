@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\BloodChemistry;
+use App\Entity\HematicBiometry;
 use App\Entity\Record;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -26,13 +28,13 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
             $record->setEgressNotes($faker->paragraph);
             $record->setVitalSigns($this->getReference(VitalSignsFixtures::VITAL_SIGNS_REFERENCE));
             $record->setTriage($this->getReference(TriageFixtures::TRIAGE_REFERENCE));
-            //$record->setHematicBiometry();
-            //$record->setBloodChemistry();
-            //$record->setSerumElectrolytes();
-            //$record->setMedicalNotes();
-            //$record->setLiverFunction();
-            //$record->setClottingTime();
-            //$record->setImmunological();
+            $record->setHematicBiometry($this->getReference(HematicBiometryFixtures::HEMATIC_BIOMETRY_REFERENCE));
+            $record->setBloodChemistry($this->getReference(BloodChemistryFixtures::BLOOD_CHEMISTRY_REFERENCE));
+            $record->setSerumElectrolytes($this->getReference(SerumElectrolytesFixtures::SERUM_ELECTROLYTES_REFERENCE));
+            $record->setMedicalNotes($this->getReference(MedicalNotesFixtures::MEDICAL_NOTES_REFERENCE));
+            $record->setLiverFunction($this->getReference(LiverFunctionFixtures::LIVER_FUNCTION_REFERENCE));
+            $record->setClottingTime($this->getReference(ClottingTimeFixtures::CLOTTING_TIME_REFERENCE));
+            $record->setImmunological($this->getReference(ImmunologicalFixtures::IMMUNOLOGICAL_REFERENCE));
             $manager->persist($record);
         }
 
@@ -44,6 +46,13 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
         return [
             VitalSignsFixtures::class,
             TriageFixtures::class,
+            HematicBiometryFixtures::class,
+            BloodChemistryFixtures::class,
+            SerumElectrolytesFixtures::class,
+            MedicalNotesFixtures::class,
+            LiverFunctionFixtures::class,
+            ClottingTimeFixtures::class,
+            ImmunologicalFixtures::class,
         ];
     }
 }

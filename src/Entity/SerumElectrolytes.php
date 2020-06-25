@@ -31,6 +31,11 @@ class SerumElectrolytes
     private $potassium;
 
     /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="serumElectrolytes", cascade={"persist", "remove"})
+     */
+    private $record;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -41,11 +46,6 @@ class SerumElectrolytes
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="serumElectrolytes", cascade={"persist", "remove"})
-     */
-    private $record;
 
     public function getId()
     {
