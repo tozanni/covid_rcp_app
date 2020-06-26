@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class SerumElectrolytesController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="SerumElectrolytes")
+ */
 class SerumElectrolytesController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
      * @param SerumElectrolytesRepository $serumElectrolytesRepository
      * @return View
      *
-     * @SWG\Tag(name="SerumElectrolytes")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=SerumElectrolytes::class))
      * )
@@ -43,7 +47,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
      * @param SerumElectrolytes $serumElectrolytes
      * @return View
      *
-     * @SWG\Tag(name="SerumElectrolytes")
      * @SWG\Parameter(name="id", in="path", type="string", description="Serum Electrolytes resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=SerumElectrolytes::class))
      * @SWG\Response(response=404, description="Serum Electrolytes not found.",
@@ -64,7 +67,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="SerumElectrolytes")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="sodium", type="integer", description="sodium", example=""),
@@ -99,7 +101,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="SerumElectrolytes")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Serum Electrolytes ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -140,7 +141,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
      * @param SerumElectrolytes $serumElectrolytes
      * @return View
      *
-     * @SWG\Tag(name="SerumElectrolytes")
      * @SWG\Parameter(name="id", in="path", type="string", description="Serum Electrolytes Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=SerumElectrolytes::class))
      * @SWG\Response(response=404, description="Serum Electrolytess deleted",

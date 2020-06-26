@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class LiverFunctionController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="LiverFunction")
+ */
 class LiverFunctionController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class LiverFunctionController extends AbstractFOSRestController
      * @param LiverFunctionRepository $liverFunctionRepository
      * @return View
      *
-     * @SWG\Tag(name="LiverFunction")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=LiverFunction::class))
      * )
@@ -43,7 +47,6 @@ class LiverFunctionController extends AbstractFOSRestController
      * @param LiverFunction $liverFunction
      * @return View
      *
-     * @SWG\Tag(name="LiverFunction")
      * @SWG\Parameter(name="id", in="path", type="string", description="Liver Function resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=LiverFunction::class))
      * @SWG\Response(response=404, description="Liver Function not found.",
@@ -64,7 +67,6 @@ class LiverFunctionController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="LiverFunction")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="aspartateAminotransferase", type="integer", description="aspartateAminotransferase", example=""),
@@ -101,7 +103,6 @@ class LiverFunctionController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="LiverFunction")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Liver Function ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -144,7 +145,6 @@ class LiverFunctionController extends AbstractFOSRestController
      * @param LiverFunction $liverFunction
      * @return View
      *
-     * @SWG\Tag(name="LiverFunction")
      * @SWG\Parameter(name="id", in="path", type="string", description="Liver Function Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=LiverFunction::class))
      * @SWG\Response(response=404, description="Liver Functions deleted",

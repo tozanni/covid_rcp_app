@@ -18,6 +18,11 @@ use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Entity\BloodChemistry;
 
+/**
+ * Class BloodChemistryController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="BloodChemistry")
+ */
 class BloodChemistryController extends AbstractFOSRestController
 {
     /**
@@ -25,7 +30,6 @@ class BloodChemistryController extends AbstractFOSRestController
      * @param BloodChemistryRepository $bloodChemistryRepository
      * @return View
      *
-     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=BloodChemistry::class))
      * )
@@ -48,7 +52,6 @@ class BloodChemistryController extends AbstractFOSRestController
      * @param BloodChemistry $bloodChemistry
      * @return View
      *
-     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Blood Chemistry resource Id")
      * @SWG\Response(response=200, description="Returns recorded Blood Chemistry.", @Model(type=BloodChemistry::class))
      * @SWG\Response(response=404, description="Blood Chemistry not found.",
@@ -69,7 +72,6 @@ class BloodChemistryController extends AbstractFOSRestController
      * @return View
      * @throws \Exception
      *
-     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="glucose", type="integer", description="", example="10"),
@@ -106,7 +108,6 @@ class BloodChemistryController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Blood Chemistry ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -154,7 +155,6 @@ class BloodChemistryController extends AbstractFOSRestController
      * @param BloodChemistry $bloodChemistry
      * @return View
      *
-     * @SWG\Tag(name="BloodChemistry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Clotting Time Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=BloodChemistry::class))
      * @SWG\Response(response=404, description="Clotting Times deleted",

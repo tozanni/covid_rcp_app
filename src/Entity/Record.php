@@ -196,30 +196,6 @@ class Record
         return $this;
     }
 
-    public function getGressNotes(): ?string
-    {
-        return $this->gress_notes;
-    }
-
-    public function setGressNotes(?string $gress_notes): self
-    {
-        $this->gress_notes = $gress_notes;
-
-        return $this;
-    }
-
-    public function getIngressDate(): ?\DateTimeInterface
-    {
-        return $this->ingress_date;
-    }
-
-    public function setIngressDate(\DateTimeInterface $ingress_date): self
-    {
-        $this->ingress_date = $ingress_date;
-
-        return $this;
-    }
-
     public function getAdmissionDate(): ?\DateTimeInterface
     {
         return $this->admission_date;

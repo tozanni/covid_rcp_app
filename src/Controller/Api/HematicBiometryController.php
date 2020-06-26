@@ -18,6 +18,11 @@ use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Entity\HematicBiometry;
 
+/**
+ * Class HematicBiometryController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="HematicBiometry")
+ */
 class HematicBiometryController extends AbstractFOSRestController
 {
     /**
@@ -25,7 +30,6 @@ class HematicBiometryController extends AbstractFOSRestController
      * @param HematicBiometryRepository $hematicBiometryRepository
      * @return View
      *
-     * @SWG\Tag(name="HematicBiometry")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=HematicBiometry::class))
      * )
@@ -48,7 +52,6 @@ class HematicBiometryController extends AbstractFOSRestController
      * @param HematicBiometry $hematicBiometry
      * @return View
      *
-     * @SWG\Tag(name="HematicBiometry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Hematic biometry resource Id")
      * @SWG\Response(response=200, description="Returns recorded Hematic biometry.", @Model(type=HematicBiometry::class))
      * @SWG\Response(response=404, description="Hematic biometry not found.",
@@ -69,7 +72,6 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      * @throws \Exception
      *
-     * @SWG\Tag(name="HematicBiometry")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="hematocrit", type="integer", description="", example="10"),
@@ -102,7 +104,6 @@ class HematicBiometryController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="HematicBiometry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Hematic biometry ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -148,7 +149,6 @@ class HematicBiometryController extends AbstractFOSRestController
      * @param HematicBiometry $hematicBiometry
      * @return View
      *
-     * @SWG\Tag(name="HematicBiometry")
      * @SWG\Parameter(name="id", in="path", type="string", description="Hematic Biometry Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=HematicBiometry::class))
      * @SWG\Response(response=404, description="Hematic Biometry deleted",

@@ -69,7 +69,8 @@ class VitalSigns
     private $capillary_glucose;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns",
+     *     cascade={"persist", "remove"})
      */
     private $record;
 

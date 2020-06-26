@@ -24,7 +24,8 @@ class MedicalNotes
     private $prescription_drugs;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="medicalNotes", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="medicalNotes",
+     *     cascade={"persist", "remove"})
      */
     private $record;
 

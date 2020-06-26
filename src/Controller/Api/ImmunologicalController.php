@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class ImmunologicalController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="Immunological")
+ */
 class ImmunologicalController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class ImmunologicalController extends AbstractFOSRestController
      * @param ImmunologicalRepository $immunologicalRepository
      * @return View
      *
-     * @SWG\Tag(name="Immunological")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=Immunological::class))
      * )
@@ -36,7 +40,6 @@ class ImmunologicalController extends AbstractFOSRestController
      * @param ValidatorInterface $validator
      * @return View
      *
-     * @SWG\Tag(name="Immunological")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="reactive_protein_c", type="text", description="Descripción de la propiedad", example=1234),

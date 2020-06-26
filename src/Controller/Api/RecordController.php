@@ -12,6 +12,11 @@ use Swagger\Annotations as SWG;
 use App\Entity\Record;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class RecordController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="Record")
+ */
 class RecordController extends AbstractFOSRestController
 {
     /**
@@ -19,7 +24,6 @@ class RecordController extends AbstractFOSRestController
      * @param RecordRepository $recordRepository
      * @return View
      *
-     * @SWG\Tag(name="Record")
      * @SWG\Response(response=200, description="Devuelve un listado de expedientes",
      *      @SWG\Schema(type="array", @Model(type=Record::class))
      * )
@@ -34,7 +38,6 @@ class RecordController extends AbstractFOSRestController
      * @param Record $record
      * @return View
      *
-     * @SWG\Tag(name="Record")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Response(response=200, description="Regresa los detalles de un Expediente", @Model(type=Record::class))
      * @SWG\Response(response=404, description="El expediente no fue encontrado",
@@ -74,7 +77,6 @@ class RecordController extends AbstractFOSRestController
      * clotting_time	ClottingTime{...}
      * immunological	Immunological{...}
      *
-     * @SWG\Tag(name="Record")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -108,7 +110,6 @@ class RecordController extends AbstractFOSRestController
      * @param Record $record
      * @return View
      *
-     * @SWG\Tag(name="Record")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -135,7 +136,6 @@ class RecordController extends AbstractFOSRestController
      * @param Record $record
      * @return View
      *
-     * @SWG\Tag(name="Record")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Response(response=200, description="Hace un borrado 'suave' de un expediente", @Model(type=Record::class))
      */

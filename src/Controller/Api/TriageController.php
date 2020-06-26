@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class TriageController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="Triage")
+ */
 class TriageController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class TriageController extends AbstractFOSRestController
      * @param TriageRepository $triageRepository
      * @return View
      *
-     * @SWG\Tag(name="Triage")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=Triage::class))
      * )
@@ -43,7 +47,6 @@ class TriageController extends AbstractFOSRestController
      * @param Triage $triage
      * @return View
      *
-     * @SWG\Tag(name="Triage")
      * @SWG\Parameter(name="id", in="path", type="string", description="Triage resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=Triage::class))
      * @SWG\Response(response=404, description="Triage not found.",
@@ -64,7 +67,6 @@ class TriageController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="Triage")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="days_before_admission", type="integer", description="days_before_admission", example=""),
@@ -113,7 +115,6 @@ class TriageController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="Triage")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Triage ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -168,7 +169,6 @@ class TriageController extends AbstractFOSRestController
      * @param Triage $triage
      * @return View
      *
-     * @SWG\Tag(name="Triage")
      * @SWG\Parameter(name="id", in="path", type="string", description="Triage Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=Triage::class))
      * @SWG\Response(response=404, description="Triages deleted",

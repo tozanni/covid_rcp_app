@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class ClottingTimeController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="ClottingTime")
+ */
 class ClottingTimeController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class ClottingTimeController extends AbstractFOSRestController
      * @param ClottingTimeRepository $clottingTimeRepository
      * @return View
      *
-     * @SWG\Tag(name="ClottingTime")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=ClottingTime::class))
      * )
@@ -43,7 +47,6 @@ class ClottingTimeController extends AbstractFOSRestController
      * @param ClottingTime $clottingTime
      * @return View
      *
-     * @SWG\Tag(name="ClottingTime")
      * @SWG\Parameter(name="id", in="path", type="string", description="Clotting Time resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=ClottingTime::class))
      * @SWG\Response(response=404, description="Clotting Time not found.",
@@ -64,7 +67,6 @@ class ClottingTimeController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="ClottingTime")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="prothrombin", type="integer", description="", example="Prothrombin"),
@@ -99,7 +101,6 @@ class ClottingTimeController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="ClottingTime")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Clotting Time ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -139,7 +140,6 @@ class ClottingTimeController extends AbstractFOSRestController
      * @param ClottingTime $clottingTime
      * @return View
      *
-     * @SWG\Tag(name="ClottingTime")
      * @SWG\Parameter(name="id", in="path", type="string", description="Clotting Time Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=ClottingTime::class))
      * @SWG\Response(response=404, description="Clotting Times deleted",

@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class VitalSignsController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="VitalSigns")
+ */
 class VitalSignsController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class VitalSignsController extends AbstractFOSRestController
      * @param VitalSignsRepository $vitalSignsRepository
      * @return View
      *
-     * @SWG\Tag(name="VitalSigns")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=VitalSigns::class))
      * )
@@ -43,7 +47,6 @@ class VitalSignsController extends AbstractFOSRestController
      * @param VitalSigns $vitalSigns
      * @return View
      *
-     * @SWG\Tag(name="VitalSigns")
      * @SWG\Parameter(name="id", in="path", type="string", description="Vital Signs resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=VitalSigns::class))
      * @SWG\Response(response=404, description="Vital Signs not found.",
@@ -64,7 +67,6 @@ class VitalSignsController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="VitalSigns")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="age", type="date", description="age", example=""),
@@ -117,7 +119,6 @@ class VitalSignsController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="VitalSigns")
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Vital Signs ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -176,7 +177,6 @@ class VitalSignsController extends AbstractFOSRestController
      * @param VitalSigns $vitalSigns
      * @return View
      *
-     * @SWG\Tag(name="VitalSigns")
      * @SWG\Parameter(name="id", in="path", type="string", description="Vital Signs Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=VitalSigns::class))
      * @SWG\Response(response=404, description="Vital Signss deleted",

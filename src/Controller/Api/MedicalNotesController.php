@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class MedicalNotesController
+ * @package App\Controller\Api
+ * @SWG\Tag(name="MedicalNotes")
+ */
 class MedicalNotesController extends AbstractFOSRestController
 {
     /**
@@ -20,7 +25,6 @@ class MedicalNotesController extends AbstractFOSRestController
      * @param MedicalNotesRepository $medicalNotesRepository
      * @return View
      *
-     * @SWG\Tag(name="MedicalNotes")
      * @SWG\Response(response=200, description="Regresa un listado",
      *     @SWG\Schema(type="array", @Model(type=MedicalNotes::class))
      * )
@@ -36,7 +40,6 @@ class MedicalNotesController extends AbstractFOSRestController
      * @param MedicalNotes $medicalNotes
      * @return View
      *
-     * @SWG\Tag(name="MedicalNotes")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a buscar")
      * @SWG\Response(response=200, description="Regresa los detalles de Notas Médicas", @Model(type=Record::class))
      * @SWG\Response(response=404, description="La nota médica no fue encontrada",
@@ -57,7 +60,6 @@ class MedicalNotesController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @SWG\Tag(name="MedicalNotes")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="notes", type="text", description="", example="Notas médicas"),
@@ -92,7 +94,6 @@ class MedicalNotesController extends AbstractFOSRestController
      * @param $id
      * @return View
      *
-     * @SWG\Tag(name="MedicalNotes")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a editar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -132,7 +133,6 @@ class MedicalNotesController extends AbstractFOSRestController
      * @param MedicalNotes $medicalNote
      * @return View
      *
-     * @SWG\Tag(name="MedicalNotes")
      * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a eliminar")
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=MedicalNotes::class))
      * @SWG\Response(response=404, description="La nota médica no fue encontrada",
