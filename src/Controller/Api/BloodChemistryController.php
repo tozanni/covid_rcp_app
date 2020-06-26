@@ -42,14 +42,14 @@ class BloodChemistryController extends AbstractFOSRestController
         return View::create($bloodChemistryRepository->findAll(), Response::HTTP_OK);
     }
 
-    
+
     /**
      * @Rest\Get("/blood_chemistry/{id}")
      * @param BloodChemistry $bloodChemistry
      * @return View
      *
      * @SWG\Tag(name="BloodChemistry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Blood Chemistry resource Id")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Blood Chemistry resource Id")
      * @SWG\Response(response=200, description="Returns recorded Blood Chemistry.", @Model(type=BloodChemistry::class))
      * @SWG\Response(response=404, description="Blood Chemistry not found.",
      *     @SWG\Schema(type="object",
@@ -107,7 +107,7 @@ class BloodChemistryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="BloodChemistry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Blood Chemistry ID")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Blood Chemistry ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="glucose", type="integer", description="", example="10"),
@@ -131,7 +131,7 @@ class BloodChemistryController extends AbstractFOSRestController
         $manager = $this->getDoctrine()->getManager();
         $bloodChemistry = $manager->getRepository(BloodChemistry::class)->find($id);
 
-        if(!$bloodChemistry){
+        if (!$bloodChemistry) {
             return View::create(
                 ["code" => 404, "message" => "¡Registro no encontrado!"],
                 Response::HTTP_NOT_FOUND
@@ -155,7 +155,7 @@ class BloodChemistryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="BloodChemistry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Clotting Time Id to delete")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Clotting Time Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=BloodChemistry::class))
      * @SWG\Response(response=404, description="Clotting Times deleted",
      *     @SWG\Schema(type="object",

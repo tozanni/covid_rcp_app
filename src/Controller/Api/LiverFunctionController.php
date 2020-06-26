@@ -44,7 +44,7 @@ class LiverFunctionController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="LiverFunction")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Liver Function resource Id")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Liver Function resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=LiverFunction::class))
      * @SWG\Response(response=404, description="Liver Function not found.",
      *     @SWG\Schema(type="object",
@@ -102,7 +102,7 @@ class LiverFunctionController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="LiverFunction")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Liver Function ID")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Liver Function ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="aspartateAminotransferase", type="integer", description="aspartateAminotransferase", example=""),
@@ -145,7 +145,7 @@ class LiverFunctionController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="LiverFunction")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Liver Function Id to delete")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Liver Function Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=LiverFunction::class))
      * @SWG\Response(response=404, description="Liver Functions deleted",
      *     @SWG\Schema(type="object",

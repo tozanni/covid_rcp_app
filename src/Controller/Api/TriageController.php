@@ -44,7 +44,7 @@ class TriageController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="Triage")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Triage resource Id")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Triage resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=Triage::class))
      * @SWG\Response(response=404, description="Triage not found.",
      *     @SWG\Schema(type="object",
@@ -114,7 +114,7 @@ class TriageController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="Triage")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Triage ID")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Triage ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="days_before_admission", type="integer", description="days_before_admission", example=""),
@@ -169,7 +169,7 @@ class TriageController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="Triage")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Triage Id to delete")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Triage Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=Triage::class))
      * @SWG\Response(response=404, description="Triages deleted",
      *     @SWG\Schema(type="object",

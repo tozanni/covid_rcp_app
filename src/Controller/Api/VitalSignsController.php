@@ -44,7 +44,7 @@ class VitalSignsController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="VitalSigns")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Vital Signs resource Id")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Vital Signs resource Id")
      * @SWG\Response(response=200, description="Returns recorded clotting time.", @Model(type=VitalSigns::class))
      * @SWG\Response(response=404, description="Vital Signs not found.",
      *     @SWG\Schema(type="object",
@@ -118,7 +118,7 @@ class VitalSignsController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="VitalSigns")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Edditing Vital Signs ID")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Vital Signs ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="age", type="date", description="age", example=""),
@@ -177,7 +177,7 @@ class VitalSignsController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="VitalSigns")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Vital Signs Id to delete")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Vital Signs Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=VitalSigns::class))
      * @SWG\Response(response=404, description="Vital Signss deleted",
      *     @SWG\Schema(type="object",

@@ -37,7 +37,7 @@ class MedicalNotesController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="MedicalNotes")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="ID de las notas médicas a buscar")
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a buscar")
      * @SWG\Response(response=200, description="Regresa los detalles de Notas Médicas", @Model(type=Record::class))
      * @SWG\Response(response=404, description="La nota médica no fue encontrada",
      *     @SWG\Schema(type="object",
@@ -93,7 +93,7 @@ class MedicalNotesController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="MedicalNotes")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="ID de las notas médicas a editar")
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a editar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="notes", type="text", description="", example="Notas médicas"),
@@ -133,7 +133,7 @@ class MedicalNotesController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="MedicalNotes")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="ID de las notas médicas a eliminar")
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a eliminar")
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=MedicalNotes::class))
      * @SWG\Response(response=404, description="La nota médica no fue encontrada",
      *     @SWG\Schema(type="object",

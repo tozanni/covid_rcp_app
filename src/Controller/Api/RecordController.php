@@ -109,7 +109,7 @@ class RecordController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="Record")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="ID del expendiente a buscar")
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -136,7 +136,7 @@ class RecordController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="Record")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="ID del expendiente a buscar")
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Response(response=200, description="Hace un borrado 'suave' de un expediente", @Model(type=Record::class))
      */
     public function delete(Record $record): View

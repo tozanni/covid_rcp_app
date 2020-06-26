@@ -49,7 +49,7 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="HematicBiometry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Hematic biometry resource Id")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Hematic biometry resource Id")
      * @SWG\Response(response=200, description="Returns recorded Hematic biometry.", @Model(type=HematicBiometry::class))
      * @SWG\Response(response=404, description="Hematic biometry not found.",
      *     @SWG\Schema(type="object",
@@ -103,7 +103,7 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="HematicBiometry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Hematic biometry ID")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Hematic biometry ID")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="hematocrit", type="integer", description="", example="10"),
@@ -149,7 +149,7 @@ class HematicBiometryController extends AbstractFOSRestController
      * @return View
      *
      * @SWG\Tag(name="HematicBiometry")
-     * @SWG\Parameter(name="id", in="path", type="integer", description="Hematic Biometry Id to delete")
+     * @SWG\Parameter(name="id", in="path", type="string", description="Hematic Biometry Id to delete")
      * @SWG\Response(response=200, description="Returns deleted Entity", @Model(type=HematicBiometry::class))
      * @SWG\Response(response=404, description="Hematic Biometry deleted",
      *     @SWG\Schema(type="object",
