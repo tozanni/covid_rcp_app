@@ -6,19 +6,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use Ramsey\Uuid\UuidInterface;
-//use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 trait EntityTrait
 {
     /**
-    * @ORM\Id()
-    * @ORM\GeneratedValue()
-    * @ORM\Column(type="integer")
-    */
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     */
     private $id;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
