@@ -5,20 +5,13 @@ namespace App\Entity;
 use App\Repository\SerumElectrolytesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
  */
 class SerumElectrolytes
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="float")
@@ -46,11 +39,6 @@ class SerumElectrolytes
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getSodium(): ?float
     {

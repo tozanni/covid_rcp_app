@@ -5,20 +5,13 @@ namespace App\Entity;
 use App\Repository\BloodChemistryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=BloodChemistryRepository::class)
  */
 class BloodChemistry
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="float")
@@ -66,11 +59,6 @@ class BloodChemistry
      * @ORM\OneToOne(targetEntity=Record::class, mappedBy="bloodChemistry", cascade={"persist", "remove"})
      */
     private $record;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getGlucose(): ?float
     {

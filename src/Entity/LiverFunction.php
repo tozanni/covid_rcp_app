@@ -5,20 +5,13 @@ namespace App\Entity;
 use App\Repository\LiverFunctionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=LiverFunctionRepository::class)
  */
 class LiverFunction
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="float")
@@ -36,6 +29,11 @@ class LiverFunction
     private $bloodUreaNitrogen;
 
     /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="liverFunction", cascade={"persist", "remove"})
+     */
+    private $record;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
@@ -46,16 +44,6 @@ class LiverFunction
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="liverFunction", cascade={"persist", "remove"})
-     */
-    private $record;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getAspartateAminotransferase(): ?float
     {

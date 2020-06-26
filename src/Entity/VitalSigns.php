@@ -5,20 +5,13 @@ namespace App\Entity;
 use App\Repository\VitalSignsRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)
  */
 class VitalSigns
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="date")
@@ -91,11 +84,6 @@ class VitalSigns
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getAge(): ?\DateTimeInterface
     {

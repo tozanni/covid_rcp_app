@@ -5,20 +5,13 @@ namespace App\Entity;
 use App\Repository\ImmunologicalRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass=ImmunologicalRepository::class)
  */
 class Immunological
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="float")
@@ -41,11 +34,6 @@ class Immunological
      * @ORM\OneToOne(targetEntity=Record::class, mappedBy="immunological", cascade={"persist", "remove"})
      */
     private $record;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getReactiveProteinC(): ?float
     {
