@@ -10,7 +10,9 @@ use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Record;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class RecordController
@@ -91,17 +93,29 @@ class RecordController extends AbstractFOSRestController
      */
     public function create(Request $request): View
     {
+        $body = $request->getContent();
+        $data = json_decode($body, true);
+
         $record = new Record();
         $form = $this->createForm(RecordType::class, $record);
-        $form->handleRequest($request);
+        $form->submit($data);
+        /**
+         * TODO: Procesar el formulario correctamente para aprovechar la validación automática
+         *
+        $entityManager = $this->getDoctrine()->getManager();
+        $record->setAdmissionDate(\DateTime::createFromFormat('Y-m-d', $data['admission_date']));
+        $entityManager->persist($record);
+        $entityManager->flush();
+        */
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($record);
-            $entityManager->flush();
-        }
+        //Manda a procesar el modelo de predicción con el objeto recién creado
+        $httpClient = HttpClient::create();
+        $response = $httpClient->request('POST',
+            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
+                'body' => $body
+            ]);
 
-        return View::create($record);
+        return View::create($response->getContent(), Response::HTTP_CREATED);
     }
 
     /**
