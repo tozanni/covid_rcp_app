@@ -18,16 +18,16 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        api_login:
-            pattern:  ^/api/auth/login
-            stateless: true
-            anonymous: true
-            json_login:
-                provider: fos_userbundle
-                check_path:               /api/auth/login
-                success_handler:          lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
-            provider: fos_userbundle
+        #api_login:
+        #    pattern:  ^/api/auth/login
+        #    stateless: true
+        #    anonymous: true
+        #    json_login:
+        #        provider: fos_userbundle
+        #        check_path:               /api/auth/login
+        #        success_handler:          lexik_jwt_authentication.handler.authentication_success
+        #        failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+        #    provider: fos_userbundle
 
         # -> custom firewall for the admin area of the URL
         admin:
@@ -44,14 +44,14 @@ security:
                 target:         /admin/login
             anonymous:          true
 
-        api:
-            pattern:    /api/v1(.*)
-            stateless:  true
-            anonymous:  false # can be omitted as its default value
-            provider: fos_userbundle
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+#        api:
+#            pattern:    /api/v1(.*)
+#            stateless:  true
+#            anonymous:  true # can be omitted as its default value
+#            provider: fos_userbundle
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
 
               # -> end custom configuration
               # default login area for standard users
@@ -94,5 +94,5 @@ security:
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/api/v1/users/register, role: [IS_AUTHENTICATED_ANONYMOUSLY]}
-        - { path: ^/api/v1/, roles: [IS_AUTHENTICATED_FULLY] }
+        - { path: ^/api/v1/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
