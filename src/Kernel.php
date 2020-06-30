@@ -23,6 +23,7 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
+        \Carbon\Doctrine\DateTimeDefaultPrecision::set(10);
     }
 
     public function getProjectDir(): string
