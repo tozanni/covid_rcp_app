@@ -23,6 +23,9 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
+        if (date_default_timezone_get() != 'UTC') {
+            date_default_timezone_set('UTC');
+        }
     }
 
     public function getProjectDir(): string
