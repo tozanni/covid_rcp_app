@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\VitalSignsRepository;
+use Carbon\Carbon;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class VitalSigns
 {
@@ -15,87 +18,114 @@ class VitalSigns
 
     /**
      * @ORM\Column(type="date")
+     * @Serializer\Expose()
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Serializer\Expose()
      */
     private $gender;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Expose()
      */
     private $weight;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Expose()
      */
     private $height;
 
     /**
      * @ORM\Column(type="float", nullable=false)
+     * @Serializer\Expose()
      */
     private $diastolic_blood_pressure;
 
     /**
      * @ORM\Column(type="float", nullable=false)
+     * @Serializer\Expose()
      */
     private $systolic_blood_pressure;
 
     /**
      * @ORM\Column(type="float", nullable=false)
+     * @Serializer\Expose()
      */
     private $heart_rate;
 
     /**
      * @ORM\Column(type="float", nullable=false)
+     * @Serializer\Expose()
      */
     private $breathing_frequency;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Expose()
      */
     private $temperature;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Expose()
      */
     private $oximetry;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Expose()
      */
     private $capillary_glucose;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="vitalSigns",
-     *     cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class,
+     *     mappedBy="vitalSigns", cascade={"persist", "remove"})
+     * @Serializer\Expose()
      */
     private $record;
 
     /**
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
+
+    /**
+     * Alias para evitar que la lógica se sobre escriba
+     * con el comando: bin/console make:entity --regenerate --overwrite
+     * Llamar esta función en el método setAge($age)
+     * @param int $age
+     * @return $this
+     */
+    public function setAgeByYears(int $age): self
+    {
+        $date = Carbon::now();
+        $this->age = $date->subYears($age);
+
+        return $this;
+    }
 
     public function getAge(): ?\DateTimeInterface
     {
         return $this->age;
     }
 
-    public function setAge(\DateTimeInterface $age): self
+    public function setAge(int $age): self
     {
-        $this->age = $age;
-
-        return $this;
+        return $this->setAgeByYears($age);
     }
 
     public function getGender(): ?string

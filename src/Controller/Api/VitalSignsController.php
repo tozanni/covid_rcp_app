@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\VitalSigns;
+use App\Form\VitalSignsType;
 use App\Repository\VitalSignsRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -69,48 +70,36 @@ class VitalSignsController extends AbstractFOSRestController
      *
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
-     *         @SWG\Property(property="age", type="date", description="age", example=""),
-     *         @SWG\Property(property="gender", type="string", description="gender", example=""),
-     *         @SWG\Property(property="weight", type="integer", description="weight", example=""),
-     *         @SWG\Property(property="height", type="integer", description="height", example=""),
-     *         @SWG\Property(property="diastolic_blood_pressure", type="integer", description="diastolic_blood_pressure", example=""),
-     *         @SWG\Property(property="systolic_blood_pressure", type="integer", description="systolic_blood_pressure", example=""),
-     *         @SWG\Property(property="heart_rate", type="integer", description="heart_rate", example=""),
-     *         @SWG\Property(property="breathing_frequency", type="integer", description="breathing_frequency", example=""),
-     *         @SWG\Property(property="temperature", type="float", description="temperature", example=""),
-     *         @SWG\Property(property="oximetry", type="integer", description="oximetry", example=""),
-     *         @SWG\Property(property="capillary_glucose", type="integer", description="capillary_glucose", example="")
+     *         @SWG\Property(property="age", type="integer", description="age", example="54"),
+     *         @SWG\Property(property="gender", type="string", description="gender", example="female"),
+     *         @SWG\Property(property="weight", type="float", description="weight", example="85.5"),
+     *         @SWG\Property(property="height", type="float", description="height", example="1.75"),
+     *         @SWG\Property(property="diastolic_blood_pressure", type="float", description="diastolic_blood_pressure", example="98"),
+     *         @SWG\Property(property="systolic_blood_pressure", type="floatr", description="systolic_blood_pressure", example="100"),
+     *         @SWG\Property(property="heart_rate", type="float", description="heart_rate", example="120"),
+     *         @SWG\Property(property="breathing_frequency", type="float", description="breathing_frequency", example="60"),
+     *         @SWG\Property(property="temperature", type="float", description="temperature", example="34.0"),
+     *         @SWG\Property(property="oximetry", type="float", description="oximetry", example="30"),
+     *         @SWG\Property(property="capillary_glucose", type="float", description="capillary_glucose", example="35")
      *    )
      * )
      *
-     * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=VitalSigns::class))
+     * @SWG\Response(response=201, description="Regresa el objecto creado", @Model(type=VitalSigns::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
+        $body = $request->getContent();
+        $data = json_decode($body, true);
+
         $vitalSigns = new VitalSigns();
-        $vitalSigns->setAge($request->get('age'));
-        $vitalSigns->setGender($request->get('gender'));
-        $vitalSigns->setWeight($request->get('weight'));
-        $vitalSigns->setHeight($request->get('height'));
-        $vitalSigns->setDiastolicBloodPressure($request->get('diastolic_blood_pressure'));
-        $vitalSigns->setSystolicBloodPressure($request->get('systolic_blood_pressure'));
-        $vitalSigns->setHeartRate($request->get('heart_rate'));
-        $vitalSigns->setBreathingFrequency($request->get('breathing_frequency'));
-        $vitalSigns->setTemperature($request->get('temperature'));
-        $vitalSigns->setOximetry($request->get('oximetry'));
-        $vitalSigns->setCapillaryGlucose($request->get('capillary_glucose'));
-        
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($vitalSigns);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
-        }
+        $form = $this->createForm(VitalSignsType::class, $vitalSigns);
+        $form->submit($data);
 
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($vitalSigns);
         $manager->flush();
 
-        return View::create($vitalSigns);
+        return View::create($vitalSigns, Response::HTTP_CREATED);
     }
 
     /**

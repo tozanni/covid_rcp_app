@@ -112,18 +112,6 @@ class Record
      */
     private $updated_at;
 
-    public function getAge(): ?int
-    {
-        return $this->age;
-    }
-
-    public function setAge(int $age): self
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;

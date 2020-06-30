@@ -89,7 +89,7 @@ class RecordController extends AbstractFOSRestController
      *         @SWG\Property(property="hematic_biometry", type="integer", description="", example="65"),
      *    )
      * )
-     * @SWG\Response(response=200, description="Crea un nuevo expediente y regresa el detalle", @Model(type=Record::class))
+     * @SWG\Response(response=201, description="Crea un nuevo expediente y regresa el detalle", @Model(type=Record::class))
      */
     public function create(Request $request): View
     {
@@ -99,23 +99,13 @@ class RecordController extends AbstractFOSRestController
         $record = new Record();
         $form = $this->createForm(RecordType::class, $record);
         $form->submit($data);
-        /**
-         * TODO: Procesar el formulario correctamente para aprovechar la validación automática
-         *
+
         $entityManager = $this->getDoctrine()->getManager();
-        $record->setAdmissionDate(\DateTime::createFromFormat('Y-m-d', $data['admission_date']));
+        //$record->setAdmissionDate(\DateTime::createFromFormat('Y-m-d', $data['admission_date']));
         $entityManager->persist($record);
         $entityManager->flush();
-        */
 
-        //Manda a procesar el modelo de predicción con el objeto recién creado
-        $httpClient = HttpClient::create();
-        $response = $httpClient->request('POST',
-            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
-                'body' => $body
-            ]);
-
-        return View::create($response->getContent(), Response::HTTP_CREATED);
+        return View::create($record, Response::HTTP_CREATED);
     }
 
     /**

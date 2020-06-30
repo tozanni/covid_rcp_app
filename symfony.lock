@@ -5,9 +5,6 @@
     "brick/math": {
         "version": "0.8.15"
     },
-    "cocur/slugify": {
-        "version": "v4.0.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -129,45 +126,6 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.39"
     },
-    "hoa/compiler": {
-        "version": "3.17.08.08"
-    },
-    "hoa/consistency": {
-        "version": "1.17.05.02"
-    },
-    "hoa/event": {
-        "version": "1.17.01.13"
-    },
-    "hoa/exception": {
-        "version": "1.17.01.16"
-    },
-    "hoa/file": {
-        "version": "1.17.07.11"
-    },
-    "hoa/iterator": {
-        "version": "2.17.01.10"
-    },
-    "hoa/math": {
-        "version": "1.17.05.16"
-    },
-    "hoa/protocol": {
-        "version": "1.17.01.14"
-    },
-    "hoa/regex": {
-        "version": "1.17.01.13"
-    },
-    "hoa/stream": {
-        "version": "1.17.02.21"
-    },
-    "hoa/ustring": {
-        "version": "4.17.01.16"
-    },
-    "hoa/visitor": {
-        "version": "2.17.01.16"
-    },
-    "hoa/zformat": {
-        "version": "1.17.01.10"
-    },
     "jms/metadata": {
         "version": "2.1.0"
     },
@@ -245,6 +203,9 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nesbot/carbon": {
+        "version": "2.35.0"
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
@@ -326,18 +287,6 @@
     "sonata-project/cache": {
         "version": "2.0.1"
     },
-    "sonata-project/core-bundle": {
-        "version": "3.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.9",
-            "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
-        },
-        "files": [
-            "config/packages/sonata_core.yaml"
-        ]
-    },
     "sonata-project/datagrid-bundle": {
         "version": "2.5.0"
     },
@@ -404,6 +353,21 @@
     },
     "symfony/debug": {
         "version": "v4.4.8"
+    },
+    "symfony/debug-bundle": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "f8863cbad2f2e58c4b65fa1eac892ab189971bea"
+        },
+        "files": [
+            "config/packages/dev/debug.yaml"
+        ]
+    },
+    "symfony/debug-pack": {
+        "version": "v1.0.8"
     },
     "symfony/dependency-injection": {
         "version": "v5.0.8"
@@ -686,18 +650,6 @@
     },
     "symfony/yaml": {
         "version": "v5.0.8"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a86723ee8d8b2f9437c8ce60a5546a1c267da5ed"
-        },
-        "files": [
-            "config/packages/twig_extensions.yaml"
-        ]
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"

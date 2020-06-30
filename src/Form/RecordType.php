@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RecordType extends AbstractType
 {
-    //TODO: Terminar de definir los tipos de las entidades dependientes
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -25,9 +24,7 @@ class RecordType extends AbstractType
             ->add('rcp_required', BooleanType::class)
             ->add('treatment', TextareaType::class)
             ->add('egress_notes', TextareaType::class)
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('vitalSigns')
+            ->add('vitalSigns', VitalSignsType::class)
             ->add('triage')
             ->add('hematicBiometry')
             ->add('bloodChemistry')
