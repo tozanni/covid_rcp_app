@@ -1,4 +1,10 @@
 doctrine:
+    dbal:
+        types:
+            datetime_immutable: \Carbon\Doctrine\DateTimeImmutableType
+            datetime: \Carbon\Doctrine\DateTimeType
+            carbon_immutable: \Carbon\Doctrine\CarbonImmutableType
+            carbon: \Carbon\Doctrine\CarbonType
     orm:
         auto_generate_proxy_classes: false
         metadata_cache_driver:

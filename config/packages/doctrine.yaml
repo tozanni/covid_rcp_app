@@ -7,10 +7,6 @@ doctrine:
     #server_version: '5.7'
     types:
       json: Sonata\Doctrine\Types\JsonType
-      datetime_immutable: \Carbon\Doctrine\DateTimeImmutableType
-      datetime: \Carbon\Doctrine\DateTimeType
-      carbon_immutable: \Carbon\Doctrine\CarbonImmutableType
-      carbon: \Carbon\Doctrine\CarbonType
     mapping_types:
       enum: string
   orm:
