@@ -55,7 +55,6 @@ class Record
 
     /**
      * @ORM\OneToOne(targetEntity=VitalSigns::class, inversedBy="record", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
      */
     private $vitalSigns;
 
