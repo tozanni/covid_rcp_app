@@ -142,23 +142,18 @@ class VitalSignsController extends AbstractFOSRestController
         $vitalSigns = $manager->getRepository(VitalSigns::class)->find($id);
 
         if(!$vitalSigns){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
+            return View::create(["code" => 404, "message" => "¡Registro no encontrado!"],
                 Response::HTTP_NOT_FOUND
             );
         }
-        //TODO: Validate input
-        $vitalSigns->setAge($request->get('age'));
-        $vitalSigns->setGender($request->get('gender'));
-        $vitalSigns->setWeight($request->get('weight'));
-        $vitalSigns->setHeight($request->get('height'));
-        $vitalSigns->setDiastolicBloodPressure($request->get('diastolic_blood_pressure'));
-        $vitalSigns->setSystolicBloodPressure($request->get('systolic_blood_pressure'));
-        $vitalSigns->setHeartRate($request->get('heart_rate'));
-        $vitalSigns->setBreathingFrequency($request->get('breathing_frequency'));
-        $vitalSigns->setTemperature($request->get('temperature'));
-        $vitalSigns->setOximetry($request->get('oximetry'));
-        $vitalSigns->setCapillaryGlucose($request->get('capillary_glucose'));
+
+        $form = $this->createForm(VitalSignsType::class, $vitalSigns);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
+
         $manager->flush();
 
         return View::create($vitalSigns);

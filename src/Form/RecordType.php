@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Record;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,7 +13,8 @@ class RecordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('admission_date')
+            ->add('admission_date', DateTimeType::class, [
+                'widget' => 'single_text', 'format' => 'yyyy-MM-dd HH:mm:ss'])
             ->add('id_canonical')
             ->add('status')
             ->add('egress_date')

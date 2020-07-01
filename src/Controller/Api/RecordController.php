@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RecordController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/records")
      * @param RecordRepository $recordRepository
@@ -58,27 +60,6 @@ class RecordController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * id	integer
-     * admission_date	string($date-time)
-     * id_canonical	string
-     * status	string
-     * egress_date	string($date-time)
-     * egress_type	string
-     * rcp_required	boolean
-     * treatment	string
-     * egress_notes	string
-     * vital_signs	VitalSigns{...}
-     * triage	Triage{...}
-     * hematic_biometry	HematicBiometry{...}
-     * blood_chemistry	BloodChemistry{...}
-     * serum_electrolytes	SerumElectrolytes{...}
-     * medical_notes	MedicalNotes{...}
-     * liver_function	LiverFunction{...}
-     * created_at	string($date-time)
-     * updated_at	string($date-time)
-     * clotting_time	ClottingTime{...}
-     * immunological	Immunological{...}
-     *
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -93,15 +74,15 @@ class RecordController extends AbstractFOSRestController
      */
     public function create(Request $request): View
     {
-        $body = $request->getContent();
-        $data = json_decode($body, true);
-
         $record = new Record();
         $form = $this->createForm(RecordType::class, $record);
-        $form->submit($data);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
-        //$record->setAdmissionDate(\DateTime::createFromFormat('Y-m-d', $data['admission_date']));
         $entityManager->persist($record);
         $entityManager->flush();
 
@@ -161,11 +142,13 @@ class RecordController extends AbstractFOSRestController
     public function edit(Request $request, Record $record): View
     {
         $form = $this->createForm(RecordType::class, $record);
-        $form->handleRequest($request);
+        $this->processForm($request, $form);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($record);
     }
