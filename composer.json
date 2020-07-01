@@ -11,6 +11,7 @@
         "jms/serializer": "^3.6.0",
         "jms/serializer-bundle": "3.6",
         "lexik/jwt-authentication-bundle": "^2.6",
+        "mhujer/jms-serializer-uuid-bundle": "^4.1",
         "nelmio/api-doc-bundle": "^3.6",
         "nelmio/cors-bundle": "^2.0",
         "nesbot/carbon": "^2.35",

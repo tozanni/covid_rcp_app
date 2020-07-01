@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b9e30dffef4d917895218dbdf701723",
+    "content-hash": "588d9727026d285c506a234549d1c5f5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2331,6 +2331,125 @@
                 "symfony"
             ],
             "time": "2020-06-14T13:20:35+00:00"
+        },
+        {
+            "name": "mhujer/jms-serializer-uuid",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhujer/jms-serializer-uuid.git",
+                "reference": "06afda81742d47a2b8ede53e6b03639cdc6aa7af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhujer/jms-serializer-uuid/zipball/06afda81742d47a2b8ede53e6b03639cdc6aa7af",
+                "reference": "06afda81742d47a2b8ede53e6b03639cdc6aa7af",
+                "shasum": ""
+            },
+            "require": {
+                "jms/serializer": "~2.0|~3.0",
+                "php": "~7.2",
+                "ramsey/uuid": "~3.0|~4.0"
+            },
+            "require-dev": {
+                "consistence/coding-standard": "3.5",
+                "jakub-onderka/php-parallel-lint": "1.0.0",
+                "php-coveralls/php-coveralls": "2.1.0",
+                "phpunit/phpunit": "7.4.4",
+                "squizlabs/php_codesniffer": "3.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mhujer\\JmsSerializer\\": [
+                        "src"
+                    ]
+                },
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hujer",
+                    "email": "mhujer@gmail.com",
+                    "homepage": "https://www.martinhujer.cz"
+                }
+            ],
+            "description": "Uuid serializer and deserializer for JMS Serializer library",
+            "homepage": "https://github.com/mhujer/jms-serializer-uuid",
+            "keywords": [
+                "jms",
+                "serializer",
+                "uuid"
+            ],
+            "time": "2020-05-17T18:56:33+00:00"
+        },
+        {
+            "name": "mhujer/jms-serializer-uuid-bundle",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mhujer/jms-serializer-uuid-bundle.git",
+                "reference": "501eaa3063386014e770a7fe529c29184d5a739a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mhujer/jms-serializer-uuid-bundle/zipball/501eaa3063386014e770a7fe529c29184d5a739a",
+                "reference": "501eaa3063386014e770a7fe529c29184d5a739a",
+                "shasum": ""
+            },
+            "require": {
+                "jms/serializer-bundle": "~3.0",
+                "mhujer/jms-serializer-uuid": "~3.0",
+                "php": "~7.2",
+                "symfony/config": "~3.4 || ~4.3 || ~5.0",
+                "symfony/dependency-injection": "~3.4 || ~4.3 || ~5.0",
+                "symfony/http-kernel": "~3.4 || ~4.3 || ~5.0",
+                "symfony/yaml": "~3.4 || ~4.3 || ~5.0"
+            },
+            "require-dev": {
+                "consistence/coding-standard": "3.9",
+                "jakub-onderka/php-parallel-lint": "1.0.0",
+                "matthiasnoback/symfony-dependency-injection-test": "4.1.0",
+                "php-coveralls/php-coveralls": "2.2.0",
+                "phpunit/phpunit": "8.4.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mhujer\\JmsSerializer\\Uuid\\SymfonyBundle\\": [
+                        "src"
+                    ]
+                },
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hujer",
+                    "email": "mhujer@gmail.com",
+                    "homepage": "https://www.martinhujer.cz"
+                }
+            ],
+            "description": "Symfony integration for Uuid serializer and deserializer for JMS Serializer library",
+            "homepage": "https://github.com/mhujer/jms-serializer-uuid-bundle",
+            "keywords": [
+                "jms",
+                "serializer",
+                "symfony",
+                "uuid"
+            ],
+            "time": "2019-11-23T22:45:58+00:00"
         },
         {
             "name": "namshi/jose",
