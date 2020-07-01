@@ -21,6 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class VitalSignsController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/vital_signs")
      * @param VitalSignsRepository $vitalSignsRepository
@@ -88,12 +90,13 @@ class VitalSignsController extends AbstractFOSRestController
      */
     public function create(Request $request): View
     {
-        $body = $request->getContent();
-        $data = json_decode($body, true);
-
         $vitalSigns = new VitalSigns();
         $form = $this->createForm(VitalSignsType::class, $vitalSigns);
-        $form->submit($data);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
 
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($vitalSigns);

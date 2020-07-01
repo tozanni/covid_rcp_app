@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)
@@ -18,6 +19,7 @@ class VitalSigns
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $age;
