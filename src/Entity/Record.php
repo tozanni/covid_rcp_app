@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\RecordRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RecordRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class Record
 {
@@ -15,99 +18,136 @@ class Record
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $admission_date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Serializer\Expose()
      */
     private $id_canonical;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $status;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Serializer\Expose()
      */
     private $egress_date;
 
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
+     * @Serializer\Expose()
      */
     private $egress_type;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Serializer\Expose()
      */
     private $rcp_required;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Serializer\Expose()
      */
     private $treatment;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Serializer\Expose()
      */
     private $egress_notes;
 
     /**
-     * @ORM\OneToOne(targetEntity=VitalSigns::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=VitalSigns::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $vitalSigns;
 
     /**
-     * @ORM\OneToOne(targetEntity=Triage::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Triage::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $triage;
 
     /**
-     * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $hematicBiometry;
 
     /**
-     * @ORM\OneToOne(targetEntity=BloodChemistry::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=BloodChemistry::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $bloodChemistry;
 
     /**
-     * @ORM\OneToOne(targetEntity=SerumElectrolytes::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=SerumElectrolytes::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $serumElectrolytes;
 
     /**
-     * @ORM\OneToOne(targetEntity=MedicalNotes::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=MedicalNotes::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $medicalNotes;
 
     /**
-     * @ORM\OneToOne(targetEntity=LiverFunction::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=LiverFunction::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $liverFunction;
 
     /**
      * @ORM\OneToOne(targetEntity=ClottingTime::class, inversedBy="record", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $clottingTime;
 
     /**
-     * @ORM\OneToOne(targetEntity=Immunological::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Immunological::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
      */
     private $immunological;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

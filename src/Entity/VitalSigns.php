@@ -26,60 +26,70 @@ class VitalSigns
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $gender;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $weight;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $height;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $diastolic_blood_pressure;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $systolic_blood_pressure;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $heart_rate;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $breathing_frequency;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $temperature;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $oximetry;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $capillary_glucose;
