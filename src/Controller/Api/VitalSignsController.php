@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Application\ApiProblemException;
 use App\Entity\VitalSigns;
 use App\Form\VitalSignsType;
 use App\Repository\VitalSignsRepository;
@@ -88,7 +87,6 @@ class VitalSignsController extends AbstractFOSRestController
      * )
      *
      * @SWG\Response(response=201, description="Regresa el objecto creado", @Model(type=VitalSigns::class))
-     * @throws ApiProblemException
      */
     public function create(Request $request): View
     {
@@ -110,7 +108,7 @@ class VitalSignsController extends AbstractFOSRestController
     /**
      * @Rest\Put("/vital_signs/{id}")
      * @param Request $request
-     * @param $id
+     * @param VitalSigns $vitalSigns
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Vital Signs ID")
@@ -129,26 +127,17 @@ class VitalSignsController extends AbstractFOSRestController
      *         @SWG\Property(property="capillary_glucose", type="integer", description="capillary_glucose", example="")
      *    )
      * )
-     * 
+     *
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=VitalSigns::class))
      * @SWG\Response(response=404, description="Vital Signs resource not found.",
      *     @SWG\Schema(type="object",
-     *          @SWG\Property(property="code", type="string", example="Código del error"),
+     *          @SWG\Property(property="code", type="integer", example=404),
      *          @SWG\Property(property="message", type="string", example="Vital Signs resource not found.")
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, VitalSigns $vitalSigns): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $vitalSigns = $manager->getRepository(VitalSigns::class)->find($id);
-
-        if(!$vitalSigns){
-            return View::create(["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
-        }
-
         $form = $this->createForm(VitalSignsType::class, $vitalSigns);
         $this->processForm($request, $form);
 
@@ -156,7 +145,7 @@ class VitalSignsController extends AbstractFOSRestController
             return $this->createValidationErrorResponse($form);
         }
 
-        $manager->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($vitalSigns);
     }

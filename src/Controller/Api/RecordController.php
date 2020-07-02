@@ -13,6 +13,7 @@ use App\Entity\Record;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class RecordController
@@ -138,6 +139,12 @@ class RecordController extends AbstractFOSRestController
      *    )
      * )
      * @SWG\Response(response=200, description="Actualiza los datos de un expediente", @Model(type=Record::class))
+     * @SWG\Response(response=404, description="Record resource not found.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="integer", example=404),
+     *          @SWG\Property(property="message", type="string", example="Record resource not found.")
+     *     )
+     * )
      */
     public function edit(Request $request, Record $record): View
     {
