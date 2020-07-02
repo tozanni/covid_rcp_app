@@ -12,8 +12,7 @@ trait ProcessFormsTrait
 {
     private function processForm(Request $request, FormInterface $form)
     {
-        $body = $request->getContent();
-        $data = json_decode($body, true);
+        $data = json_decode($request->getContent(), true);
 
         $clearMissing = $request->getMethod() != 'PATCH';
         $form->submit($data, $clearMissing);
@@ -41,12 +40,8 @@ trait ProcessFormsTrait
     {
         $errors = $this->getFormErrors($form);
 
-       $apiProblem = new ApiProblem(
-           Response::HTTP_BAD_REQUEST,
-           'validation_error',
-           'Hubo un problema de validación'
-       );
-       $apiProblem->set('errors', $errors);
+        $apiProblem = new ApiProblem(Response::HTTP_BAD_REQUEST, ApiProblem::TYPE_VALIDATION_ERROR);
+        $apiProblem->set('errors', $errors);
 
         return View::create($apiProblem->toArray(), Response::HTTP_BAD_REQUEST,
             ['Content-Type' => 'application/problem+json']

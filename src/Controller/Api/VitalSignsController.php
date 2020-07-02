@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Application\ApiProblemException;
 use App\Entity\VitalSigns;
 use App\Form\VitalSignsType;
 use App\Repository\VitalSignsRepository;
@@ -87,6 +88,7 @@ class VitalSignsController extends AbstractFOSRestController
      * )
      *
      * @SWG\Response(response=201, description="Regresa el objecto creado", @Model(type=VitalSigns::class))
+     * @throws ApiProblemException
      */
     public function create(Request $request): View
     {
