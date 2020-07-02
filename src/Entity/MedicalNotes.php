@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\MedicalNotesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MedicalNotesRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class MedicalNotes
 {
@@ -15,11 +18,15 @@ class MedicalNotes
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $notes;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $prescription_drugs;
 
@@ -32,12 +39,14 @@ class MedicalNotes
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

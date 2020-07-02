@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\LiverFunctionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LiverFunctionRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class LiverFunction
 {
@@ -15,16 +18,22 @@ class LiverFunction
 
     /**
      * @ORM\Column(type="float")
+     *@Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $aspartateAminotransferase;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $alanineTransaminase;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $bloodUreaNitrogen;
 
@@ -36,12 +45,14 @@ class LiverFunction
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

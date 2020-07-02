@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\BloodChemistryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BloodChemistryRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class BloodChemistry
 {
@@ -15,43 +18,57 @@ class BloodChemistry
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $glucose;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $urea;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $creatinine;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $cholesterol;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $triglycerides;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $glycated_hemoglobin;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

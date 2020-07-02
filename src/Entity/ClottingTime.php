@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\ClottingTimeRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClottingTimeRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class ClottingTime
 {
@@ -15,23 +18,29 @@ class ClottingTime
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $prothrombin;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $thromboplastin;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

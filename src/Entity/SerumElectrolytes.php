@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\SerumElectrolytesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class SerumElectrolytes
 {
@@ -15,11 +18,15 @@ class SerumElectrolytes
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $sodium;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $potassium;
 
@@ -31,12 +38,14 @@ class SerumElectrolytes
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

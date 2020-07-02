@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\HematicBiometryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class HematicBiometry
 {
@@ -15,33 +18,43 @@ class HematicBiometry
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $hematocrit;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $hemoglobin;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $leukocytes;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $platelets;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 

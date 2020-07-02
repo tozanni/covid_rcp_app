@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\TriageRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TriageRepository::class)
+ * @Serializer\ExclusionPolicy("all")
  */
 class Triage
 {
@@ -15,46 +18,64 @@ class Triage
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $days_before_admission;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $difficulty_breathing;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $chest_pain;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $headache;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $cough;
 
     /**
      * @ORM\Column(type="json", nullable=true)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $other_symptoms = [];
 
     /**
      * @ORM\Column(type="json", nullable=true)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $comorbidities = [];
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $smoker;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\NotBlank()
+     * @Serializer\Expose()
      */
     private $pregnant;
 
@@ -66,12 +87,14 @@ class Triage
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
+     * @Serializer\Expose()
      */
     private $updated_at;
 
