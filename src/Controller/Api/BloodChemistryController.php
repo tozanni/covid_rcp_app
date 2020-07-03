@@ -8,6 +8,7 @@
 
 namespace App\Controller\Api;
 
+use App\Form\BloodChemistryType;
 use App\Repository\BloodChemistryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,8 @@ use App\Entity\BloodChemistry;
  */
 class BloodChemistryController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("blood_chemistry")
      * @param BloodChemistryRepository $bloodChemistryRepository
@@ -88,24 +91,24 @@ class BloodChemistryController extends AbstractFOSRestController
     public function create(Request $request): View
     {
         $bloodChemistry = new BloodChemistry();
-        $bloodChemistry->setGlucose($request->get('glucose'));
-        $bloodChemistry->setUrea($request->get('urea'));
-        $bloodChemistry->setCreatinine($request->get('creatinine'));
-        $bloodChemistry->setCholesterol($request->get('cholesterol'));
-        $bloodChemistry->setTriglycerides($request->get('triglycerides'));
-        $bloodChemistry->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
+        $form = $this->createForm(BloodChemistryType::class, $bloodChemistry);
+        $this->processForm($request, $form);
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($bloodChemistry);
-        $manager->flush();
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
 
-        return View::create($bloodChemistry);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($bloodChemistry);
+        $entityManager->flush();
+
+        return View::create($bloodChemistry, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/blood_chemistry/{id}")
      * @param Request $request
-     * @param $id
+     * @param BloodChemistry $bloodChemistry
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Blood Chemistry ID")
@@ -127,25 +130,16 @@ class BloodChemistryController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, BloodChemistry $bloodChemistry): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $bloodChemistry = $manager->getRepository(BloodChemistry::class)->find($id);
+        $form = $this->createForm(BloodChemistryType::class, $bloodChemistry);
+        $this->processForm($request, $form);
 
-        if (!$bloodChemistry) {
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $bloodChemistry->setGlucose($request->get('glucose'));
-        $bloodChemistry->setUrea($request->get('urea'));
-        $bloodChemistry->setCreatinine($request->get('creatinine'));
-        $bloodChemistry->setCholesterol($request->get('cholesterol'));
-        $bloodChemistry->setTriglycerides($request->get('triglycerides'));
-        $bloodChemistry->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($bloodChemistry);
     }

@@ -13,7 +13,11 @@ use App\Entity\Record;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
  * Class RecordController
@@ -61,6 +65,10 @@ class RecordController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -87,6 +95,12 @@ class RecordController extends AbstractFOSRestController
         $entityManager->persist($record);
         $entityManager->flush();
 
+        $predictionResponse = $this->requestToPredictionModel($record);
+
+        if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
+            return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
+        }
+
         return View::create($record, Response::HTTP_CREATED);
     }
 
@@ -95,10 +109,10 @@ class RecordController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -119,7 +133,7 @@ class RecordController extends AbstractFOSRestController
         $httpClient = HttpClient::create();
         $response = $httpClient->request('POST',
             'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
-                'body' => $body
+                'body' => $body,
             ]);
 
         return View::create($response->getContent(), Response::HTTP_CREATED);
@@ -131,6 +145,10 @@ class RecordController extends AbstractFOSRestController
      * @param Record $record
      * @return View
      *
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -157,6 +175,12 @@ class RecordController extends AbstractFOSRestController
 
         $this->getDoctrine()->getManager()->flush();
 
+        $predictionResponse = $this->requestToPredictionModel($record);
+
+        if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
+            return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
+        }
+
         return View::create($record);
     }
 
@@ -175,5 +199,20 @@ class RecordController extends AbstractFOSRestController
         $entityManager->flush();
 
         return View::create(["message" => "El expediente se eliminó correctamente"]);
+    }
+
+    /**
+     * @param $record
+     * @return ResponseInterface
+     * @throws TransportExceptionInterface
+     */
+    private function requestToPredictionModel($record)
+    {
+        $httpClient = HttpClient::create();
+
+        return $httpClient->request('POST',
+            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
+                'body' => json_encode($record),
+            ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\MedicalNotes;
+use App\Form\MedicalNotesType;
 use App\Repository\MedicalNotesRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -11,7 +12,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class MedicalNotesController
@@ -20,6 +20,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class MedicalNotesController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/medical_notes")
      * @param MedicalNotesRepository $medicalNotesRepository
@@ -56,7 +58,6 @@ class MedicalNotesController extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/medical_notes")
-     * @param ValidatorInterface $validator
      * @param Request $request
      * @return View
      *
@@ -69,29 +70,27 @@ class MedicalNotesController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=MedicalNotes::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
-        $medicalNote = new MedicalNotes();
-        $medicalNote->setNotes($request->get('notes'));
-        $medicalNote->setPrescriptionDrugs($request->get('prescription_drugs'));
+        $medicalNotes = new MedicalNotes();
+        $form = $this->createForm(MedicalNotesType::class, $medicalNotes);
+        $this->processForm($request, $form);
 
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($medicalNote);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($medicalNote);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($medicalNotes);
+        $entityManager->flush();
 
-        return View::create($medicalNote);
+        return View::create($medicalNotes, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/medical_notes/{id}")
      * @param Request $request
-     * @param $id
+     * @param MedicalNotes $medicalNotes
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="ID de las notas médicas a editar")
@@ -109,23 +108,18 @@ class MedicalNotesController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, MedicalNotes $medicalNotes): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $medicalNote = $manager->getRepository(MedicalNotes::class)->find($id);
+        $form = $this->createForm(MedicalNotesType::class, $medicalNotes);
+        $this->processForm($request, $form);
 
-        if(!$medicalNote){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $medicalNote->setNotes($request->get('notes'));
-        $medicalNote->setPrescriptionDrugs($request->get('prescription_drugs'));
-        $manager->flush();
+        $this->getDoctrine()->getManager()->flush();
 
-        return View::create($medicalNote);
+        return View::create($medicalNotes);
     }
 
     /**

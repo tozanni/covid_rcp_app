@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Form\ImmunologicalType;
 use App\Repository\ImmunologicalRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class ImmunologicalController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/immunological")
      * @param ImmunologicalRepository $immunologicalRepository
@@ -37,7 +40,6 @@ class ImmunologicalController extends AbstractFOSRestController
     /**
      * @Rest\Post("/immunological")
      * @param Request $request
-     * @param ValidatorInterface $validator
      * @return View
      *
      * @SWG\Parameter(name="body", in="body",
@@ -48,19 +50,53 @@ class ImmunologicalController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=MedicalNotes::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
         $immunological = new Immunological();
-        $immunological->setReactiveProteinC($request->get('reactive_protein_c'));
+        $form = $this->createForm(ImmunologicalType::class, $immunological);
+        $this->processForm($request, $form);
 
-        $errors = $validator->validate($immunological);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($immunological);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($immunological);
+        $entityManager->flush();
+
+        return View::create($immunological, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Rest\Put("/immunological/{id}")
+     * @param Request $request
+     * @param Immunological $immunological
+     * @return View
+     *
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
+     * @SWG\Parameter(name="body", in="body",
+     *    @SWG\Schema(type="object",
+     *         @SWG\Property(property="reactive_protein_c", type="text", description="Descripción de la propiedad", example=1234),
+     *    )
+     * )
+     * @SWG\Response(response=200, description="Actualiza los datos de un expediente", @Model(type=Immunological::class))
+     * @SWG\Response(response=404, description="Record resource not found.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="integer", example=404),
+     *          @SWG\Property(property="message", type="string", example="Record resource not found.")
+     *     )
+     * )
+     */
+    public function edit(Request $request, Immunological $immunological): View
+    {
+        $form = $this->createForm(ImmunologicalType::class, $immunological);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($immunological);
     }

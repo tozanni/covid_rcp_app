@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\LiverFunction;
+use App\Form\LiverFunctionType;
 use App\Repository\LiverFunctionRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class LiverFunctionController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/liver_function")
      * @param LiverFunctionRepository $liverFunctionRepository
@@ -77,30 +80,27 @@ class LiverFunctionController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=LiverFunction::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
         $liverFunction = new LiverFunction();
-        $liverFunction->setAspartateAminotransferase($request->get('aspartateAminotransferase'));
-        $liverFunction->setAlanineTransaminase($request->get('alanineTransaminase'));
-        $liverFunction->setBloodUreaNitrogen($request->get('bloodUreaNitrogen'));
-        
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($liverFunction);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        $form = $this->createForm(LiverFunctionType::class, $liverFunction);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($liverFunction);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($liverFunction);
+        $entityManager->flush();
 
-        return View::create($liverFunction);
+        return View::create($liverFunction, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/liver_function/{id}")
      * @param Request $request
-     * @param $id
+     * @param LiverFunction $liverFunction
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Liver Function ID")
@@ -111,7 +111,7 @@ class LiverFunctionController extends AbstractFOSRestController
      *         @SWG\Property(property="bloodUreaNitrogen", type="integer", description="bloodUreaNitrogen", example="")
      *    )
      * )
-     * 
+     *
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=LiverFunction::class))
      * @SWG\Response(response=404, description="Liver Function resource not found.",
      *     @SWG\Schema(type="object",
@@ -120,22 +120,16 @@ class LiverFunctionController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, LiverFunction $liverFunction): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $liverFunction = $manager->getRepository(LiverFunction::class)->find($id);
+        $form = $this->createForm(LiverFunctionType::class, $liverFunction);
+        $this->processForm($request, $form);
 
-        if(!$liverFunction){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $liverFunction->setAspartateAminotransferase($request->get('aspartateAminotransferase'));
-        $liverFunction->setAlanineTransaminase($request->get('alanineTransaminase'));
-        $liverFunction->setBloodUreaNitrogen($request->get('bloodUreaNitrogen'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($liverFunction);
     }

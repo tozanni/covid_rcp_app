@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Triage;
+use App\Form\TriageType;
 use App\Repository\TriageRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -11,7 +12,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class TriageController
@@ -20,6 +20,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class TriageController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/triage")
      * @param TriageRepository $triageRepository
@@ -63,7 +65,6 @@ class TriageController extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/triage")
-     * @param ValidatorInterface $validator
      * @param Request $request
      * @return View
      *
@@ -83,36 +84,27 @@ class TriageController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=Triage::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
         $triage = new Triage();
-        $triage->setDaysBeforeAdmission($request->get('days_before_admission'));
-        $triage->setDifficultyBreathing($request->get('difficulty_breathing'));
-        $triage->setChestPain($request->get('chest_pain'));
-        $triage->setHeadache($request->get('headache'));
-        $triage->setCough($request->get('cough'));
-        $triage->setOtherSymptoms($request->get('other_symptoms'));
-        $triage->setComorbidities($request->get('comorbidities'));
-        $triage->setSmoker($request->get('smoker'));
-        $triage->setPregnant($request->get('pregnant'));
-        
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($triage);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        $form = $this->createForm(TriageType::class, $triage);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($triage);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($triage);
+        $entityManager->flush();
 
-        return View::create($triage);
+        return View::create($triage, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/triage/{id}")
      * @param Request $request
-     * @param $id
+     * @param Triage $triage
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Triage ID")
@@ -129,7 +121,7 @@ class TriageController extends AbstractFOSRestController
      *         @SWG\Property(property="pregnant", type="boolean", description="pregnant", example="")
      *    )
      * )
-     * 
+     *
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=Triage::class))
      * @SWG\Response(response=404, description="Triage resource not found.",
      *     @SWG\Schema(type="object",
@@ -138,28 +130,16 @@ class TriageController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, Triage $triage): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $triage = $manager->getRepository(Triage::class)->find($id);
+        $form = $this->createForm(TriageType::class, $triage);
+        $this->processForm($request, $form);
 
-        if(!$triage){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $triage->setDaysBeforeAdmission($request->get('days_before_admission'));
-        $triage->setDifficultyBreathing($request->get('difficulty_breathing'));
-        $triage->setChestPain($request->get('chest_pain'));
-        $triage->setHeadache($request->get('headache'));
-        $triage->setCough($request->get('cough'));
-        $triage->setOtherSymptoms($request->get('other_symptoms'));
-        $triage->setComorbidities($request->get('comorbidities'));
-        $triage->setSmoker($request->get('smoker'));
-        $triage->setPregnant($request->get('pregnant'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($triage);
     }

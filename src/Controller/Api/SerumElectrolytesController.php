@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\SerumElectrolytes;
+use App\Form\SerumElectrolytesType;
 use App\Repository\SerumElectrolytesRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -11,7 +12,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class SerumElectrolytesController
@@ -20,6 +20,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class SerumElectrolytesController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/serum_electrolytes")
      * @param SerumElectrolytesRepository $serumElectrolytesRepository
@@ -63,7 +65,6 @@ class SerumElectrolytesController extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/serum_electrolytes")
-     * @param ValidatorInterface $validator
      * @param Request $request
      * @return View
      *
@@ -76,29 +77,27 @@ class SerumElectrolytesController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=SerumElectrolytes::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
         $serumElectrolytes = new SerumElectrolytes();
-        $serumElectrolytes->setSodium($request->get('sodium'));
-        $serumElectrolytes->setPotassium($request->get('potassium'));
-        
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($serumElectrolytes);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        $form = $this->createForm(SerumElectrolytesType::class, $serumElectrolytes);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($serumElectrolytes);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($serumElectrolytes);
+        $entityManager->flush();
 
-        return View::create($serumElectrolytes);
+        return View::create($serumElectrolytes, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/serum_electrolytes/{id}")
      * @param Request $request
-     * @param $id
+     * @param SerumElectrolytes $serumElectrolytes
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Serum Electrolytes ID")
@@ -108,7 +107,7 @@ class SerumElectrolytesController extends AbstractFOSRestController
      *         @SWG\Property(property="potassium", type="integer", description="potassium", example="")
      *    )
      * )
-     * 
+     *
      * @SWG\Response(response=200, description="Regresa el objecto actualizado", @Model(type=SerumElectrolytes::class))
      * @SWG\Response(response=404, description="Serum Electrolytes resource not found.",
      *     @SWG\Schema(type="object",
@@ -117,21 +116,16 @@ class SerumElectrolytesController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, SerumElectrolytes $serumElectrolytes): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $serumElectrolytes = $manager->getRepository(SerumElectrolytes::class)->find($id);
+        $form = $this->createForm(SerumElectrolytesType::class, $serumElectrolytes);
+        $this->processForm($request, $form);
 
-        if(!$serumElectrolytes){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $serumElectrolytes->setSodium($request->get('sodium'));
-        $serumElectrolytes->setPotassium($request->get('potassium'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($serumElectrolytes);
     }

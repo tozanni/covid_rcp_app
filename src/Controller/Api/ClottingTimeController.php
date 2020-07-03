@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\ClottingTime;
+use App\Form\ClottingTimeType;
 use App\Repository\ClottingTimeRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class ClottingTimeController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("/clotting_time")
      * @param ClottingTimeRepository $clottingTimeRepository
@@ -63,7 +66,6 @@ class ClottingTimeController extends AbstractFOSRestController
 
     /**
      * @Rest\Post("/clotting_time")
-     * @param ValidatorInterface $validator
      * @param Request $request
      * @return View
      *
@@ -76,29 +78,27 @@ class ClottingTimeController extends AbstractFOSRestController
      *
      * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=ClottingTime::class))
      */
-    public function create(Request $request, ValidatorInterface $validator): View
+    public function create(Request $request): View
     {
         $clottingTime = new ClottingTime();
-        $clottingTime->setProthrombin($request->get('prothrombin'));
-        $clottingTime->setThromboplastin($request->get('thromboplastin'));
-        
-        //TODO: Revisar el caso cuando el usuario no manda un parámetro, formar un response 400
-        $errors = $validator->validate($clottingTime);
-        if (count($errors) > 0) {
-            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        $form = $this->createForm(ClottingTimeType::class, $clottingTime);
+        $this->processForm($request, $form);
+
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($clottingTime);
-        $manager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($clottingTime);
+        $entityManager->flush();
 
-        return View::create($clottingTime);
+        return View::create($clottingTime, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/clotting_time/{id}")
      * @param Request $request
-     * @param $id
+     * @param ClottingTime $clottingTime
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Edditing Clotting Time ID")
@@ -116,21 +116,16 @@ class ClottingTimeController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, ClottingTime $clottingTime): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $clottingTime = $manager->getRepository(ClottingTime::class)->find($id);
+        $form = $this->createForm(ClottingTimeType::class, $clottingTime);
+        $this->processForm($request, $form);
 
-        if(!$clottingTime){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $clottingTime->setProthrombin($request->get('prothrombin'));
-        $clottingTime->setThromboplastin($request->get('thromboplastin'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($clottingTime);
     }

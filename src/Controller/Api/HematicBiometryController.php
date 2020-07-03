@@ -8,6 +8,7 @@
 
 namespace App\Controller\Api;
 
+use App\Form\HematicBiometryType;
 use App\Repository\HematicBiometryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,8 @@ use App\Entity\HematicBiometry;
  */
 class HematicBiometryController extends AbstractFOSRestController
 {
+    use ProcessFormsTrait;
+
     /**
      * @Rest\Get("hematic_biometry")
      * @param HematicBiometryRepository $hematicBiometryRepository
@@ -86,22 +89,24 @@ class HematicBiometryController extends AbstractFOSRestController
     public function create(Request $request): View
     {
         $hematicBiometry = new HematicBiometry();
-        $hematicBiometry->setHematocrit($request->get('hematocrit'));
-        $hematicBiometry->setHemoglobin($request->get('hemoglobin'));
-        $hematicBiometry->setLeukocytes($request->get('leukocytes'));
-        $hematicBiometry->setPlatelets($request->get('platelets'));
+        $form = $this->createForm(HematicBiometryType::class, $hematicBiometry);
+        $this->processForm($request, $form);
 
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($hematicBiometry);
-        $manager->flush();
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
 
-        return View::create($hematicBiometry);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($hematicBiometry);
+        $entityManager->flush();
+
+        return View::create($hematicBiometry, Response::HTTP_CREATED);
     }
 
     /**
      * @Rest\Put("/hematic_biometry/{id}")
      * @param Request $request
-     * @param $id
+     * @param HematicBiometry $hematicBiometry
      * @return View
      *
      * @SWG\Parameter(name="id", in="path", type="string", description="Hematic biometry ID")
@@ -121,25 +126,16 @@ class HematicBiometryController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function edit(Request $request, $id): View
+    public function edit(Request $request, HematicBiometry $hematicBiometry): View
     {
-        $manager = $this->getDoctrine()->getManager();
-        $hematicBiometry = $manager->getRepository(HematicBiometry::class)->find($id);
+        $form = $this->createForm(HematicBiometryType::class, $hematicBiometry);
+        $this->processForm($request, $form);
 
-        if(!$hematicBiometry){
-            return View::create(
-                ["code" => 404, "message" => "¡Registro no encontrado!"],
-                Response::HTTP_NOT_FOUND
-            );
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
         }
-        //TODO: Validate input
-        $hematicBiometry->setGlucose($request->get('glucose'));
-        $hematicBiometry->setUrea($request->get('urea'));
-        $hematicBiometry->setCreatinine($request->get('creatinine'));
-        $hematicBiometry->setCholesterol($request->get('cholesterol'));
-        $hematicBiometry->setTriglycerides($request->get('triglycerides'));
-        $hematicBiometry->setGlycatedHemoglobin($request->get('glycated_hemoglobin'));
-        $manager->flush();
+
+        $this->getDoctrine()->getManager()->flush();
 
         return View::create($hematicBiometry);
     }
