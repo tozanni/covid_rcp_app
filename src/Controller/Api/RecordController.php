@@ -65,10 +65,6 @@ class RecordController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      *
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
@@ -95,48 +91,7 @@ class RecordController extends AbstractFOSRestController
         $entityManager->persist($record);
         $entityManager->flush();
 
-        $predictionResponse = $this->requestToPredictionModel($record);
-
-        if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
-            return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
-        }
-
         return View::create($record, Response::HTTP_CREATED);
-    }
-
-    /**
-     * @Rest\Post("/prediction-model-test")
-     * @param Request $request
-     * @return View
-     *
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
-     * @SWG\Parameter(name="body", in="body",
-     *    @SWG\Schema(type="object",
-     *         @SWG\Property(property="admission_date", type="datetime", description="", example="10"),
-     *         @SWG\Property(property="id_canonical", type="string", description="", example="12"),
-     *         @SWG\Property(property="status", type="string", description="", example="13"),
-     *         @SWG\Property(property="vital_signs", type="object", description="", example="123"),
-     *         @SWG\Property(property="triage", type="object", description="", example="12"),
-     *         @SWG\Property(property="hematic_biometry", type="integer", description="", example="65"),
-     *    )
-     * )
-     * @SWG\Response(response=200, description="Crea un nuevo expediente y regresa el detalle", @Model(type=Record::class))
-     */
-    public function predictionModelTest(Request $request): View
-    {
-        $body = $request->getContent();
-
-        //Manda a procesar el modelo de predicción con el objeto recién creado
-        $httpClient = HttpClient::create();
-        $response = $httpClient->request('POST',
-            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
-                'body' => $body,
-            ]);
-
-        return View::create($response->getContent(), Response::HTTP_CREATED);
     }
 
     /**
@@ -181,7 +136,9 @@ class RecordController extends AbstractFOSRestController
             return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
         }
 
-        return View::create($record);
+        return View::create([
+            'record' => $record, 'prediction' => $predictionResponse->getContent()
+        ]);
     }
 
     /**
