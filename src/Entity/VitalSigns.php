@@ -97,7 +97,6 @@ class VitalSigns
     /**
      * @ORM\OneToOne(targetEntity=Record::class,
      *     mappedBy="vitalSigns", cascade={"persist", "remove"})
-     * @Serializer\Expose()
      */
     private $record;
 

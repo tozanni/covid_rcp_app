@@ -100,10 +100,6 @@ class RecordController extends AbstractFOSRestController
      * @param Record $record
      * @return View
      *
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
@@ -130,15 +126,7 @@ class RecordController extends AbstractFOSRestController
 
         $this->getDoctrine()->getManager()->flush();
 
-        $predictionResponse = $this->requestToPredictionModel($record);
-
-        if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
-            return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
-        }
-
-        return View::create([
-            'record' => $record, 'prediction' => $predictionResponse->getContent()
-        ]);
+        return View::create($record);
     }
 
     /**
@@ -156,6 +144,36 @@ class RecordController extends AbstractFOSRestController
         $entityManager->flush();
 
         return View::create(["message" => "El expediente se eliminó correctamente"]);
+    }
+
+    /**
+     * @Rest\get("/records/{id}/prediction")
+     * @param Record $record
+     * @return View
+     *
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
+     * @SWG\Response(response=200, description="Resultaddo del modelo de predicción")
+     * @SWG\Response(response=404, description="Record resource not found.",
+     *     @SWG\Schema(type="object",
+     *          @SWG\Property(property="code", type="integer", example=404),
+     *          @SWG\Property(property="message", type="string", example="Record resource not found.")
+     *     )
+     * )
+     */
+    public function prediction(Record $record): View
+    {
+        //return View::create($record);
+        $predictionResponse = $this->requestToPredictionModel($record);
+
+        if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
+            return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
+        }
+
+        return View::create($predictionResponse->getContent());
     }
 
     /**
