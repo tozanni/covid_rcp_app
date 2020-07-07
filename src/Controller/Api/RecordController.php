@@ -7,6 +7,7 @@ use App\Repository\RecordRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use App\Entity\Record;
@@ -149,6 +150,7 @@ class RecordController extends AbstractFOSRestController
     /**
      * @Rest\get("/records/{id}/prediction")
      * @param Record $record
+     * @param SerializerInterface $serializer
      * @return View
      *
      * @throws ClientExceptionInterface
@@ -164,10 +166,9 @@ class RecordController extends AbstractFOSRestController
      *     )
      * )
      */
-    public function prediction(Record $record): View
+    public function prediction(Record $record, SerializerInterface $serializer): View
     {
-        //return View::create($record);
-        $predictionResponse = $this->requestToPredictionModel($record);
+        $predictionResponse = $this->requestToPredictionModel($serializer->serialize($record, 'json'));
 
         if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
             return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
@@ -186,8 +187,8 @@ class RecordController extends AbstractFOSRestController
         $httpClient = HttpClient::create();
 
         return $httpClient->request('POST',
-            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel', [
-                'body' => json_encode($record),
-            ]);
+            'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel',
+            ['body' => $record]
+        );
     }
 }
