@@ -20,7 +20,7 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
             $record = new Record();
             $record->setAdmissionDate($faker->dateTime);
             $record->setIdCanonical($faker->randomNumber(8));
-            $record->setStatus($faker->randomElement(['new', 'process']));
+            $record->setStatus($faker->sentence(3));
             $record->setEgressDate($faker->dateTime);
             $record->setEgressType($faker->randomElement(['Vivo', 'Fallecido']));
             $record->setRcpRequired($faker->boolean);

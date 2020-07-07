@@ -21,8 +21,14 @@ class TriageFixtures extends Fixture
         $triage->setChestPain($faker->boolean);
         $triage->setHeadache($faker->boolean);
         $triage->setCough($faker->boolean);
-        $triage->setOtherSymptoms((array) json_encode(['uno', 'dos']));
-        $triage->setComorbidities((array) json_encode(['uno', 'dos']));
+        $triage->setOtherSymptoms((array) [
+            "conjunctivitis", "articulations_pain", "diarrhea",
+            "muscle_pain", "sore_throat", "shaking_chills"
+        ]);
+        $triage->setComorbidities([
+            "anemia", "coronary_atherosclerosis", "cancer", "cardiovascular",
+            "diabetes", "gestational_diabetes"
+        ]);
         $triage->setSmoker($faker->boolean);
         $triage->setPregnant($faker->boolean);
         $manager->persist($triage);
