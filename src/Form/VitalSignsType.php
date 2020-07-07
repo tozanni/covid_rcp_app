@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\VitalSigns;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,8 @@ class VitalSignsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('age', IntegerType::class)
+            ->add('age', DateTimeType::class, [
+                'widget' => 'single_text', 'format' => 'yyyy-MM-dd HH:mm:ss'])
             ->add('gender')
             ->add('weight')
             ->add('height')
@@ -34,10 +36,5 @@ class VitalSignsType extends AbstractType
         $resolver->setDefaults([
             'data_class' => VitalSigns::class,
         ]);
-    }
-
-    public function getName()
-    {
-        return 'vital_signs';
     }
 }

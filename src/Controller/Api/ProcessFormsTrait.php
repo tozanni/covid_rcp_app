@@ -14,7 +14,7 @@ trait ProcessFormsTrait
     {
         $data = json_decode($request->getContent(), true);
 
-        $clearMissing = $request->getMethod() != 'PATCH';
+        $clearMissing = $request->getMethod() != 'PUT';
         $form->submit($data, $clearMissing);
     }
 

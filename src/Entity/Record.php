@@ -276,7 +276,7 @@ class Record
         return $this->vitalSigns;
     }
 
-    public function setVitalSigns(VitalSigns $vitalSigns): self
+    public function setVitalSigns(?VitalSigns $vitalSigns): self
     {
         $this->vitalSigns = $vitalSigns;
 
