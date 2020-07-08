@@ -54,6 +54,7 @@ class Triage
     /**
      * @ORM\Column(type="json", nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Json()
      * @Serializer\Expose()
      */
     private $other_symptoms = [];
@@ -61,6 +62,7 @@ class Triage
     /**
      * @ORM\Column(type="json", nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Json()
      * @Serializer\Expose()
      */
     private $comorbidities = [];
