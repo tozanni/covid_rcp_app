@@ -19,15 +19,18 @@ class TriageFixtures extends Fixture
         $triage->setDaysBeforeAdmission($faker->randomNumber(2));
         $triage->setDifficultyBreathing($faker->boolean);
         $triage->setChestPain($faker->boolean);
-        $triage->setHeadache($faker->boolean);
-        $triage->setCough($faker->boolean);
-        $triage->setOtherSymptoms((array) [
-            "conjunctivitis", "articulations_pain", "diarrhea",
-            "muscle_pain", "sore_throat", "shaking_chills"
+        $triage->setHeadache($faker->numberBetween(0, 3));
+        $triage->setCough($faker->numberBetween(0, 3));
+        $triage->setOtherSymptoms([
+            "conjunctivitis", "articulations_pain", "diarrhea", "fatigue_and_weakness",
+            "muscle_pain", "sore_throat_or_pain", "shaking_chills", "nausea", "sweating", "threw_up"
         ]);
         $triage->setComorbidities([
-            "anemia", "coronary_atherosclerosis", "cancer", "cardiovascular",
-            "diabetes", "gestational_diabetes"
+            "anemia", "coronary_atherosclerosis", "cancer", "cardiovascular", "glaucoma",
+            "diabetes_1_and_2", "gestational_diabetes", "cardiac_arrhythmias", "seizures_or_epilepsy",
+            "hepatic_cirrhosis", "hypertension", "immunological", "leukemia", "neurological",
+            "osteoporosis", "parkinson_s", "high_pressure", "pulmonary", "chronic_kidney",
+            "immunosuppressive_treatment", "hiv",
         ]);
         $triage->setSmoker($faker->boolean);
         $triage->setPregnant($faker->boolean);

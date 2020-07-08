@@ -38,14 +38,14 @@ class Triage
     private $chest_pain;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $headache;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
@@ -134,24 +134,24 @@ class Triage
         return $this;
     }
 
-    public function getHeadache(): ?string
+    public function getHeadache(): ?int
     {
         return $this->headache;
     }
 
-    public function setHeadache(string $headache): self
+    public function setHeadache(int $headache): self
     {
         $this->headache = $headache;
 
         return $this;
     }
 
-    public function getCough(): ?string
+    public function getCough(): ?int
     {
         return $this->cough;
     }
 
-    public function setCough(string $cough): self
+    public function setCough(int $cough): self
     {
         $this->cough = $cough;
 
