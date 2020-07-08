@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Triage;
+use Sonata\Doctrine\Types\JsonType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +20,8 @@ class TriageType extends AbstractType
             ->add('chest_pain')
             ->add('headache')
             ->add('cough')
-            ->add('other_symptoms')
-            ->add('comorbidities')
+            ->add('other_symptoms', CollectionType::class, ['entry_type' => TextType::class, 'allow_add' => true])
+            ->add('comorbidities', CollectionType::class, ['entry_type' => TextType::class, 'allow_add' => true])
             ->add('smoker')
             ->add('pregnant')
             ->add('record')
