@@ -174,7 +174,7 @@ class RecordController extends AbstractFOSRestController
             return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());
         }
 
-        return View::create($predictionResponse->getContent());
+        return View::create($predictionResponse->toArray());
     }
 
     /**
