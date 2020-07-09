@@ -12,10 +12,10 @@ class HematicBiometryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('hematocrit')
-            ->add('hemoglobin')
-            ->add('leukocytes')
-            ->add('platelets')
+            ->add('hematocrit', null, ["required" => false])
+            ->add('hemoglobin', null, ["required" => false])
+            ->add('leukocytes', null, ["required" => false])
+            ->add('platelets', null, ["required" => false])
             ->add('record')
         ;
     }

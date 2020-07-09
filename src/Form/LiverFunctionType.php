@@ -13,9 +13,9 @@ class LiverFunctionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('aspartate_aminotransferase', TextType::class)
-            ->add('alanine_transaminase', TextType::class)
-            ->add('blood_urea_nitrogen', TextType::class)
+            ->add('aspartate_aminotransferase', TextType::class, ["required" => false])
+            ->add('alanine_transaminase', TextType::class, ["required" => false])
+            ->add('blood_urea_nitrogen', TextType::class, ["required" => false])
             ->add('record')
         ;
     }

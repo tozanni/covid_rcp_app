@@ -13,7 +13,7 @@ class ImmunologicalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reactive_protein_c', TextType::class)
+            ->add('reactive_protein_c', TextType::class, ["required" => false])
             ->add('record')
         ;
     }

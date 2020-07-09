@@ -12,8 +12,8 @@ class ClottingTimeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prothrombin')
-            ->add('thromboplastin')
+            ->add('prothrombin', null, ["required" => false])
+            ->add('thromboplastin', null, ["required" => false])
             ->add('record')
         ;
     }

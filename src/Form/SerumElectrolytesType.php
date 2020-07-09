@@ -12,8 +12,8 @@ class SerumElectrolytesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sodium')
-            ->add('potassium')
+            ->add('sodium', null, ["required" => false])
+            ->add('potassium', null, ["required" => false])
             ->add('record')
         ;
     }
