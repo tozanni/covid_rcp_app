@@ -2,38 +2,33 @@
 
 namespace App\Entity;
 
-use App\Repository\SerumElectrolytesRepository;
+use App\Repository\ImagingRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
+ * @ORM\Entity(repositoryClass=ImagingRepository::class)
  * @Serializer\ExclusionPolicy("all")
  */
-class SerumElectrolytes
+class Imaging
 {
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="boolean")
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
-    private $sodium;
+    private $chest_x_ray;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=128)
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
-    private $potassium;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="serumElectrolytes", cascade={"persist", "remove"})
-     */
-    private $record;
+    private $result;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -43,52 +38,57 @@ class SerumElectrolytes
 
     /**
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
 
-    public function getSodium(): ?float
+    /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="immunological", cascade={"persist", "remove"})
+     */
+    private $record;
+
+    public function getChestXRay(): ?bool
     {
-        return $this->sodium;
+        return $this->chest_x_ray;
     }
 
-    public function setSodium(float $sodium): self
+    public function setChestXRay(bool $chest_x_ray): self
     {
-        $this->sodium = $sodium;
+        $this->chest_x_ray = $chest_x_ray;
 
         return $this;
     }
 
-    public function getPotassium(): ?float
+    public function getResult(): ?string
     {
-        return $this->potassium;
+        return $this->result;
     }
 
-    public function setPotassium(float $potassium): self
+    public function setResult(string $result): self
     {
-        $this->potassium = $potassium;
+        $this->result = $result;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -105,9 +105,9 @@ class SerumElectrolytes
         $this->record = $record;
 
         // set (or unset) the owning side of the relation if necessary
-        $newSerumElectrolytes = null === $record ? null : $this;
-        if ($record->getSerumElectrolytes() !== $newSerumElectrolytes) {
-            $record->setSerumElectrolytes($newSerumElectrolytes);
+        $newImmunological = null === $record ? null : $this;
+        if ($record->getImmunological() !== $newImmunological) {
+            $record->setImmunological($newImmunological);
         }
 
         return $this;

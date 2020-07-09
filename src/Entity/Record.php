@@ -138,6 +138,14 @@ class Record
     private $immunological;
 
     /**
+     * @ORM\OneToOne(targetEntity=Imaging::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
+     */
+    private $imaging;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      * @Serializer\Expose()
@@ -387,6 +395,18 @@ class Record
     public function setImmunological(?Immunological $immunological): self
     {
         $this->immunological = $immunological;
+
+        return $this;
+    }
+
+    public function getImaging(): ?Imaging
+    {
+        return $this->imaging;
+    }
+
+    public function setImaging(?Imaging $imaging): self
+    {
+        $this->imaging = $imaging;
 
         return $this;
     }

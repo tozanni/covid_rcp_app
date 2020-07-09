@@ -15,6 +15,7 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
@@ -156,7 +157,7 @@ class RecordController extends AbstractFOSRestController
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
+     * @throws TransportExceptionInterface|DecodingExceptionInterface
      * @SWG\Parameter(name="id", in="path", type="string", description="ID del expendiente a buscar")
      * @SWG\Response(response=200, description="Resultaddo del modelo de predicción")
      * @SWG\Response(response=404, description="Record resource not found.",

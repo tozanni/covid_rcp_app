@@ -35,6 +35,7 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
             $record->setLiverFunction($this->getReference(LiverFunctionFixtures::LIVER_FUNCTION_REFERENCE));
             $record->setClottingTime($this->getReference(ClottingTimeFixtures::CLOTTING_TIME_REFERENCE));
             $record->setImmunological($this->getReference(ImmunologicalFixtures::IMMUNOLOGICAL_REFERENCE));
+            $record->setImaging($this->getReference(ImagingFixtures::IMAGING_REFERENCE));
             $manager->persist($record);
         }
 

@@ -33,14 +33,12 @@ class ClottingTime
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
-     * @Serializer\Expose()
      */
     private $created_at;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime_immutable")
-     * @Serializer\Expose()
      */
     private $updated_at;
 

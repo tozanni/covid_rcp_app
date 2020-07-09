@@ -31,6 +31,7 @@ class RecordType extends AbstractType
             ->add('liver_function', LiverFunctionType::class, ['required' => false])
             ->add('clotting_time', ClottingTimeType::class, ['required' => false])
             ->add('immunological', ImmunologicalType::class, ['required' => false])
+            ->add('imaging', ImagingType::class, ['required' => false])
         ;
     }
 
