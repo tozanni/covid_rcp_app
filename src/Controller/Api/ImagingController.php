@@ -32,7 +32,7 @@ class ImagingController extends AbstractFOSRestController
      *
      * @SWG\Response(response=404, description="HTTP_NOT_FOUND - La dirección con el Id solicitado no se encuentra.",
      *     @SWG\Schema(type="object",
-     *          @SWG\Property(property="chest_x_ray", type="boolean", description="Si tiene radiografía toraxica", example=true),
+     *          @SWG\Property(property="radiography", type="boolean", description="Si tiene radiografía toraxica", example=true),
      *          @SWG\Property(property="result", type="string", description="Codigo del resultado segun estudio")
      *    )
      * )

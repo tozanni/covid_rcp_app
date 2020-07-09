@@ -12,7 +12,7 @@ class ImagingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('chest_x_ray')
+            ->add('radiography')
             ->add('result')
             ->add('record')
         ;

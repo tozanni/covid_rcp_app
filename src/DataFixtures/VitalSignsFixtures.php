@@ -13,11 +13,10 @@ class VitalSignsFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
         $faker = Faker\Factory::create('es_MX');
 
         $vitalSigns = new VitalSigns();
-        $vitalSigns->setAge($faker->numberBetween(1, 99));
+        $vitalSigns->setAge($faker->dateTime);
         $vitalSigns->setGender($faker->randomElement(['male', 'female']));
         $vitalSigns->setWeight($faker->numberBetween(15, 99));
         $vitalSigns->setHeight($faker->randomFloat(2, 1.55, 2.35));

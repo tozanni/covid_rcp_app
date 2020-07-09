@@ -21,7 +21,7 @@ class Imaging
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
-    private $chest_x_ray;
+    private $radiography;
 
     /**
      * @ORM\Column(type="string", length=128)
@@ -43,21 +43,9 @@ class Imaging
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="immunological", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="imaging", cascade={"persist", "remove"})
      */
     private $record;
-
-    public function getChestXRay(): ?bool
-    {
-        return $this->chest_x_ray;
-    }
-
-    public function setChestXRay(bool $chest_x_ray): self
-    {
-        $this->chest_x_ray = $chest_x_ray;
-
-        return $this;
-    }
 
     public function getResult(): ?string
     {
@@ -71,24 +59,24 @@ class Imaging
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -105,10 +93,22 @@ class Imaging
         $this->record = $record;
 
         // set (or unset) the owning side of the relation if necessary
-        $newImmunological = null === $record ? null : $this;
-        if ($record->getImmunological() !== $newImmunological) {
-            $record->setImmunological($newImmunological);
+        $newImaging = null === $record ? null : $this;
+        if ($record->getImaging() !== $newImaging) {
+            $record->setImaging($newImaging);
         }
+
+        return $this;
+    }
+
+    public function getRadiography(): ?bool
+    {
+        return $this->radiography;
+    }
+
+    public function setRadiography(bool $radiography): self
+    {
+        $this->radiography = $radiography;
 
         return $this;
     }

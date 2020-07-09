@@ -16,7 +16,7 @@ class ImagingFixtures extends Fixture
         $faker = Factory::create('es_MX');
 
         $imaging = new Imaging();
-        $imaging->setChestXRay($faker->boolean);
+        $imaging->setRadiography($faker->boolean);
         $imaging->setResult($faker->randomElement([
             "normal", "infiltrate", "apical_pneumatic_foci", "basal_pneumatic_foci",
             "bilateral_pneumatic_foci", "generalized_pneumatic_foci", "medial_pneumatic_foci",
