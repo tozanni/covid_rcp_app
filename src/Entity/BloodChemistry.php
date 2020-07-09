@@ -17,43 +17,37 @@ class BloodChemistry
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $glucose;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $urea;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $creatinine;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $cholesterol;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $triglycerides;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $glycated_hemoglobin;

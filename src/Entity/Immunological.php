@@ -17,8 +17,7 @@ class Immunological
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $reactiveProteinC;

@@ -17,15 +17,13 @@ class Imaging
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="boolean", nullable=true)
      * @Serializer\Expose()
      */
     private $radiography;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=128, nullable=true)
      * @Serializer\Expose()
      */
     private $result;
@@ -38,7 +36,7 @@ class Imaging
 
     /**
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $updated_at;
 
