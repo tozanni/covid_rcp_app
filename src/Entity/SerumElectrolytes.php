@@ -17,15 +17,13 @@ class SerumElectrolytes
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $sodium;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $potassium;

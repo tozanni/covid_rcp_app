@@ -17,29 +17,25 @@ class HematicBiometry
     use EntityTrait;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $hematocrit;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $hemoglobin;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $leukocytes;
 
     /**
-     * @ORM\Column(type="float")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $platelets;
