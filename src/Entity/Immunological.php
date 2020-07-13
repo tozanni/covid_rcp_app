@@ -6,7 +6,6 @@ use App\Repository\ImmunologicalRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ImmunologicalRepository::class)
@@ -44,7 +43,7 @@ class Immunological
         return $this->reactiveProteinC;
     }
 
-    public function setReactiveProteinC(float $reactiveProteinC): self
+    public function setReactiveProteinC(?float $reactiveProteinC): self
     {
         $this->reactiveProteinC = $reactiveProteinC;
 

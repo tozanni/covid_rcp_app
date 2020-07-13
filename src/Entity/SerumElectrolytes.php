@@ -50,7 +50,7 @@ class SerumElectrolytes
         return $this->sodium;
     }
 
-    public function setSodium(float $sodium): self
+    public function setSodium(?float $sodium): self
     {
         $this->sodium = $sodium;
 
@@ -62,7 +62,7 @@ class SerumElectrolytes
         return $this->potassium;
     }
 
-    public function setPotassium(float $potassium): self
+    public function setPotassium(?float $potassium): self
     {
         $this->potassium = $potassium;
 

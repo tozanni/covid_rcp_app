@@ -6,7 +6,6 @@ use App\Repository\HematicBiometryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)
@@ -62,7 +61,7 @@ class HematicBiometry
         return $this->hematocrit;
     }
 
-    public function setHematocrit(float $hematocrit): self
+    public function setHematocrit(?float $hematocrit): self
     {
         $this->hematocrit = $hematocrit;
 
@@ -74,7 +73,7 @@ class HematicBiometry
         return $this->hemoglobin;
     }
 
-    public function setHemoglobin(float $hemoglobin): self
+    public function setHemoglobin(?float $hemoglobin): self
     {
         $this->hemoglobin = $hemoglobin;
 
@@ -86,7 +85,7 @@ class HematicBiometry
         return $this->leukocytes;
     }
 
-    public function setLeukocytes(float $leukocytes): self
+    public function setLeukocytes(?float $leukocytes): self
     {
         $this->leukocytes = $leukocytes;
 
@@ -98,7 +97,7 @@ class HematicBiometry
         return $this->platelets;
     }
 
-    public function setPlatelets(float $platelets): self
+    public function setPlatelets(?float $platelets): self
     {
         $this->platelets = $platelets;
 

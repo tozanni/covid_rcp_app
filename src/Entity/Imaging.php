@@ -6,7 +6,6 @@ use App\Repository\ImagingRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ImagingRepository::class)
@@ -50,7 +49,7 @@ class Imaging
         return $this->result;
     }
 
-    public function setResult(string $result): self
+    public function setResult(?string $result): self
     {
         $this->result = $result;
 
@@ -74,7 +73,7 @@ class Imaging
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -104,7 +103,7 @@ class Imaging
         return $this->radiography;
     }
 
-    public function setRadiography(bool $radiography): self
+    public function setRadiography(?bool $radiography): self
     {
         $this->radiography = $radiography;
 

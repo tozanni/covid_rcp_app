@@ -6,7 +6,6 @@ use App\Repository\LiverFunctionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LiverFunctionRepository::class)
@@ -56,7 +55,7 @@ class LiverFunction
         return $this->aspartateAminotransferase;
     }
 
-    public function setAspartateAminotransferase(float $aspartateAminotransferase): self
+    public function setAspartateAminotransferase(?float $aspartateAminotransferase): self
     {
         $this->aspartateAminotransferase = $aspartateAminotransferase;
 
@@ -68,7 +67,7 @@ class LiverFunction
         return $this->alanineTransaminase;
     }
 
-    public function setAlanineTransaminase(float $alanineTransaminase): self
+    public function setAlanineTransaminase(?float $alanineTransaminase): self
     {
         $this->alanineTransaminase = $alanineTransaminase;
 
@@ -80,7 +79,7 @@ class LiverFunction
         return $this->bloodUreaNitrogen;
     }
 
-    public function setBloodUreaNitrogen(float $bloodUreaNitrogen): self
+    public function setBloodUreaNitrogen(?float $bloodUreaNitrogen): self
     {
         $this->bloodUreaNitrogen = $bloodUreaNitrogen;
 

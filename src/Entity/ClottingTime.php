@@ -6,7 +6,6 @@ use App\Repository\ClottingTimeRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClottingTimeRepository::class)
@@ -50,7 +49,7 @@ class ClottingTime
         return $this->prothrombin;
     }
 
-    public function setProthrombin(float $prothrombin): self
+    public function setProthrombin(?float $prothrombin): self
     {
         $this->prothrombin = $prothrombin;
 
@@ -62,7 +61,7 @@ class ClottingTime
         return $this->thromboplastin;
     }
 
-    public function setThromboplastin(float $thromboplastin): self
+    public function setThromboplastin(?float $thromboplastin): self
     {
         $this->thromboplastin = $thromboplastin;
 

@@ -6,7 +6,6 @@ use App\Repository\BloodChemistryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BloodChemistryRepository::class)
@@ -74,7 +73,7 @@ class BloodChemistry
         return $this->glucose;
     }
 
-    public function setGlucose(float $glucose): self
+    public function setGlucose(?float $glucose): self
     {
         $this->glucose = $glucose;
 
@@ -86,7 +85,7 @@ class BloodChemistry
         return $this->urea;
     }
 
-    public function setUrea(float $urea): self
+    public function setUrea(?float $urea): self
     {
         $this->urea = $urea;
 
@@ -98,7 +97,7 @@ class BloodChemistry
         return $this->creatinine;
     }
 
-    public function setCreatinine(float $creatinine): self
+    public function setCreatinine(?float $creatinine): self
     {
         $this->creatinine = $creatinine;
 
@@ -110,7 +109,7 @@ class BloodChemistry
         return $this->cholesterol;
     }
 
-    public function setCholesterol(float $cholesterol): self
+    public function setCholesterol(?float $cholesterol): self
     {
         $this->cholesterol = $cholesterol;
 
@@ -122,7 +121,7 @@ class BloodChemistry
         return $this->triglycerides;
     }
 
-    public function setTriglycerides(float $triglycerides): self
+    public function setTriglycerides(?float $triglycerides): self
     {
         $this->triglycerides = $triglycerides;
 
@@ -134,7 +133,7 @@ class BloodChemistry
         return $this->glycated_hemoglobin;
     }
 
-    public function setGlycatedHemoglobin(float $glycated_hemoglobin): self
+    public function setGlycatedHemoglobin(?float $glycated_hemoglobin): self
     {
         $this->glycated_hemoglobin = $glycated_hemoglobin;
 
