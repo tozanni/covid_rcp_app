@@ -9,7 +9,3 @@ sonata_user_admin_resetting:
 #api_auth_login:
 #  path: /api/auth/login
 #  methods:  [POST]
-
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
