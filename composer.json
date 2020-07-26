@@ -38,8 +38,11 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "fzaninotto/faker": "^1.9",
         "sonata-project/easy-extends-bundle": "^2.5",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/css-selector": "4.4.*",
         "symfony/debug-bundle": "*",
         "symfony/maker-bundle": "^1.17",
+        "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
         "symfony/var-dumper": "*",
         "symfony/web-server-bundle": "4.4.*"
@@ -70,7 +73,8 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.dist', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.dist', '.env');\"",
+            "@php -r \"file_exists('phpunit.xml.dist') || copy('phpunit.xml.dist', 'phpunit.xml');\""
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
