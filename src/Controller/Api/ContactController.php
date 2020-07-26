@@ -9,6 +9,9 @@ use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Component\HttpFoundation\{Request, Response};
 use Swagger\Annotations as SWG;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * Class ContactController
@@ -33,7 +36,7 @@ class ContactController extends AbstractFOSRestController
      *
      * @SWG\Response(response=201, description="El mensaje ha sido creado y enviado", @Model(type=Contact::class))
      */
-    public function create(Request $request): View
+    public function create(Request $request, MailerInterface $mailer): View
     {
         $contact = new Contact();
 
@@ -47,6 +50,22 @@ class ContactController extends AbstractFOSRestController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($contact);
         $entityManager->flush();
+
+        $email = (new TemplatedEmail())
+            ->from('contacto@rcpcovid19.mx')
+            ->to('quique@example.com')
+            ->subject('Formulario Contacto: ' . $contact->getSubject())
+            ->htmlTemplate('emails/contact.html.twig')
+            ->context([
+                'name' => $contact->getName(),
+                'message' => $contact->getMessage(),
+            ]);
+
+        try {
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $error) {
+            return View::create($error, Response::HTTP_FAILED_DEPENDENCY);
+        }
 
         return View::create($contact, Response::HTTP_CREATED);
     }

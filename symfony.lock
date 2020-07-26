@@ -164,6 +164,9 @@
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
+    "league/html-to-markdown": {
+        "version": "4.10.0"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
         "recipe": {
@@ -175,6 +178,9 @@
         "files": [
             "config/packages/lexik_jwt_authentication.yaml"
         ]
+    },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
     },
     "mhujer/jms-serializer-uuid": {
         "version": "3.2.0"
@@ -332,6 +338,15 @@
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
     },
+    "symfony/amazon-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "9648db3ecae5c8a6b1a5f74715d3907124348815"
+        }
+    },
     "symfony/asset": {
         "version": "v4.4.8"
     },
@@ -463,6 +478,18 @@
     },
     "symfony/intl": {
         "version": "v4.4.8"
+    },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -683,6 +710,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"
+    },
+    "twig/inky-extra": {
+        "version": "v3.0.4"
     },
     "twig/string-extra": {
         "version": "v3.0.3"
