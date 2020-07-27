@@ -12,6 +12,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface as Mailer;
+use Symfony\Component\Mime\Address;
 
 /**
  * Class ContactController
@@ -52,15 +53,7 @@ class ContactController extends AbstractFOSRestController
         $entityManager->persist($contact);
         $entityManager->flush();
 
-        $email = (new TemplatedEmail())
-            ->from($this->getParameter('mailer_from'))
-            ->to($this->getParameter('mailer_to'))
-            ->subject('Formulario Contacto: ' . $contact->getSubject())
-            ->htmlTemplate('emails/contact.html.twig')
-            ->context([
-                'name' => $contact->getName(),
-                'message' => $contact->getMessage(),
-            ]);
+        $email = $this->buildEmail($contact);
 
         try {
             $mailer->send($email);
@@ -69,5 +62,20 @@ class ContactController extends AbstractFOSRestController
         }
 
         return View::create($contact, Response::HTTP_CREATED);
+    }
+
+    private function buildEmail($contact)
+    {
+        return (new TemplatedEmail())
+            ->from(new Address($this->getParameter('mailer_from'), "Formulario Contacto"))
+            ->to($this->getParameter('mailer_to'))
+            ->subject($contact->getSubject())
+            ->htmlTemplate('emails/contact.html.twig')
+            ->context([
+                'name' => $contact->getName(),
+                'address' => $contact->getEmail(),
+                'subject' => $contact->getSubject(),
+                'message' => $contact->getMessage(),
+            ]);
     }
 }

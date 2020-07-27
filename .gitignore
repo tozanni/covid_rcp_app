@@ -1,3 +1,11 @@
+#Editors
+.idea
+.DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
 
 ###> symfony/framework-bundle ###
 /.env
@@ -10,21 +18,9 @@
 vendor/
 ###< symfony/framework-bundle ###
 
-#Editors
-.idea
-.DS_Store
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
-
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
 
 ###> symfony/phpunit-bridge ###
 .phpunit

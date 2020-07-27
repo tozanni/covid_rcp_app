@@ -1,15 +1,59 @@
-{% apply inky_to_html %}
+{% apply inky_to_html|inline_css(source('@css/foundation-emails.css'), source('@css/email.css')) %}
 <container>
     <row class="header">
         <columns>
-            <spacer size="16"></spacer>
-            <h1 class="text-center">{{ email.subject }}!</h1>
+            <a href="https://rcpcovid19.mx">
+                <img src="{{ email.image('@images/email/logo.png') }}" class="logo" alt="RCP Covid-19 Logo">
+            </a>
         </columns>
-
+    </row>
+    <row class="welcome">
+        <columns>
+            <spacer size="35"></spacer>
+            <h1>
+                <center>
+                    {{ subject }}
+                </center>
+            </h1>
+            <spacer size="10"></spacer>
+        </columns>
+    </row>
+    <spacer size="30"></spacer>
+    <row>
+        <columns>
+            <p>
+                Han contactado vía el formulario de contacto con los siguientes datos:<br>
+            </p>
+            <p>
+                Nombre: <strong>{{ name }}</strong><br>
+                Correo Electrónico: <strong>{{ address }}</strong><br>
+            </p>
+            <p>
+                {{ message }}
+            </p>
+        </columns>
     </row>
     <row>
         <columns>
-            <p>{{ message }}</p>
+            <center>
+                <button href="mailto:{{ address }}">Responder</button>
+            </center>
+        </columns>
+    </row>
+    <row class="footer">
+        <columns>
+            <p>Saludos,</p>
+            <p>El equipo de <em>RCP Covid-19</em></p>
+        </columns>
+    </row>
+    <row class="bottom">
+        <columns>
+            <center>
+                <spacer size="20"></spacer>
+                <div>
+                    <span>Enviado con ❤️ de los colaboradores de RCP Covid-19<span>
+                </div>
+            </center>
         </columns>
     </row>
 </container>
