@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\{Request, Response};
 use Swagger\Annotations as SWG;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\MailerInterface as Mailer;
 
 /**
  * Class ContactController
@@ -25,6 +25,7 @@ class ContactController extends AbstractFOSRestController
     /**
      * @Rest\Post("/contacts", name="contact")
      * @param Request $request
+     * @param Mailer $mailer
      * @return View
      *
      * @SWG\Parameter(name="body", in="body", @SWG\Schema(type="object",
@@ -36,7 +37,7 @@ class ContactController extends AbstractFOSRestController
      *
      * @SWG\Response(response=201, description="El mensaje ha sido creado y enviado", @Model(type=Contact::class))
      */
-    public function create(Request $request, MailerInterface $mailer): View
+    public function create(Request $request, Mailer $mailer): View
     {
         $contact = new Contact();
 
@@ -52,8 +53,8 @@ class ContactController extends AbstractFOSRestController
         $entityManager->flush();
 
         $email = (new TemplatedEmail())
-            ->from('contacto@rcpcovid19.mx')
-            ->to('quique@example.com')
+            ->from($this->getParameter('mailer_from'))
+            ->to($this->getParameter('mailer_to'))
             ->subject('Formulario Contacto: ' . $contact->getSubject())
             ->htmlTemplate('emails/contact.html.twig')
             ->context([
