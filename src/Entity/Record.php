@@ -31,7 +31,6 @@ class Record
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
-     * @Assert\NotBlank()
      * @Serializer\Expose()
      */
     private $status;
