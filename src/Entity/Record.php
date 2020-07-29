@@ -30,7 +30,7 @@ class Record
     private $id_canonical;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, nullable=true)
      * @Assert\NotBlank()
      * @Serializer\Expose()
      */
@@ -164,7 +164,7 @@ class Record
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 

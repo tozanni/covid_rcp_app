@@ -16,7 +16,7 @@ class RecordType extends AbstractType
             ->add('admission_date', DateTimeType::class, [
                 'widget' => 'single_text', 'format' => 'yyyy-MM-dd HH:mm:ss'])
             ->add('id_canonical')
-            ->add('status')
+            ->add('status', null, ['required' => false])
             ->add('egress_date')
             ->add('egress_type')
             ->add('rcp_required')
