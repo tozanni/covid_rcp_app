@@ -24,7 +24,7 @@ class ContactController extends AbstractFOSRestController
     use ProcessFormsTrait;
 
     /**
-     * @Rest\Post("/contacts", name="contact")
+     * @Rest\Post("/contact", name="contact")
      * @param Request $request
      * @param Mailer $mailer
      * @return View
