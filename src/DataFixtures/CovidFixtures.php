@@ -17,12 +17,12 @@ class CovidFixtures extends Fixture
 
         $covid = new Covid();
         $covid->setPcr($faker->boolean);
-        $covid->setLdh($faker->randomFloat());
-        $covid->setIl6($faker->randomFloat());
-        $covid->setFerritin($faker->randomFloat());
-        $covid->setTroponin($faker->randomFloat());
-        $covid->setIgm($faker->randomFloat());
-        $covid->setIgg($faker->randomFloat());
+        $covid->setLdh($faker->numberBetween(1.0, 3.0));
+        $covid->setIl6($faker->numberBetween(1.0, 3.0));
+        $covid->setFerritin($faker->numberBetween(1.0, 3.0));
+        $covid->setTroponin($faker->numberBetween(1.0, 3.0));
+        $covid->setIgm($faker->numberBetween(1.0, 3.0));
+        $covid->setIgg($faker->numberBetween(1.0, 3.0));
         $manager->persist($covid);
 
         $this->setReference(self::COVID_REFERENCE, $covid);
