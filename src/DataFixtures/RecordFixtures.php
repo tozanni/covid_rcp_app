@@ -28,6 +28,7 @@ class RecordFixtures extends Fixture implements DependentFixtureInterface
             $record->setEgressNotes($faker->paragraph);
             $record->setVitalSigns($this->getReference(VitalSignsFixtures::VITAL_SIGNS_REFERENCE));
             $record->setTriage($this->getReference(TriageFixtures::TRIAGE_REFERENCE));
+            $record->setCovid($this->getReference(CovidFixtures::COVID_REFERENCE));
             $record->setHematicBiometry($this->getReference(HematicBiometryFixtures::HEMATIC_BIOMETRY_REFERENCE));
             $record->setBloodChemistry($this->getReference(BloodChemistryFixtures::BLOOD_CHEMISTRY_REFERENCE));
             $record->setSerumElectrolytes($this->getReference(SerumElectrolytesFixtures::SERUM_ELECTROLYTES_REFERENCE));

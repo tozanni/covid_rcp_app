@@ -57,6 +57,11 @@ class Covid
      */
     private $igg;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="covid", cascade={"persist", "remove"})
+     */
+    private $record;
+
     public function getPcr(): ?bool
     {
         return $this->pcr;
@@ -137,6 +142,24 @@ class Covid
     public function setIgg(?float $igg): self
     {
         $this->igg = $igg;
+
+        return $this;
+    }
+
+    public function getRecord(): ?Record
+    {
+        return $this->record;
+    }
+
+    public function setRecord(?Record $record): self
+    {
+        $this->record = $record;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newCovid = null === $record ? null : $this;
+        if ($record->getCovid() !== $newCovid) {
+            $record->setCovid($newCovid);
+        }
 
         return $this;
     }

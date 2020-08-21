@@ -82,6 +82,13 @@ class Record
     private $triage;
 
     /**
+     * @ORM\OneToOne(targetEntity=Covid::class, inversedBy="record", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
+     */
+    private $covid;
+
+    /**
      * @ORM\OneToOne(targetEntity=HematicBiometry::class, inversedBy="record",
      *     cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
@@ -406,6 +413,18 @@ class Record
     public function setImaging(?Imaging $imaging): self
     {
         $this->imaging = $imaging;
+
+        return $this;
+    }
+
+    public function getCovid(): ?Covid
+    {
+        return $this->covid;
+    }
+
+    public function setCovid(?Covid $covid): self
+    {
+        $this->covid = $covid;
 
         return $this;
     }
