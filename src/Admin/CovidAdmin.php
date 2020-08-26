@@ -62,11 +62,8 @@ final class CovidAdmin extends AbstractAdmin
             ->add('troponin')
             ->add('igm')
             ->add('igg')
-            ->add('id')
             ->add('created_at', DateTimePickerType::class, ['widget' => 'single_text'])
-
-            ->add('updated_at')
-            ;
+        ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
