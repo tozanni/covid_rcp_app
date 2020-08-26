@@ -25,4 +25,9 @@ trait EntityTrait
     {
         return $this->id;
     }
+
+    public function setId($id)
+    {
+        return $this;
+    }
 }

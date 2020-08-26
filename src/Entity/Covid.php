@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\CovidRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=CovidRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable()
  */
 class Covid
 {
@@ -18,42 +20,49 @@ class Covid
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $pcr;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $ldh;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $il_6;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $ferritin;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $troponin;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $igm;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
+     * @Gedmo\Versioned()
      */
     private $igg;
 

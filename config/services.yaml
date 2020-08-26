@@ -33,3 +33,10 @@ services:
         class: Mhujer\JmsSerializer\Uuid\UuidSerializerHandler
         tags:
             - { name: jms_serializer.subscribing_handler }
+
+    admin.covid:
+        class: App\Admin\CovidAdmin
+        arguments: [~, App\Entity\Covid, App\Controller\CovidAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Covid }
+        public: true
