@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ClottingTimeRepository;
+use App\Loggable\ClottingTime as LogEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
@@ -10,7 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass=ClottingTimeRepository::class)
  * @Serializer\ExclusionPolicy("all")
- * @Gedmo\Loggable
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class ClottingTime
 {

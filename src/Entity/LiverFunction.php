@@ -6,11 +6,12 @@ use App\Repository\LiverFunctionRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use App\Loggable\LiverFunction as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=LiverFunctionRepository::class)
  * @Serializer\ExclusionPolicy("all")
- * @Gedmo\Loggable
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class LiverFunction
 {

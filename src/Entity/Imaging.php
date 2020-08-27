@@ -6,11 +6,12 @@ use App\Repository\ImagingRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use App\Loggable\Imaging as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ImagingRepository::class)
  * @Serializer\ExclusionPolicy("all")
- * @Gedmo\Loggable
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class Imaging
 {

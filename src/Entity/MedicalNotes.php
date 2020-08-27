@@ -7,11 +7,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Loggable\MedicalNotes as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=MedicalNotesRepository::class)
  * @Serializer\ExclusionPolicy("all")
- * @Gedmo\Loggable
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class MedicalNotes
 {
