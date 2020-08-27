@@ -1,4 +1,4 @@
 framework:
   mailer:
     envelope:
-      recipients: ['hi@cerco.dev','tests@inodata.mx']
+      recipients: ['tests@inodata.mx']
