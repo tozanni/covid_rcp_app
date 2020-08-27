@@ -10,30 +10,35 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class HematicBiometry
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $hematocrit;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $hemoglobin;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $leukocytes;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */

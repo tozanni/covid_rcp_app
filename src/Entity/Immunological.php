@@ -10,12 +10,14 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass=ImmunologicalRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class Immunological
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */

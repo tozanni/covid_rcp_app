@@ -11,12 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class VitalSigns
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -24,6 +26,7 @@ class VitalSigns
     private $age;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="string", length=12)
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -31,6 +34,7 @@ class VitalSigns
     private $gender;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -38,6 +42,7 @@ class VitalSigns
     private $weight;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -45,6 +50,7 @@ class VitalSigns
     private $height;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -52,6 +58,7 @@ class VitalSigns
     private $diastolic_blood_pressure;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -59,6 +66,7 @@ class VitalSigns
     private $systolic_blood_pressure;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -66,6 +74,7 @@ class VitalSigns
     private $heart_rate;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -73,6 +82,7 @@ class VitalSigns
     private $breathing_frequency;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -80,6 +90,7 @@ class VitalSigns
     private $temperature;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -87,6 +98,7 @@ class VitalSigns
     private $oximetry;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float")
      * @Assert\NotBlank()
      * @Serializer\Expose()

@@ -11,12 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=MedicalNotesRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class MedicalNotes
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -24,6 +26,7 @@ class MedicalNotes
     private $notes;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text", nullable=true)
      * @Assert\NotBlank()
      * @Serializer\Expose()

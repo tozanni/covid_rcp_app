@@ -11,18 +11,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=SerumElectrolytesRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class SerumElectrolytes
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
     private $sodium;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */

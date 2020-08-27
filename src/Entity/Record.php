@@ -11,12 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=RecordRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class Record
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -30,36 +32,42 @@ class Record
     private $id_canonical;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Serializer\Expose()
      */
     private $status;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="datetime", nullable=true)
      * @Serializer\Expose()
      */
     private $egress_date;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="string", length=32, nullable=true)
      * @Serializer\Expose()
      */
     private $egress_type;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean", nullable=true)
      * @Serializer\Expose()
      */
     private $rcp_required;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text", nullable=true)
      * @Serializer\Expose()
      */
     private $treatment;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="text", nullable=true)
      * @Serializer\Expose()
      */

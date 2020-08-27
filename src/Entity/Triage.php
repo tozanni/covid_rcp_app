@@ -11,12 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=TriageRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class Triage
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -24,6 +26,7 @@ class Triage
     private $days_before_admission;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -31,6 +34,7 @@ class Triage
     private $difficulty_breathing;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -38,6 +42,7 @@ class Triage
     private $chest_pain;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -45,6 +50,7 @@ class Triage
     private $headache;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -52,6 +58,7 @@ class Triage
     private $cough;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="json", nullable=true)
      * @Assert\NotBlank()
      * @Assert\Json()
@@ -60,6 +67,7 @@ class Triage
     private $other_symptoms = [];
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="json", nullable=true)
      * @Assert\NotBlank()
      * @Assert\Json()
@@ -68,6 +76,7 @@ class Triage
     private $comorbidities = [];
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\NotBlank()
      * @Serializer\Expose()
@@ -75,6 +84,7 @@ class Triage
     private $smoker;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\NotBlank()
      * @Serializer\Expose()

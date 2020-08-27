@@ -10,18 +10,21 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass=ImagingRepository::class)
  * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable
  */
 class Imaging
 {
     use EntityTrait;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="boolean", nullable=true)
      * @Serializer\Expose()
      */
     private $radiography;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="string", length=128, nullable=true)
      * @Serializer\Expose()
      */
