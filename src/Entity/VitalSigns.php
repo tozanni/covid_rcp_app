@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Loggable\VitalSigns as LogEntity;
+use App\Entity\Loggable\VitalSigns as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=VitalSignsRepository::class)

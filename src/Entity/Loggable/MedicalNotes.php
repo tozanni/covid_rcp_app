@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Loggable;
+namespace App\Entity\Loggable;
 
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Loggable\ClottingTime
+ * App\Entity\Loggable\MedicalNotes
  *
  * @ORM\Table(
- *     name="clotting_time_log_entries",
+ *     name="medical_notes_log_entries",
  *     options={"row_format":"DYNAMIC"},
  *  indexes={
  *      @ORM\Index(name="log_class_lookup_idx", columns={"object_class"}),
@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity(repositoryClass="Gedmo\Loggable\Entity\Repository\LogEntryRepository")
  */
-class ClottingTime extends AbstractLogEntry
+class MedicalNotes extends AbstractLogEntry
 {
     /**
      * All required columns are mapped through inherited superclass

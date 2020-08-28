@@ -6,7 +6,7 @@ use App\Repository\CovidRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
-use App\Loggable\Covid as LogEntity;
+use App\Entity\Loggable\Covid as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CovidRepository::class)

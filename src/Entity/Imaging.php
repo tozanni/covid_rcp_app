@@ -6,7 +6,7 @@ use App\Repository\ImagingRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use App\Loggable\Imaging as LogEntity;
+use App\Entity\Loggable\Imaging as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ImagingRepository::class)

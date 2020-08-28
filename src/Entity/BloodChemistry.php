@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BloodChemistryRepository;
-use App\Loggable\BloodChemistry as LogEntity;
+use App\Entity\Loggable\BloodChemistry as LogEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;

@@ -6,7 +6,7 @@ use App\Repository\HematicBiometryRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use App\Loggable\HematicBiometry as LogEntity;
+use App\Entity\Loggable\HematicBiometry as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=HematicBiometryRepository::class)

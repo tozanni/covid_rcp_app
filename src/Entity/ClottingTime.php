@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ClottingTimeRepository;
-use App\Loggable\ClottingTime as LogEntity;
+use App\Entity\Loggable\ClottingTime as LogEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;

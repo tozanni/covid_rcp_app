@@ -6,7 +6,7 @@ use App\Repository\ImmunologicalRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use App\Loggable\Immunological as LogEntity;
+use App\Entity\Loggable\Immunological as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ImmunologicalRepository::class)
