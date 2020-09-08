@@ -10,23 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class SerumElectrolytes extends KernelTestCase
 {
-    private $entityManager;
-
-    public function setUp()
-    {
-        $kernel = self::bootKernel();
-
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-        $this->entityManager->close();
-        $this->entityManager = null;
-    }
+    use EntityManagerTrait;
 
     /** @test */
     public function History()
