@@ -27,3 +27,4 @@ vendor/
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+/.env.test
