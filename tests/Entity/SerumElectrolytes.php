@@ -21,6 +21,13 @@ class SerumElectrolytes extends KernelTestCase
             ->getManager();
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+        $this->entityManager->close();
+        $this->entityManager = null;
+    }
+
     /** @test */
     public function History()
     {
@@ -39,4 +46,6 @@ class SerumElectrolytes extends KernelTestCase
         $this->assertIsArray($serumElectrolytes->getSodiumHistory());
 
     }
+
+
 }
