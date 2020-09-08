@@ -43,8 +43,6 @@ class Audits extends KernelTestCase
         $serumElectrolytes->setSodium(1.5);
         $this->entityManager->flush();
 
-        $this->assertEquals(1.5, $serumElectrolytes->getSodium());
-
         $serumElectrolytes->setPotassium(1.99);
         $this->entityManager->flush();
 
