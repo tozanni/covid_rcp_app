@@ -10,6 +10,7 @@ use App\Tests\ApiTestCase;
  */
 class ContactControllerTest extends ApiTestCase
 {
+    /**
     public function testPOST()
     {
         $data = [
@@ -25,5 +26,5 @@ class ContactControllerTest extends ApiTestCase
 
         $this->assertEquals(201, $response->getStatusCode());
         $this->assertContains($data['email'], $response->getContent());
-    }
+    }*/
 }

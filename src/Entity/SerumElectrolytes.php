@@ -114,4 +114,9 @@ class SerumElectrolytes
 
         return $this;
     }
+
+    public function getSodiumHistory()
+    {
+        return [];
+    }
 }

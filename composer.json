@@ -40,6 +40,7 @@
         "twig/twig": "^2.12"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "fzaninotto/faker": "^1.9",
         "sonata-project/easy-extends-bundle": "^2.5",
@@ -49,7 +50,8 @@
         "symfony/maker-bundle": "^1.17",
         "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
-        "symfony/var-dumper": "*"
+        "symfony/var-dumper": "*",
+        "theofidry/psysh-bundle": "^4.3"
     },
     "config": {
         "preferred-install": {
