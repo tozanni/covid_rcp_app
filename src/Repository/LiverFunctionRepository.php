@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class LiverFunctionRepository extends ServiceEntityRepository
 {
+    use AuditTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, LiverFunction::class);
