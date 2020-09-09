@@ -24,6 +24,7 @@ class RecordType extends AbstractType
             ->add('egress_notes')
             ->add('vital_signs', VitalSignsType::class, ['required' => false])
             ->add('triage', TriageType::class, ['required' => false])
+            ->add('covid', CovidType::class, ['required' => false])
             ->add('hematic_biometry', HematicBiometryType::class, ['required' => false])
             ->add('blood_chemistry', BloodChemistryType::class, ['required' => false])
             ->add('serum_electrolytes', SerumElectrolytesType::class, ['required' => false])
