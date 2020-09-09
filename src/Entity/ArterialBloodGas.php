@@ -51,7 +51,7 @@ class ArterialBloodGas
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="clottingTime", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="arterialBloodGas", cascade={"persist", "remove"})
      */
     private $record;
 
@@ -142,9 +142,9 @@ class ArterialBloodGas
         $this->record = $record;
 
         // set (or unset) the owning side of the relation if necessary
-        $newClottingTime = null === $record ? null : $this;
-        if ($record->getClottingTime() !== $newClottingTime) {
-            $record->setClottingTime($newClottingTime);
+        $newArterialBloodGas = null === $record ? null : $this;
+        if ($record->getArterialBloodGas() !== $newArterialBloodGas) {
+            $record->setArterialBloodGas($newArterialBloodGas);
         }
 
         return $this;

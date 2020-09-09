@@ -41,7 +41,7 @@ class CardiacEnzymes
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="clottingTime", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Record::class, mappedBy="cardiacEnzymes", cascade={"persist", "remove"})
      */
     private $record;
 
@@ -108,9 +108,9 @@ class CardiacEnzymes
         $this->record = $record;
 
         // set (or unset) the owning side of the relation if necessary
-        $newClottingTime = null === $record ? null : $this;
-        if ($record->getClottingTime() !== $newClottingTime) {
-            $record->setClottingTime($newClottingTime);
+        $newCardiacEnzymes = null === $record ? null : $this;
+        if ($record->getCardiacEnzymes() !== $newCardiacEnzymes) {
+            $record->setCardiacEnzymes($newCardiacEnzymes);
         }
 
         return $this;

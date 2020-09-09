@@ -114,6 +114,22 @@ class Record
     private $bloodChemistry;
 
     /**
+     * @ORM\OneToOne(targetEntity=ArterialBloodGas::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
+     */
+    private $arterialBloodGas;
+
+    /**
+     * @ORM\OneToOne(targetEntity=CardiacEnzymes::class, inversedBy="record",
+     *     cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Serializer\Expose()
+     */
+    private $cardiacEnzymes;
+
+    /**
      * @ORM\OneToOne(targetEntity=SerumElectrolytes::class, inversedBy="record",
      *     cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
@@ -434,6 +450,30 @@ class Record
     public function setCovid(?Covid $covid): self
     {
         $this->covid = $covid;
+
+        return $this;
+    }
+
+    public function getArterialBloodGas(): ?ArterialBloodGas
+    {
+        return $this->arterialBloodGas;
+    }
+
+    public function setArterialBloodGas(?ArterialBloodGas $arterialBloodGas): self
+    {
+        $this->arterialBloodGas = $arterialBloodGas;
+
+        return $this;
+    }
+
+    public function getCardiacEnzymes(): ?CardiacEnzymes
+    {
+        return $this->cardiacEnzymes;
+    }
+
+    public function setCardiacEnzymes(?CardiacEnzymes $cardiacEnzymes): self
+    {
+        $this->cardiacEnzymes = $cardiacEnzymes;
 
         return $this;
     }
