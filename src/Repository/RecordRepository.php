@@ -23,9 +23,7 @@ class RecordRepository extends ServiceEntityRepository
     }
 
     public function serializeRecord(Record $record, SerializerInterface $serializer) {
-        $em = $this->getEntityManager();
         $recordLogs = $this->audits($record);
-        $repo = $em->getRepository('\App\Entity\VitalSigns');
 
         $relatedModels = [
             "vital_signs" => $record->getVitalSigns(),

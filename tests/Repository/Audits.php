@@ -2,6 +2,8 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\ArterialBloodGas;
+use App\Entity\CardiacEnzymes;
 use App\Entity\LiverFunction;
 use App\Entity\Record;
 use App\Entity\VitalSigns;
@@ -96,7 +98,7 @@ class Audits extends KernelTestCase
         $repo = $this->entityManager->getRepository('\App\Entity\Record');
         $serializer = self::$kernel->getContainer()->get('jms_serializer');
         $serializedData = $repo->serializeRecord($record, $serializer);
-
+        dd($serializedData);
         $this->assertJson($serializedData);
     }
 
@@ -138,8 +140,24 @@ class Audits extends KernelTestCase
         $this->entityManager->persist($liverFunction);
         $this->entityManager->flush();
 
+        $arterialBloodGas = new ArterialBloodGas();
+        $arterialBloodGas->setPh($faker->numberBetween(1.0, 3.0));
+        $arterialBloodGas->setO2($faker->numberBetween(1.0, 3.0));
+        $arterialBloodGas->setBe($faker->numberBetween(1.0, 3.0));
+        $arterialBloodGas->setHco3($faker->numberBetween(1.0, 3.0));
+        $this->entityManager->persist($arterialBloodGas);
+        $this->entityManager->flush();
+
+        $cardiacEnzymes = new CardiacEnzymes();
+        $cardiacEnzymes->setCpk($faker->numberBetween(1.0, 3.0));
+        $cardiacEnzymes->setMiogoblin($faker->numberBetween(1.0, 3.0));
+        $this->entityManager->persist($cardiacEnzymes);
+        $this->entityManager->flush();
+
         $record->setVitalSigns($vitalSigns);
         $record->setLiverFunction($liverFunction);
+        $record->setArterialBloodGas($arterialBloodGas);
+        $record->setCardiacEnzymes($cardiacEnzymes);
         $this->entityManager->flush();
         return $record;
     }
