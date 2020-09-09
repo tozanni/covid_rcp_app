@@ -14,6 +14,7 @@ class ImmunologicalType extends AbstractType
     {
         $builder
             ->add('reactive_protein_c', TextType::class, ["required" => false])
+            ->add('procalcitonin', TextType::class, ["required" => false])
             ->add('record')
         ;
     }

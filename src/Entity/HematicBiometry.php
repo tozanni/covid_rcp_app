@@ -43,6 +43,13 @@ class HematicBiometry
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
+    private $lymphocytes;
+
+    /**
+     * @Gedmo\Versioned
+     * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
+     */
     private $platelets;
 
     /**
@@ -148,6 +155,18 @@ class HematicBiometry
         if ($record->getHematicBiometry() !== $newHematicBiometry) {
             $record->setHematicBiometry($newHematicBiometry);
         }
+
+        return $this;
+    }
+
+    public function getLymphocytes(): ?float
+    {
+        return $this->lymphocytes;
+    }
+
+    public function setLymphocytes(?float $lymphocytes): self
+    {
+        $this->lymphocytes = $lymphocytes;
 
         return $this;
     }

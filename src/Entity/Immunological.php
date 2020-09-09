@@ -25,6 +25,13 @@ class Immunological
     private $reactiveProteinC;
 
     /**
+     * @Gedmo\Versioned
+     * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
+     */
+    private $procalcitonin;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
      */
@@ -91,6 +98,18 @@ class Immunological
     public function setUpdatedAt(\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getProcalcitonin(): ?float
+    {
+        return $this->procalcitonin;
+    }
+
+    public function setProcalcitonin(?float $procalcitonin): self
+    {
+        $this->procalcitonin = $procalcitonin;
 
         return $this;
     }
