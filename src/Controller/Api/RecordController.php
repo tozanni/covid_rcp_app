@@ -169,7 +169,11 @@ class RecordController extends AbstractFOSRestController
      */
     public function prediction(Record $record, SerializerInterface $serializer): View
     {
-        $predictionResponse = $this->requestToPredictionModel($serializer->serialize($record, 'json'));
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository($record);
+        $serializedJson = $repo->serializeRecord($record, $serializer);
+
+        $predictionResponse = $this->requestToPredictionModel($serializedJson);
 
         if ($predictionResponse->getStatusCode() !== Response::HTTP_OK) {
             return View::create($predictionResponse->getContent(), $predictionResponse->getStatusCode());

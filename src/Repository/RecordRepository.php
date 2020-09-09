@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Record;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use JMS\Serializer\SerializerInterface;
 
 /**
  * @method Record|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,34 @@ class RecordRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Record::class);
+    }
+
+    public function serializeRecord(Record $record, SerializerInterface $serializer) {
+        $em = $this->getEntityManager();
+        $recordLogs = $this->audits($record);
+        $repo = $em->getRepository('\App\Entity\VitalSigns');
+
+        $relatedModels = [
+            "vital_signs" => $record->getVitalSigns(),
+            "triage" => $record->getTriage(),
+            "serum_electrolytes" => $record->getSerumElectrolytes(),
+            "blood_chemistry" => $record->getBloodChemistry(),
+            "clotting_time" => $record->getClottingTime(),
+            "immunological" => $record->getImmunological(),
+            "medical_notes" => $record->getMedicalNotes(),
+            "liver_function" => $record->getLiverFunction(),
+            "imaging" => $record->getImaging(),
+            "covid" => $record->getCovid(),
+            "hematic_biometry" => $record->getHematicBiometry(),
+        ];
+
+        foreach($relatedModels as $key => $model) {
+            if($model) {
+                $recordLogs[$key] = $this->audits($model);
+            }
+        }
+
+        return $serializer->serialize($recordLogs, 'json');
     }
 
     // /**
