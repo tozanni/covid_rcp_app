@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\ArterialBloodGasRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use App\Entity\Loggable\ArterialBloodGas as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ArterialBloodGasRepository::class)
+ * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class ArterialBloodGas
 {
@@ -20,21 +23,25 @@ class ArterialBloodGas
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Gedmo\Versioned
      */
     private $ph;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Gedmo\Versioned
      */
     private $o2;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Gedmo\Versioned
      */
     private $hco3;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Gedmo\Versioned
      */
     private $be;
 

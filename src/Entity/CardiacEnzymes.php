@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\CardiacEnzymesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use App\Entity\Loggable\CardiacEnzymes as LogEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CardiacEnzymesRepository::class)
+ * @Serializer\ExclusionPolicy("all")
+ * @Gedmo\Loggable(logEntryClass=LogEntity::class)
  */
 class CardiacEnzymes
 {
@@ -19,11 +22,13 @@ class CardiacEnzymes
     private $id;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      */
     private $cpk;
 
     /**
+     * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
      */
     private $miogoblin;
