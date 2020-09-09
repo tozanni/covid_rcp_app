@@ -2,19 +2,21 @@
 
 namespace App\Repository;
 
-trait AuditTrait {
+use ReflectionClass;
 
-    /** @noinspection PhpUndefinedMethodInspection */
-    public function audits($entity) {
+trait AuditTrait
+{
+    public function audits($entity)
+    {
         $em = $this->getEntityManager();
-        $name = (new \ReflectionClass($entity))->getShortName();
-        $auditRepository = $em->getRepository("\App\Entity\Loggable\\".$name);
+        $name = (new ReflectionClass($entity))->getShortName();
+        $auditRepository = $em->getRepository("\App\Entity\Loggable\\" . $name);
         $logs = $auditRepository->getLogEntries($entity);
         $props = [];
         foreach ($logs as $log) {
             $timeStamp = $log->getLoggedAt()->format('Y-m-d H:i:s');
             foreach ($log->getData() as $key => $value) {
-                if(isset($props[$key])) {
+                if (isset($props[$key])) {
                     $props[$key] = array_merge($props[$key], [$timeStamp => $value]);
                 } else {
                     $props[$key] = [$timeStamp => $value];
