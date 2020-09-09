@@ -6,6 +6,7 @@ use App\Repository\CardiacEnzymesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Entity\Loggable\CardiacEnzymes as LogEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=CardiacEnzymesRepository::class)

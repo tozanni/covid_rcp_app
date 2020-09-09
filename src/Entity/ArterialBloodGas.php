@@ -6,6 +6,7 @@ use App\Repository\ArterialBloodGasRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use App\Entity\Loggable\ArterialBloodGas as LogEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass=ArterialBloodGasRepository::class)
