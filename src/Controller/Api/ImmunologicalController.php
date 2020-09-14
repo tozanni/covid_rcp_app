@@ -12,7 +12,6 @@ use Swagger\Annotations as SWG;
 use App\Entity\Immunological;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class ImmunologicalController
@@ -45,10 +44,12 @@ class ImmunologicalController extends AbstractFOSRestController
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="reactive_protein_c", type="text", description="Descripción de la propiedad", example=1234),
+     *         @SWG\Property(property="procalcitonin", type="text", description="Descripción de la propiedad", example=1234),
+     *         @SWG\Property(property="d_dimero", type="text", description="Descripción de la propiedad", example=1234)
      *    )
      * )
      *
-     * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=MedicalNotes::class))
+     * @SWG\Response(response=200, description="Regresa el objecto creado", @Model(type=Immunological::class))
      */
     public function create(Request $request): View
     {
@@ -77,6 +78,8 @@ class ImmunologicalController extends AbstractFOSRestController
      * @SWG\Parameter(name="body", in="body",
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="reactive_protein_c", type="text", description="Descripción de la propiedad", example=1234),
+     *         @SWG\Property(property="procalcitonin", type="text", description="Descripción de la propiedad", example=1234),
+     *         @SWG\Property(property="d_dimero", type="text", description="Descripción de la propiedad", example=1234)
      *    )
      * )
      * @SWG\Response(response=200, description="Actualiza los datos de un expediente", @Model(type=Immunological::class))

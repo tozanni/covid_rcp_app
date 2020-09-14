@@ -32,6 +32,13 @@ class Immunological
     private $procalcitonin;
 
     /**
+     * @Gedmo\Versioned
+     * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
+     */
+    private $dDimer;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
      */
@@ -110,6 +117,18 @@ class Immunological
     public function setProcalcitonin(?float $procalcitonin): self
     {
         $this->procalcitonin = $procalcitonin;
+
+        return $this;
+    }
+
+    public function getDDimer(): ?float
+    {
+        return $this->dDimer;
+    }
+
+    public function setDDimer(?float $dDimer): self
+    {
+        $this->dDimer = $dDimer;
 
         return $this;
     }
