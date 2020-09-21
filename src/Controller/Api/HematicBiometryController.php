@@ -79,6 +79,7 @@ class HematicBiometryController extends AbstractFOSRestController
      *    @SWG\Schema(type="object",
      *         @SWG\Property(property="hematocrit", type="integer", description="", example="10"),
      *         @SWG\Property(property="hemoglobin", type="integer", description="", example="12"),
+     *         @SWG\Property(property="neutrophils", type="integer", description="", example="12"),
      *         @SWG\Property(property="leukocytes", type="integer", description="", example="13"),
      *         @SWG\Property(property="platelets", type="integer", description="", example="123")
      *    )
@@ -115,6 +116,7 @@ class HematicBiometryController extends AbstractFOSRestController
      *         @SWG\Property(property="hematocrit", type="integer", description="", example="10"),
      *         @SWG\Property(property="hemoglobin", type="integer", description="", example="12"),
      *         @SWG\Property(property="leukocytes", type="integer", description="", example="13"),
+     *         @SWG\Property(property="neutrophils", type="integer", description="", example="13"),
      *         @SWG\Property(property="platelets", type="integer", description="", example="123")
      *    )
      * )

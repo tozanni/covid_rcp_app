@@ -50,6 +50,13 @@ class HematicBiometry
      * @ORM\Column(type="float", nullable=true)
      * @Serializer\Expose()
      */
+    private $neutrophils;
+
+    /**
+     * @Gedmo\Versioned
+     * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
+     */
     private $platelets;
 
     /**
@@ -167,6 +174,18 @@ class HematicBiometry
     public function setLymphocytes(?float $lymphocytes): self
     {
         $this->lymphocytes = $lymphocytes;
+
+        return $this;
+    }
+
+    public function getNeutrophils(): ?float
+    {
+        return $this->neutrophils;
+    }
+
+    public function setNeutrophils(?float $neutrophils): self
+    {
+        $this->neutrophils = $neutrophils;
 
         return $this;
     }

@@ -16,6 +16,7 @@ class HematicBiometryType extends AbstractType
             ->add('hemoglobin', null, ["required" => false])
             ->add('leukocytes', null, ["required" => false])
             ->add('lymphocytes', null, ["required" => false])
+            ->add('neutrophils', null, ["required" => false])
             ->add('platelets', null, ["required" => false])
             ->add('record')
         ;
