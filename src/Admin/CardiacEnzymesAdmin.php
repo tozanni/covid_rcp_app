@@ -9,38 +9,26 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\Form\Type\DateTimePickerType;
 
-final class CovidAdmin extends AbstractAdmin
+final class CardiacEnzymesAdmin extends AbstractAdmin
 {
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
-            ->add('pcr')
-            ->add('ldh')
-            ->add('il_6')
-            ->add('ferritin')
-            ->add('troponin')
-            ->add('igm')
-            ->add('igg')
             ->add('id')
+            ->add('cpk')
+            ->add('miogoblin')
             ->add('created_at')
-            ->add('updated_at')
-            ;
+            ->add('updated_at');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('pcr')
-            ->add('ldh')
-            ->add('il_6')
-            ->add('ferritin')
-            ->add('troponin')
-            ->add('igm')
-            ->add('igg')
             ->add('id')
+            ->add('cpk')
+            ->add('miogoblin')
             ->add('created_at')
             ->add('updated_at')
             ->add('_action', null, [
@@ -55,29 +43,17 @@ final class CovidAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->add('pcr')
-            ->add('ldh')
-            ->add('il_6')
-            ->add('ferritin')
-            ->add('troponin')
-            ->add('igm')
-            ->add('igg')
-        ;
+            ->add('cpk')
+            ->add('miogoblin');
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
-            ->add('pcr')
-            ->add('ldh')
-            ->add('il_6')
-            ->add('ferritin')
-            ->add('troponin')
-            ->add('igm')
-            ->add('igg')
             ->add('id')
+            ->add('cpk')
+            ->add('miogoblin')
             ->add('created_at')
-            ->add('updated_at')
-            ;
+            ->add('updated_at');
     }
 }

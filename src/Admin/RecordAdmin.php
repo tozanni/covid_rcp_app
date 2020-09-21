@@ -8,7 +8,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Form\Type\BooleanType;
+use Sonata\Form\Type\DatePickerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 final class RecordAdmin extends AbstractAdmin
 {
@@ -56,14 +61,36 @@ final class RecordAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->add('admission_date')
-            ->add('id_canonical')
-            ->add('status')
-            ->add('egress_date')
-            ->add('egress_type')
-            ->add('rcp_required')
-            ->add('treatment')
-            ->add('egress_notes')
+            ->with('General', ['class' => 'col-md-9'])
+                ->add('admission_date', DatePickerType::class)
+                ->add('id_canonical')
+                ->add('status')
+                ->add('vitalSigns', AdminType::class)
+            ->end()
+            ->with('Covid-19 Labs', ['class' => 'col-md-3'])
+                ->add('covid', AdminType::class)
+            ->end()
+            ->with("Egress", ['class' => 'col-md-3'])
+                ->add('egress_type')
+                ->add('rcp_required', BooleanType::class)
+                ->add('treatment', TextareaType::class)
+                ->add('egress_notes', TextareaType::class)
+                ->add('egress_date', DatePickerType::class)
+            ->end()
+            ->with('Triage', ['class' => 'col-md-9'])
+                ->add('triage', AdminType::class)
+            ->end()
+            ->with('Labs')
+                ->add('hematicBiometry', AdminType::class)
+                ->add('bloodChemistry', AdminType::class)
+                ->add('serumElectrolytes', AdminType::class)
+                ->add('liverFunction', AdminType::class)
+                ->add('clottingTime', AdminType::class)
+                ->add('immunological', AdminType::class)
+                ->add('cardiacEnzymes', AdminType::class)
+                ->add('arterialBloodGas', AdminType::class)
+                ->add('imaging', AdminType::class)
+            ->end()
             ;
     }
 

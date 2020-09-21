@@ -126,6 +126,11 @@ class VitalSigns
      */
     private $updated_at;
 
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
+
     public function getAge(): ?\DateTimeInterface
     {
         return $this->age;

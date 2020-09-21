@@ -124,3 +124,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: VitalSigns }
         public: true
+
+    admin.arterial_blood_gas:
+        class: App\Admin\ArterialBloodGasAdmin
+        arguments: [~, App\Entity\ArterialBloodGas, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ArterialBloodGas }
+        public: true
+
+    admin.cardiac_enzymes:
+        class: App\Admin\CardiacEnzymesAdmin
+        arguments: [~, App\Entity\CardiacEnzymes, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CardiacEnzymes }
+        public: true
