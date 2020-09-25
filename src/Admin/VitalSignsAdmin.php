@@ -66,6 +66,7 @@ final class VitalSignsAdmin extends AbstractAdmin
         $formMapper
             ->add('age', DatePickerType::class)
             ->add('gender', ChoiceType::class, [
+                'row_attr' => ['class' => 'col-md-6'],
                 'choices' => ['Male' => 'male', 'Female' => 'female',]
             ])
             ->add('weight', null, ['attr' => ['placeholder' => 'kg']])
