@@ -76,6 +76,11 @@ class BloodChemistry
      */
     private $record;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getGlucose(): ?float
     {
         return $this->glucose;

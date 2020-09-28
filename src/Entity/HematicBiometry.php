@@ -71,6 +71,11 @@ class HematicBiometry
      */
     private $updated_at;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     /**
      * @ORM\OneToOne(targetEntity=Record::class, mappedBy="hematicBiometry", cascade={"persist", "remove"})
      */

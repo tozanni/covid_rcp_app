@@ -55,6 +55,11 @@ class Immunological
      */
     private $record;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getReactiveProteinC(): ?float
     {
         return $this->reactiveProteinC;

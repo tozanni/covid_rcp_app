@@ -48,6 +48,11 @@ class Imaging
      */
     private $record;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getResult(): ?string
     {
         return $this->result;

@@ -111,6 +111,11 @@ class Triage
      */
     private $updated_at;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getDaysBeforeAdmission(): ?int
     {
         return $this->days_before_admission;

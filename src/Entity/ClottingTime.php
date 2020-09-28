@@ -48,6 +48,11 @@ class ClottingTime
      */
     private $record;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getProthrombin(): ?float
     {
         return $this->prothrombin;

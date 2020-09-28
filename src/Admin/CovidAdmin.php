@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\Entity\Covid;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\Form\Type\DateTimePickerType;
 
 final class CovidAdmin extends AbstractAdmin
 {
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
@@ -27,7 +26,7 @@ final class CovidAdmin extends AbstractAdmin
             ->add('id')
             ->add('created_at')
             ->add('updated_at')
-            ;
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -61,23 +60,19 @@ final class CovidAdmin extends AbstractAdmin
             ->add('ferritin')
             ->add('troponin')
             ->add('igm')
-            ->add('igg')
-        ;
+            ->add('igg');
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
+            ->add('id')
             ->add('pcr')
             ->add('ldh')
             ->add('il_6')
             ->add('ferritin')
             ->add('troponin')
             ->add('igm')
-            ->add('igg')
-            ->add('id')
-            ->add('created_at')
-            ->add('updated_at')
-            ;
+            ->add('igg');
     }
 }

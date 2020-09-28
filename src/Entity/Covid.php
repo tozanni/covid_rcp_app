@@ -72,6 +72,11 @@ class Covid
      */
     private $record;
 
+    public function __toString()
+    {
+        return (string) $this->id;
+    }
+
     public function getPcr(): ?bool
     {
         return $this->pcr;

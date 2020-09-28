@@ -7,6 +7,7 @@ namespace App\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\DataTransformer\ModelsToArrayTransformer;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
@@ -21,8 +22,9 @@ final class RecordAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
-            ->add('admission_date')
+            ->add('id')
             ->add('id_canonical')
+            ->add('admission_date')
             ->add('status')
             ->add('egress_date')
             ->add('egress_type')
@@ -31,29 +33,26 @@ final class RecordAdmin extends AbstractAdmin
             ->add('egress_notes')
             ->add('created_at')
             ->add('updated_at')
-            ->add('id')
             ;
     }
 
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('admission_date')
+            ->add('id')
             ->add('id_canonical')
+            ->add('admission_date')
             ->add('status')
             ->add('egress_date')
             ->add('egress_type')
             ->add('rcp_required')
-            ->add('treatment')
-            ->add('egress_notes')
             ->add('created_at')
             ->add('updated_at')
-            ->add('id')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
-                    'edit' => [],
-                    'delete' => [],
+                    //'edit' => [],
+                    //'delete' => [],
                 ],
             ]);
     }
@@ -107,17 +106,44 @@ final class RecordAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
-            ->add('admission_date')
-            ->add('id_canonical')
-            ->add('status')
-            ->add('egress_date')
-            ->add('egress_type')
-            ->add('rcp_required')
-            ->add('treatment')
-            ->add('egress_notes')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('id')
-            ;
+            ->tab('General')
+                ->with('General', ['class' => 'col-md-9'])
+                ->add('admission_date')
+                ->add('id_canonical')
+                ->add('status')
+                ->add('vitalSigns')
+                ->end()
+                ->with('Egreso', ['class' => 'col-md-3'])
+                ->add('egress_type')
+                ->add('rcp_required')
+                ->add('treatment')
+                ->add('egress_notes')
+                ->add('egress_date')
+                ->end()
+            ->end()
+            ->tab('Covid-19 Labs', ['class' => 'col-md-3'])
+                ->with('Covid')
+                ->add('covid')
+                ->end()
+            ->end()
+            ->tab('Triage')
+                ->with('Triage')
+                ->add('triage', AdminType::class)
+                ->end()
+            ->end()
+            ->tab('Labs')
+                ->with('Laboratorios')
+                    ->add('hematicBiometry')
+                    ->add('bloodChemistry')
+                    ->add('serumElectrolytes')
+                    ->add('liverFunction')
+                    ->add('clottingTime')
+                    ->add('immunological')
+                    ->add('cardiacEnzymes')
+                    ->add('arterialBloodGas')
+                    ->add('imaging')
+                ->end()
+            ->end()
+        ;
     }
 }
