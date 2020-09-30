@@ -33,6 +33,9 @@ class RecordType extends AbstractType
             ->add('clotting_time', ClottingTimeType::class, ['required' => false])
             ->add('immunological', ImmunologicalType::class, ['required' => false])
             ->add('imaging', ImagingType::class, ['required' => false])
+            ->add('cardiac_enzymes', CardiacEnzymesType::class, ['required' => false])
+            ->add('arterial_blood_gas', ArterialBloodGasType::class, ['required' => false])
+
         ;
     }
 

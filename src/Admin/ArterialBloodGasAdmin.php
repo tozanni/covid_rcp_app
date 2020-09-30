@@ -19,6 +19,7 @@ final class ArterialBloodGasAdmin extends AbstractAdmin
             ->add('id')
             ->add('ph')
             ->add('o2')
+            ->add('co2')
             ->add('hco3')
             ->add('be')
             ->add('created_at')
@@ -32,6 +33,7 @@ final class ArterialBloodGasAdmin extends AbstractAdmin
             ->add('id')
             ->add('ph')
             ->add('o2')
+            ->add('co2')
             ->add('hco3')
             ->add('be')
             ->add('created_at')
@@ -50,6 +52,7 @@ final class ArterialBloodGasAdmin extends AbstractAdmin
         $formMapper
             ->add('ph')
             ->add('o2')
+            ->add('co2')
             ->add('hco3')
             ->add('be')
             ;
@@ -61,6 +64,7 @@ final class ArterialBloodGasAdmin extends AbstractAdmin
             ->add('id')
             ->add('ph')
             ->add('o2')
+            ->add('co2')
             ->add('hco3')
             ->add('be')
             ->add('created_at')

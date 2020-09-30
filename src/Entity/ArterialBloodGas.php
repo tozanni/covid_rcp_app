@@ -15,34 +15,40 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ArterialBloodGas
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Gedmo\Versioned
+     * @Serializer\Expose()
      */
     private $ph;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Gedmo\Versioned
+     * @Serializer\Expose()
      */
     private $o2;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Gedmo\Versioned
+     * @Serializer\Expose()
+     */
+    private $co2;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @Gedmo\Versioned
+     * @Serializer\Expose()
      */
     private $hco3;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Gedmo\Versioned
+     * @Serializer\Expose()
      */
     private $be;
 
@@ -159,6 +165,18 @@ class ArterialBloodGas
         if ($record->getArterialBloodGas() !== $newArterialBloodGas) {
             $record->setArterialBloodGas($newArterialBloodGas);
         }
+
+        return $this;
+    }
+
+    public function getCo2(): ?float
+    {
+        return $this->co2;
+    }
+
+    public function setCo2(?float $co2): self
+    {
+        $this->co2 = $co2;
 
         return $this;
     }

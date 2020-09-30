@@ -15,24 +15,21 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CardiacEnzymes
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use EntityTrait;
 
     /**
      * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
      */
     private $cpk;
 
     /**
      * @Gedmo\Versioned
      * @ORM\Column(type="float", nullable=true)
+     * @Serializer\Expose()
      */
-    private $miogoblin;
+    private $mioglobin;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -69,18 +66,6 @@ class CardiacEnzymes
     public function setCpk(?float $cpk): self
     {
         $this->cpk = $cpk;
-
-        return $this;
-    }
-
-    public function getMiogoblin(): ?float
-    {
-        return $this->miogoblin;
-    }
-
-    public function setMiogoblin(?float $miogoblin): self
-    {
-        $this->miogoblin = $miogoblin;
 
         return $this;
     }
@@ -123,6 +108,18 @@ class CardiacEnzymes
         if ($record->getCardiacEnzymes() !== $newCardiacEnzymes) {
             $record->setCardiacEnzymes($newCardiacEnzymes);
         }
+
+        return $this;
+    }
+
+    public function getMioglobin(): ?float
+    {
+        return $this->mioglobin;
+    }
+
+    public function setMioglobin(?float $mioglobin): self
+    {
+        $this->mioglobin = $mioglobin;
 
         return $this;
     }

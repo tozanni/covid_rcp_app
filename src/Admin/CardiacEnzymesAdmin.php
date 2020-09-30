@@ -18,7 +18,7 @@ final class CardiacEnzymesAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('cpk')
-            ->add('miogoblin')
+            ->add('mioglobin')
             ->add('created_at')
             ->add('updated_at');
     }
@@ -28,7 +28,7 @@ final class CardiacEnzymesAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('cpk')
-            ->add('miogoblin')
+            ->add('mioglobin')
             ->add('created_at')
             ->add('updated_at')
             ->add('_action', null, [
@@ -44,7 +44,7 @@ final class CardiacEnzymesAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('cpk')
-            ->add('miogoblin');
+            ->add('mioglobin');
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
@@ -52,7 +52,7 @@ final class CardiacEnzymesAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('cpk')
-            ->add('miogoblin')
+            ->add('mioglobin')
             ->add('created_at')
             ->add('updated_at');
     }
