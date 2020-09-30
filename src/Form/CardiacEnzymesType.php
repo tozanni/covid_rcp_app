@@ -12,8 +12,9 @@ class CardiacEnzymesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cpk')
-            ->add('miogoblin')
+            ->add('cpk', null, ['required' => false])
+            ->add('miogoblin', null, ['required' => false])
+            ->add('record')
         ;
     }
 

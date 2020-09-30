@@ -16,6 +16,7 @@ class ArterialBloodGasType extends AbstractType
             ->add('o2', null, ["required" => false])
             ->add('hco3', null, ["required" => false])
             ->add('be', null, ["required" => false])
+            ->add('record')
         ;
     }
 
