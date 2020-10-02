@@ -178,22 +178,22 @@ class Record
     private $imaging;
 
     /**
-     * @var User $createdBy
+     * @var User $created_by
      *
      * @Gedmo\Blameable(on="create")
      * @ORM\ManyToOne (targetEntity=User::class)
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
-    private $createdBy;
+    private $created_by;
 
     /**
-     * @var User $updatedBy
+     * @var User $updated_by
      *
      * @Gedmo\Blameable(on="update")
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
-    private $updatedBy;
+    private $updated_by;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -504,24 +504,24 @@ class Record
 
     public function getCreatedBy(): ?User
     {
-        return $this->createdBy;
+        return $this->created_by;
     }
 
-    public function setCreatedBy(?User $createdBy): self
+    public function setCreatedBy(?User $created_by): self
     {
-        $this->createdBy = $createdBy;
+        $this->created_by = $created_by;
 
         return $this;
     }
 
     public function getUpdatedBy(): ?User
     {
-        return $this->updatedBy;
+        return $this->updated_by;
     }
 
-    public function setUpdatedBy(?User $updatedBy): self
+    public function setUpdatedBy(?User $updated_by): self
     {
-        $this->updatedBy = $updatedBy;
+        $this->updated_by = $updated_by;
 
         return $this;
     }

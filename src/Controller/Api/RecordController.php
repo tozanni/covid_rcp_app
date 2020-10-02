@@ -19,6 +19,7 @@ use Symfony\Contracts\HttpClient\Exception\{
     ServerExceptionInterface,
     TransportExceptionInterface
 };
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
@@ -29,6 +30,13 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class RecordController extends AbstractFOSRestController
 {
     use ProcessFormsTrait;
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     /**
      * @Rest\Get("/records")
@@ -41,7 +49,16 @@ class RecordController extends AbstractFOSRestController
      */
     public function index(RecordRepository $recordRepository): View
     {
-        return View::create($recordRepository->findAll());
+        $user = $this->security->getUser();
+
+        if ($user->getUsername() == 'anonymous'){
+            return View::create([
+                'error' => 401,
+                'message' => 'Para ver el listado necesitas iniciar sesión',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        return View::create($recordRepository->findBy(['created_by' => $user->getId()]));
     }
 
     /**
@@ -59,6 +76,15 @@ class RecordController extends AbstractFOSRestController
     {
         //TODO: Revisar la sección de excepciones de FOSRestBundle
         //ver: https://symfony.com/doc/master/bundles/FOSRestBundle/4-exception-controller-support.html
+        $user = $this->security->getUser();
+
+        if (!$record->getCreatedBy() || $record->getCreatedBy()->getId() != $user->getId()){
+            return View::create([
+                'error' => 401,
+                'message' => '¡No tienes permiso para ver este registro!',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
         return View::create($record);
     }
 

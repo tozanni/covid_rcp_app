@@ -10,7 +10,7 @@ use InvalidArgumentException;
  */
 class ApiProblem
 {
-    const TYPE_VALIDATION_ERROR = 'validation_error';
+    private const TYPE_VALIDATION_ERROR = 'validation_error';
 
     private static $titles = [
         self::TYPE_VALIDATION_ERROR => 'Hubo un problema de validación',

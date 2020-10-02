@@ -39,6 +39,8 @@ class RecordRepository extends ServiceEntityRepository
             "hematic_biometry" => $record->getHematicBiometry(),
             "cardiac_enzymes" => $record->getCardiacEnzymes(),
             "arterial_blood_gas" => $record->getArterialBloodGas(),
+            "created_by" => $record->getCreatedBy(),
+            "updated_by" => $record->getCreatedBy(),
         ];
 
         foreach($relatedModels as $key => $model) {
