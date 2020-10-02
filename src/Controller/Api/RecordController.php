@@ -9,7 +9,6 @@ use FOS\RestBundle\Controller\{AbstractFOSRestController, Annotations as Rest};
 use FOS\RestBundle\View\View;
 use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\{Request, Response};
