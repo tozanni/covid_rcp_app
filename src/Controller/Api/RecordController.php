@@ -8,6 +8,7 @@ use App\Repository\RecordRepository;
 use FOS\RestBundle\Controller\{AbstractFOSRestController, Annotations as Rest};
 use FOS\RestBundle\View\View;
 use JMS\Serializer\SerializerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpClient\HttpClient;
@@ -41,13 +42,15 @@ class RecordController extends AbstractFOSRestController
     /**
      * @Rest\Get("/records")
      * @param RecordRepository $recordRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return View
      *
      * @SWG\Response(response=200, description="Devuelve un listado de expedientes",
      *      @SWG\Schema(type="array", @Model(type=Record::class))
      * )
      */
-    public function index(RecordRepository $recordRepository): View
+    public function index(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request): View
     {
         $user = $this->security->getUser();
 
@@ -58,7 +61,15 @@ class RecordController extends AbstractFOSRestController
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        return View::create($recordRepository->findBy(['created_by' => $user->getId()]));
+        //return View::create(['hola']);
+
+        $pagination = $paginator->paginate(
+            $recordRepository->findBy(['created_by' => $user->getId()]),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return View::create($pagination);
     }
 
     /**
