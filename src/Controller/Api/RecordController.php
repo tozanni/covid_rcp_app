@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Application\Sonata\UserBundle\Entity\Group;
 use App\Entity\Record;
 use App\Form\RecordType;
 use App\Repository\RecordRepository;
@@ -54,20 +55,27 @@ class RecordController extends AbstractFOSRestController
     {
         $user = $this->security->getUser();
 
-        if ($user->getUsername() == 'anonymous'){
+        if ($user->getUsername() == 'anonymous') {
             return View::create([
                 'error' => 401,
                 'message' => 'Para ver el listado necesitas iniciar sesión',
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        $pagination = $paginator->paginate(
-            $recordRepository->findBy(['created_by' => $user->getId()]),
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            //TODO: Validar que siempre se asigne un solo hospital al usuario
+            $group = $user->getGroups()[0];
+
+            $records = $recordRepository->findByGroup($group);
+        } else {
+            $records = $recordRepository->findBy(['created_by' => $user->getId()]);
+        }
+
+        return View::create($paginator->paginate(
+            $records,
             $request->query->getInt('page', 1),
             10
-        );
-
-        return View::create($pagination);
+        ));
     }
 
     /**
@@ -87,7 +95,7 @@ class RecordController extends AbstractFOSRestController
         //ver: https://symfony.com/doc/master/bundles/FOSRestBundle/4-exception-controller-support.html
         $user = $this->security->getUser();
 
-        if (!$record->getCreatedBy() || $record->getCreatedBy()->getId() != $user->getId()){
+        if (!$record->getCreatedBy() || $record->getCreatedBy()->getId() != $user->getId()) {
             return View::create([
                 'error' => 401,
                 'message' => '¡No tienes permiso para ver este registro!',

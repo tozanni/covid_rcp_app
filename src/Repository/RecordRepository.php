@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Application\Sonata\UserBundle\Entity\Group;
 use App\Entity\Record;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +23,8 @@ class RecordRepository extends ServiceEntityRepository
         parent::__construct($registry, Record::class);
     }
 
-    public function serializeRecord(Record $record, SerializerInterface $serializer) {
+    public function serializeRecord(Record $record, SerializerInterface $serializer)
+    {
         $recordLogs = $this->audits($record);
 
         $relatedModels = [
@@ -43,13 +45,28 @@ class RecordRepository extends ServiceEntityRepository
             "updated_by" => $record->getCreatedBy(),
         ];
 
-        foreach($relatedModels as $key => $model) {
-            if($model) {
+        foreach ($relatedModels as $key => $model) {
+            if ($model) {
                 $recordLogs[$key] = $this->audits($model);
             }
         }
 
         return $serializer->serialize($recordLogs, 'json');
+    }
+
+    /**
+     * @param \App\Application\Sonata\UserBundle\Entity\Group $group
+     * @return \App\Entity\Record[]
+     */
+    public function findByGroup(Group $group)
+    {
+        $usersCollection = $group->getUsers();
+
+        $userIds = $usersCollection->map(function ($item) {
+            return $item->getId();
+        });
+
+        return $this->findBy(['created_by' => $userIds->toArray()]);
     }
 
     // /**
