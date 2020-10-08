@@ -2,6 +2,7 @@
 
 namespace App\Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -25,6 +26,11 @@ class Group extends BaseGroup
     protected $id;
 
     /**
+     * @var $users
+     */
+    protected $users;
+
+    /**
      * Get id.
      *
      * @return int $id
@@ -32,5 +38,13 @@ class Group extends BaseGroup
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
