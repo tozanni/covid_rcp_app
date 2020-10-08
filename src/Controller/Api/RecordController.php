@@ -61,8 +61,6 @@ class RecordController extends AbstractFOSRestController
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        //return View::create(['hola']);
-
         $pagination = $paginator->paginate(
             $recordRepository->findBy(['created_by' => $user->getId()]),
             $request->query->getInt('page', 1),
