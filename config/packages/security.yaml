@@ -96,21 +96,21 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
 
-        # - { path: ^/admin, roles: ROLE_ADMIN , requires_channel: https}
-        # - { path: ^/profile, roles: ROLE_USER , requires_channel: https}
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
         # Admin login page needs to be accessed without credential
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
-        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
-        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] , requires_channel: https}
-        - { path: ^/api/v1/users/register, role: [IS_AUTHENTICATED_ANONYMOUSLY], requires_channel: https}
-        #- { path: ^/api/v1/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] , requires_channel: https}
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/api/v1/users/register, role: [IS_AUTHENTICATED_ANONYMOUSLY]}
+        #- { path: ^/api/v1/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/api/v1/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY , requires_channel: https}
-        - { path: ^/api/v1/,       roles: IS_AUTHENTICATED_FULLY , requires_channel: https}
+        - { path: ^/api/v1/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/,       roles: IS_AUTHENTICATED_FULLY }
