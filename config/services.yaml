@@ -34,107 +34,114 @@ services:
         tags:
             - { name: jms_serializer.subscribing_handler }
 
-    admin.covid:
-        class: App\Admin\CovidAdmin
-        arguments: [~, App\Entity\Covid, App\Controller\CovidAdminController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Covid }
-        public: true
+    # admin.covid:
+    #     class: App\Admin\CovidAdmin
+    #     arguments: [~, App\Entity\Covid, App\Controller\CovidAdminController]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Covid }
+    #     public: true
 
-    admin.blood_chemistry:
-        class: App\Admin\BloodChemistryAdmin
-        arguments: [~, App\Entity\BloodChemistry, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: BloodChemistry }
-        public: true
+    # admin.blood_chemistry:
+    #     class: App\Admin\BloodChemistryAdmin
+    #     arguments: [~, App\Entity\BloodChemistry, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: BloodChemistry }
+    #     public: true
 
-    admin.clotting_time:
-        class: App\Admin\ClottingTimeAdmin
-        arguments: [~, App\Entity\ClottingTime, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: ClottingTime }
-        public: true
+    # admin.clotting_time:
+    #     class: App\Admin\ClottingTimeAdmin
+    #     arguments: [~, App\Entity\ClottingTime, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: ClottingTime }
+    #     public: true
 
-    admin.contact:
-        class: App\Admin\ContactAdmin
-        arguments: [~, App\Entity\Contact, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Contact }
-        public: true
+    # admin.contact:
+    #     class: App\Admin\ContactAdmin
+    #     arguments: [~, App\Entity\Contact, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Contact }
+    #     public: true
 
-    admin.hematic_biometry:
-        class: App\Admin\HematicBiometryAdmin
-        arguments: [~, App\Entity\HematicBiometry, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: HematicBiometry }
-        public: true
+    # admin.hematic_biometry:
+    #     class: App\Admin\HematicBiometryAdmin
+    #     arguments: [~, App\Entity\HematicBiometry, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: HematicBiometry }
+    #     public: true
 
-    admin.imaging:
-        class: App\Admin\ImagingAdmin
-        arguments: [~, App\Entity\Imaging, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Imaging }
-        public: true
+    # admin.imaging:
+    #     class: App\Admin\ImagingAdmin
+    #     arguments: [~, App\Entity\Imaging, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Imaging }
+    #     public: true
 
-    admin.immunological:
-        class: App\Admin\ImmunologicalAdmin
-        arguments: [~, App\Entity\Immunological, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Immunological }
-        public: true
+    # admin.immunological:
+    #     class: App\Admin\ImmunologicalAdmin
+    #     arguments: [~, App\Entity\Immunological, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Immunological }
+    #     public: true
 
-    admin.liver_function:
-        class: App\Admin\LiverFunctionAdmin
-        arguments: [~, App\Entity\LiverFunction, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: LiverFunction }
-        public: true
+    # admin.liver_function:
+    #     class: App\Admin\LiverFunctionAdmin
+    #     arguments: [~, App\Entity\LiverFunction, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: LiverFunction }
+    #     public: true
 
-    admin.medical_notes:
-        class: App\Admin\MedicalNotesAdmin
-        arguments: [~, App\Entity\MedicalNotes, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: MedicalNotes }
-        public: true
+    # admin.medical_notes:
+    #     class: App\Admin\MedicalNotesAdmin
+    #     arguments: [~, App\Entity\MedicalNotes, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: MedicalNotes }
+    #     public: true
 
     admin.record:
         class: App\Admin\RecordAdmin
         arguments: [~, App\Entity\Record, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Record }
+            - { name: sonata.admin, manager_type: orm, group: Administrar, label: Record }
         public: true
 
-    admin.serum_electrolytes:
-        class: App\Admin\SerumElectrolytesAdmin
-        arguments: [~, App\Entity\SerumElectrolytes, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: SerumElectrolytes }
-        public: true
+    # admin.serum_electrolytes:
+    #     class: App\Admin\SerumElectrolytesAdmin
+    #     arguments: [~, App\Entity\SerumElectrolytes, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: SerumElectrolytes }
+    #     public: true
 
-    admin.triage:
-        class: App\Admin\TriageAdmin
-        arguments: [~, App\Entity\Triage, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Triage }
-        public: true
+    # admin.triage:
+    #     class: App\Admin\TriageAdmin
+    #     arguments: [~, App\Entity\Triage, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Triage }
+    #     public: true
 
-    admin.vital_signs:
-        class: App\Admin\VitalSignsAdmin
-        arguments: [~, App\Entity\VitalSigns, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: VitalSigns }
-        public: true
+    # admin.vital_signs:
+    #     class: App\Admin\VitalSignsAdmin
+    #     arguments: [~, App\Entity\VitalSigns, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: VitalSigns }
+    #     public: true
 
-    admin.arterial_blood_gas:
-        class: App\Admin\ArterialBloodGasAdmin
-        arguments: [~, App\Entity\ArterialBloodGas, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: ArterialBloodGas }
-        public: true
+    # admin.arterial_blood_gas:
+    #     class: App\Admin\ArterialBloodGasAdmin
+    #     arguments: [~, App\Entity\ArterialBloodGas, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: ArterialBloodGas }
+    #     public: true
 
-    admin.cardiac_enzymes:
-        class: App\Admin\CardiacEnzymesAdmin
-        arguments: [~, App\Entity\CardiacEnzymes, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: CardiacEnzymes }
-        public: true
+    # admin.cardiac_enzymes:
+    #     class: App\Admin\CardiacEnzymesAdmin
+    #     arguments: [~, App\Entity\CardiacEnzymes, ~]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: CardiacEnzymes }
+    #     public: true
+
+    # admin.group:
+    #     class: App\Admin\GroupAdmin
+    #     arguments: [~, App\Application\Sonata\UserBundle\Entity\Group, App\Controller\GroupAdminController]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: admin, label: Group }
+    #     public: true

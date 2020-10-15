@@ -1,0 +1,38 @@
+admin: Administrar
+Covid: Laboratorios Covid-19
+groups: Hospitales
+Group: Hospital
+Security: Seguridad
+Record: Registro Médico
+Record List: Listado de Registros Médicos
+Id: ID
+Id Canonical: ID del Paciente
+Admission Date: Fecha de Admisión
+Status: Estatus
+Egress Date: Fecha de Egreso
+Egress Type: Tipo de Egreso
+Egress Notes: Notas de Egreso
+Rcp Required: RCP Requerido
+Action: Acción
+Created At: Creado en
+Updated At: Actualizado en
+Treatment: Tratamiento
+
+#Roles
+ROLE_ADMIN: Administrador de Hospital
+ROLE_USER: Usuario Estándar
+ROLE_SUPER_ADMIN: Súper Administrador
+ROLE_ALLOWED_TO_SWITCH: Admin. con Suplantación
+
+
+
+breadcrumb:
+  link_group_list: Listado de Hospitales
+
+form:
+  label_roles: Roles
+  label_name: Nombre
+
+list:
+  label_name: Nombre
+  label_roles: Roles
