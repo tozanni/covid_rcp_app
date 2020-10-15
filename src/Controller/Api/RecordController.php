@@ -62,14 +62,10 @@ class RecordController extends AbstractFOSRestController
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            //TODO: Validar que siempre se asigne un solo hospital al usuario
-            $group = $user->getGroups()[0];
+        //TODO: Validar que siempre se asigne un solo hospital al usuario en el admin panel
+        $group = $user->getGroups()[0];
 
-            $records = $recordRepository->findByGroup($group);
-        } else {
-            $records = $recordRepository->findBy(['created_by' => $user->getId()]);
-        }
+        $records = $recordRepository->findByGroup($group);
 
         return View::create($paginator->paginate(
             $records,

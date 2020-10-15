@@ -66,7 +66,7 @@ class RecordRepository extends ServiceEntityRepository
             return $item->getId();
         });
 
-        return $this->findBy(['created_by' => $userIds->toArray()]);
+        return $this->findBy(['created_by' => $userIds->toArray()], ['created_at' => 'DESC']);
     }
 
     // /**
