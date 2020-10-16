@@ -89,10 +89,13 @@ class RecordController extends AbstractFOSRestController
      */
     public function show(Record $record): View
     {
-        //TODO: Revisar la sección de excepciones de FOSRestBundle
-        //ver: https://symfony.com/doc/master/bundles/FOSRestBundle/4-exception-controller-support.html
         $user = $this->security->getUser();
 
+        if ($user == 'admin') {
+            return View::create($record);
+        }
+
+        //TODO: Revisar si el registro es del mismo hospital
         if (!$record->getCreatedBy() || $record->getCreatedBy()->getId() != $user->getId()) {
             return View::create([
                 'error' => 401,
