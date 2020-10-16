@@ -50,7 +50,10 @@ final class RecordAdmin extends AbstractAdmin
             ->add('updated_at')
             ->add('_action', null, [
                 'actions' => [
-                    'show' => [],
+                    'showInApp' => [
+                        'template' => 'CRUD/list__action_show_in_app.html.twig',
+                    ]
+                    //'show' => [],
                     //'edit' => [],
                     //'delete' => [],
                 ],

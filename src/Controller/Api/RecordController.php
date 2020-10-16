@@ -67,6 +67,8 @@ class RecordController extends AbstractFOSRestController
 
         $records = $recordRepository->findByGroup($group);
 
+        //return View::create($records);
+
         return View::create($paginator->paginate(
             $records,
             $request->query->getInt('page', 1),
