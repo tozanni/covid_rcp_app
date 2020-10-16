@@ -91,7 +91,7 @@ class RecordController extends AbstractFOSRestController
     {
         $user = $this->security->getUser();
 
-        if ($user == 'admin') {
+        if ($user->getUsername() == 'admin') {
             return View::create($record);
         }
 
