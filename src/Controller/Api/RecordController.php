@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Application\Sonata\UserBundle\Entity\Group;
 use App\Entity\Record;
 use App\Form\RecordType;
 use App\Repository\RecordRepository;
