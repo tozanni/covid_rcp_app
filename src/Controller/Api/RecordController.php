@@ -76,6 +76,20 @@ class RecordController extends AbstractFOSRestController
     }
 
     /**
+     * @Rest\Get ("/records/search")
+     * @param RecordRepository $recordRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return View
+     */
+    public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request)
+    {
+        $records = $recordRepository->findByIdOrCanonicalId($request->query->get('q'));
+
+        return View::create($paginator->paginate($records, $request->query->getInt('page', 1), 10));
+    }
+
+    /**
      * @Rest\Get("/records/{id}")
      * @param Record $record
      * @return View

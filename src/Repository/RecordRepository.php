@@ -69,6 +69,19 @@ class RecordRepository extends ServiceEntityRepository
         return $this->findBy(['created_by' => $userIds->toArray()], ['created_at' => 'DESC']);
     }
 
+    public function findByIdOrCanonicalId($value)
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        if (preg_match('/[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/', $value)){
+            $qb = $qb->andWhere("r.id = '{$value}'");
+        } else {
+            $qb = $qb->orWhere("r.id_canonical like '%{$value}%'");
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Record[] Returns an array of Record objects
     //  */
