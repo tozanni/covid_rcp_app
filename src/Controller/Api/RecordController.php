@@ -85,21 +85,20 @@ class RecordController extends AbstractFOSRestController
     public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request)
     {
         $user = $this->security->getUser();
-        $hospital = $user->getGroups()[0];
+        $id = $request->query->get('q');
+        $records = [];
 
         if ($user->hasRole('ROLE_SUPER_ADMIN')) { //Super Admin: Trae todos los registros
-            $records = $recordRepository->findAll();
+            $records = $recordRepository->findAllById($id);
         } //Administrador del hospital o capturista: puede ver TODOS los registros de SU hospital asignado
         elseif ($user->hasRole('ROLE_HOSPITAL_ADMIN') || $user->hasRole('ROLE_HOSPITAL_CAPTURISTA')) {
-            //TODO: Validar que siempre se asigne un solo hospital al usuario en el admin panel
             $hospital = $user->getGroups()[0];
 
-            $records = $recordRepository->findByHospital($hospital);
+            $records = $recordRepository->findByHospitalAndId($hospital, $id);
         }
 
-        $records = $recordRepository->findByHospitalAndId($hospital, $request->query->get('q'));
-
-        return View::create($paginator->paginate($records, $request->query->getInt('page', 1), 10));
+        return View::create($paginator->paginate($records,
+            $request->query->getInt('page', 1), 10));
     }
 
     /**

@@ -85,7 +85,7 @@ class RecordRepository extends ServiceEntityRepository
 
     protected function addFilterByIdOrCanonicalId(QueryBuilder $qb, $value)
     {
-        if (preg_match('/[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/', $value)){
+        if (preg_match('/[a-f0-9]{8}\-[a-f0-9]{4}-4[a-f0-9]{3}-([89ab])[a-f0-9]{3}-[a-f0-9]{12}/', $value)){
             $qb = $qb->andWhere("r.id = '{$value}'");
         } else {
             $qb = $qb->andWhere("r.id_canonical like '%{$value}%'");
@@ -100,6 +100,13 @@ class RecordRepository extends ServiceEntityRepository
         $qb = $this->addFilterByHospital($qb, $hospital);
 
         return $this->addFilterByIdOrCanonicalId($qb, $id);
+    }
+
+    public function findAllById($value)
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        return $this->addFilterByIdOrCanonicalId($qb, $value)->getQuery()->getResult();
     }
 
     // /**
