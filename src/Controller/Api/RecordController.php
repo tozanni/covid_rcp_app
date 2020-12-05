@@ -53,25 +53,25 @@ class RecordController extends AbstractFOSRestController
     public function index(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request): View
     {
         $user = $this->security->getUser();
+        $records = [];
 
         if ($user->getUsername() == 'anonymous') {
-            return View::create([
-                'error' => 401,
-                'message' => 'Para ver el listado necesitas iniciar sesión',
-            ], Response::HTTP_UNAUTHORIZED);
+            return $this->respondUnauthorized();
         }
 
-        //TODO: Validar que siempre se asigne un solo hospital al usuario en el admin panel
-        $group = $user->getGroups()[0];
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) { //Super Admin: Trae todos los registros
+            $records = $recordRepository->findAll();
+        } //Administrador del hospital o capturista: puede ver TODOS los registros de SU hospital asignado
+        elseif ($user->hasRole('ROLE_HOSPITAL_ADMIN') || $user->hasRole('ROLE_HOSPITAL_CAPTURISTA')) {
+            //TODO: Validar que siempre se asigne un solo hospital al usuario en el admin panel
+            $hospital = $user->getGroups()[0];
 
-        $records = $recordRepository->findByGroup($group);
+            $records = $recordRepository->findByHospital($hospital);
+        }
 
-        //return View::create($records);
-
-        return View::create($paginator->paginate(
-            $records,
+        return View::create($paginator->paginate($records,
             $request->query->getInt('page', 1),
-            10
+            30
         ));
     }
 
@@ -84,7 +84,10 @@ class RecordController extends AbstractFOSRestController
      */
     public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request)
     {
-        $records = $recordRepository->findByIdOrCanonicalId($request->query->get('q'));
+        $user = $this->security->getUser();
+        $hospital = $user->getGroups()[0];
+
+        $records = $recordRepository->findByHospitalAndId($hospital, $request->query->get('q'));
 
         return View::create($paginator->paginate($records, $request->query->getInt('page', 1), 10));
     }
@@ -252,5 +255,16 @@ class RecordController extends AbstractFOSRestController
             'https://6ep2ew4noc.execute-api.us-east-1.amazonaws.com/BaseModel',
             ['body' => $record]
         );
+    }
+
+    /**
+     * @return \FOS\RestBundle\View\View
+     */
+    protected function respondUnauthorized(): View
+    {
+        return View::create([
+            'error' => 401,
+            'message' => 'Para ver el listado necesitas iniciar sesión',
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }

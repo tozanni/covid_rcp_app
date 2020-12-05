@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Application\Sonata\UserBundle\Entity\Group;
 use App\Entity\Record;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use JMS\Serializer\SerializerInterface;
 
@@ -55,31 +56,50 @@ class RecordRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param \App\Application\Sonata\UserBundle\Entity\Group $group
-     * @return \App\Entity\Record[]
+     * @param QueryBuilder $qb
+     * @param Group $hospital
+     * @return QueryBuilder
      */
-    public function findByGroup(Group $group)
+    protected function addFilterByHospital(QueryBuilder $qb, Group $hospital): QueryBuilder
     {
-        $usersCollection = $group->getUsers();
+        $usersCollection = $hospital->getUsers();
 
         $userIds = $usersCollection->map(function ($item) {
             return $item->getId();
-        });
+        })->toArray();
 
-        return $this->findBy(['created_by' => $userIds->toArray()], ['created_at' => 'DESC']);
+        return $qb->add('where', $qb->expr()->in('r.created_by', $userIds));
     }
 
-    public function findByIdOrCanonicalId($value)
+    /**
+     * @param Group $hospital
+     * @return int|mixed|string
+     */
+    public function findByHospital(Group $hospital)
     {
         $qb = $this->createQueryBuilder('r');
 
+        return $this->addFilterByHospital($qb, $hospital)
+            ->getQuery()->getResult();
+    }
+
+    protected function addFilterByIdOrCanonicalId(QueryBuilder $qb, $value)
+    {
         if (preg_match('/[a-f0-9]{8}\-[a-f0-9]{4}\-4[a-f0-9]{3}\-(8|9|a|b)[a-f0-9]{3}\-[a-f0-9]{12}/', $value)){
             $qb = $qb->andWhere("r.id = '{$value}'");
         } else {
-            $qb = $qb->orWhere("r.id_canonical like '%{$value}%'");
+            $qb = $qb->andWhere("r.id_canonical like '%{$value}%'");
         }
 
-        return $qb->getQuery()->getResult();
+        return $qb;
+    }
+
+    public function findByHospitalAndId(Group $hospital, $id)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb = $this->addFilterByHospital($qb, $hospital);
+
+        return $this->addFilterByIdOrCanonicalId($qb, $id);
     }
 
     // /**
