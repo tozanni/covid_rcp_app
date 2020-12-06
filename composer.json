@@ -1,6 +1,29 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "name": "tozanni/covid_rcp_app",
+    "description": "Backend para aplicación de predicción de complicaciones por COVID-19",
+    "homepage": "https://rcpcovid19.mx",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enrique García Cruz",
+            "email": "enrique@inodata.com.mx",
+            "role": "Developer",
+            "homepage": "https://inodata.mx"
+        },
+        {
+            "name": "Heriberto Monterrubio Hernández",
+            "email": "heriberto@inodata.com.mx",
+            "role": "Developer",
+            "homepage": "https://inodata.mx"
+        },
+        {
+            "name": "César René Contreras Villegas",
+            "email": "hi@cerco.dev",
+            "role": "Developer",
+            "homepage": "http://cerco.dev"
+        }
+    ],
     "require": {
         "php": "^7.2.31",
         "ext-ctype": "*",
