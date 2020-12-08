@@ -76,16 +76,16 @@ class RecordController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\Get ("/records/search")
+     * @Rest\Post("/records/search")
      * @param RecordRepository $recordRepository
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return View
      */
-    public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request)
+    public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request): View
     {
         $user = $this->security->getUser();
-        $id = $request->query->get('q');
+        $id = $request->get('q');
         $records = [];
 
         if ($user->hasRole('ROLE_SUPER_ADMIN')) { //Super Admin: Trae todos los registros
