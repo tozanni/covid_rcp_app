@@ -81,6 +81,14 @@ class RecordController extends AbstractFOSRestController
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return View
+     * 
+     * @SWG\Parameter(name="body", in="body",
+     *    @SWG\Schema(type="object",
+     *         @SWG\Property(property="id_canonical", type="string", description="", example="12"),
+     *    )
+     * )
+     * @SWG\Response(response=200, description="Devuelve listado con todos los registros de acuerdo al permiso",
+     *      @SWG\Schema(type="array", @Model(type=Record::class))
      */
     public function searchByIdOrCanonicalId(RecordRepository $recordRepository, PaginatorInterface $paginator, Request $request): View
     {
